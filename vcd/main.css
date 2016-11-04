@@ -1,21 +1,23 @@
-#vcd, #vcd ul, #vcd #wrapPager
+#picture {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    top: 150px;
+    left: 780px;
+}
+
+#vcd, #vcd ul
 {
     width: 200px;
     height: 272px;
 }
 
-#vcd, #vcd ul, #vcd #wrapPager, #cd
+#vcd, #vcd ul, #cd
 {
     background: url("images/disk.png") no-repeat 0 0;
 }
 
-#vcd
-{
-    position: relative;
-    margin: 20px auto 0;
-}
-
-#vcd ul, #vcd #wrapPager, #cd
+#vcd ul, #cd
 {
     position: absolute;
 }
@@ -75,50 +77,3 @@
     transform: rotate(2520deg);
 }
 
-#vcd #wrapPager
-{
-    display: block;
-    left: 0;
-    top: 2px;
-}
-
-#vcd #indexBar
-{
-    top: 235px;
-    left: 25px;
-    text-align: center;
-    overflow: hidden;
-    opacity: 0;
-    visibility: hidden;
-    -webkit-transition: opacity linear .6s;
-    -moz-transition: opacity linear .6s;
-    -ms-transition: opacity linear .6s;
-    transition: opacity linear .6s;
-    position: absolute;
-}
-
-#vcd:hover #indexBar
-{
-    opacity: 1;
-    visibility: visible;
-}
-
-#vcd #indexBar a
-{
-    display: inline-block;
-    margin: 0 4px;
-    height: 0;
-    width: 0;
-    border: 4px #9f9f9f solid;
-    border-radius: 100%;
-    text-indent: -200px;
-    overflow: hidden;
-}
-
-#vcd #indexBar a:hover, #vcd #indexBar a.active
-{
-    width: 4px;
-    height: 4px;
-    border-color: #05c7fe;
-    border-width: 2px;
-}

@@ -6,6 +6,9 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 	outline: 0;
 	background: transparent;
 	}
+body {
+	background: black;
+}
 	
 ol, ul {
 	list-style: none;

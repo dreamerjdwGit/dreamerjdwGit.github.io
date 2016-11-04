@@ -68,11 +68,11 @@ var vcd = {
         },
         autoClick: function ()
         {
-            var as = $("a", vcd.indexBar);
+            var as = $("a");
             vcd.currentIndex++;
             if (vcd.currentIndex == as.length)
             {
-                vcd.currentIndex = 0;
+                vcd.currentIndex = 1;
             }
             as.removeClass(vcd.CLASS_ACTIVE);
             as.eq(vcd.currentIndex).addClass(vcd.CLASS_ACTIVE);

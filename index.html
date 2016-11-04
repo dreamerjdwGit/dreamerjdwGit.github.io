@@ -5,11 +5,57 @@
 	<title>爱心跳动</title>
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<script src="javaScript/jquery.min.js" type="text/javascript"></script>
+
+	<link type="text/css" href="vcd/reset.css" rel="stylesheet">
+    <link type="text/css" href="vcd/main.css" rel="stylesheet">
+
+    <script type="text/javascript" src="vcd/vcd.js"></script>
+
+    <script type="text/javascript">
+
+        $(function ()
+        {
+            vcd.init();
+            vcd.autoPlay();
+        });
+
+    </script>
 </head>
 <body>
+	<div id="picture">
+		<div id="vcd">
+    		<i id="cd"></i>
+    		<ul>
+        		<li class="active"><a><img src="vcd/ad/1.jpg"/></a></li>
+        		<li><a><img src="vcd/ad/2.jpg"/></a></li>
+        		<li><a><img src="vcd/ad/3.jpg"/></a></li>
+        		<li><a><img src="vcd/ad/4.jpg"/></a></li>
+        		<li><a><img src="vcd/ad/5.jpg"/></a></li>
+    		    <li><a><img src="vcd/ad/6.jpg"/></a></li>
+        		<li><a><img src="vcd/ad/7.jpg"/></a></li>
+    		    <li><a><img src="vcd/ad/8.jpg"/></a></li>
+        		<li><a><img src="vcd/ad/9.jpg"/></a></li>
+        		<li><a><img src="vcd/ad/10.jpg"/></a></li>
+        		<li><a><img src="vcd/ad/11.jpg"/></a></li>
+        		<li><a><img src="vcd/ad/12.jpg"/></a></li>
+        		<li><a><img src="vcd/ad/13.jpg"/></a></li>
+        		<li><a><img src="vcd/ad/14.jpg"/></a></li>
+    		</ul>
+		</div>
+	</div>
+
+	<div id="canvas3d"></div>
+	
+
 	<div class="container">
 		<div class="heart"></div>
 	</div>
+	
 </body>
+<style type="text/css">
+	body {
+			background: url("img/birthday.jpg");
+	}
+</style>
 <script src="javaScript/firework.js" type="text/javascript"></script>
 </html>
