@@ -6,9 +6,10 @@
 </head>
 <style type="text/css">
 	#canvas3d {
-		width: 100%;
+		position: absolute;
+		width: 500px;
 		height: 500px;
-		margin: 0;
+		left: 400px;
 	}
 </style>
 <body>
@@ -111,7 +112,7 @@
 
 	// 进行渲染
 	renderer = new THREE.CanvasRenderer();
-	renderer.setClearColor(0xf0f0f0);
+	// renderer.setClearColor(0xf0f0f0);
 	renderer.setPixelRatio(window.devicePixelRatio);
 	renderer.setSize(width, height);
 	canvas3d.appendChild(renderer.domElement);
