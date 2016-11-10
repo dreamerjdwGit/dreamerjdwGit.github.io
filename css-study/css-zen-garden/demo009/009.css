@@ -1,0 +1,301 @@
+body {
+	color: #000;
+	margin: 0px auto;
+	background: #fff url(body-bg.png);
+}
+
+p {
+	margin-top: 0;
+	font: 12px/15px georgia, serif;
+	text-align: justify;
+}
+
+a:link {
+	font-weight: bold;
+	text-decoration: none;
+	color: #000;
+}
+
+a:visited {
+	font-weight: bold;
+	text-decoration: none;
+	color: #333;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+}
+
+#container {
+	width: 800px;
+	margin: 0;
+	border-right: 1px solid #333;
+	background: url(frill-bg.png) repeat-x;
+}
+
+#intro {
+	min-width: 470px;
+}
+
+#pageHeader {
+	width: 280px;
+	margin-top: 40px;
+	float: left;
+}
+
+#pageHeader h1 {
+	background: transparent url(pageheader-bg.png) no-repeat;
+	width: 240px;
+	height: 220px;
+	margin-left: 40px;
+}
+
+#pageHeader h1 span {
+	display: none;
+}
+
+#pageHeader h2 span {
+	display: none;
+}
+
+#quickSummary {
+	clear: both;
+	width: 280px;
+	margin-bottom: 20px;
+	float: left;
+}
+
+#quickSummary p {
+	font-family: georgia, times, serif;
+	font-size: 10px;
+	text-transform: uppercase;
+	text-align: center;
+	padding-left: 60px;
+	padding-right: 20px;
+}
+
+#preamble {
+	margin-left: 280px;
+	width: 460px;
+	padding-top: 90px;
+}
+
+#preamble h3 {
+	background: transparent url(preamble.png) no-repeat;
+	width: 460px;
+	height: 70px;
+}
+
+#preamble h3 span {
+	display: none;
+}
+
+#preamble a:link {
+	color: #600;
+}
+
+#preamble p {
+	line-height: 150%;
+}
+
+#supportingText {
+	margin-left: 0;
+}
+
+#supportingText a:link {
+	color: #600;
+}
+
+#explanation {
+	margin-left: 280px;
+	width: 460px;
+}
+
+#explanation h3 {
+	background: transparent url(sowhat.png) no-repeat;
+	width: 460px;
+	height: 50px;
+	margin-bottom: 20px;
+}
+
+#explanation h3 span {
+	display: none;
+}
+
+#explanation p {
+	line-height: 150%;
+}
+
+#participation {
+	width: 460px;
+}
+
+#participation h3 {
+	background: transparent url(participation.png) no-repeat;
+	width: 460px;
+	height: 50px;
+	margin-bottom: 20px;
+}
+
+#participation h3 span {
+	display: none;
+}
+
+#participation p {
+	line-height: 150%;
+}
+
+#benefits {
+	width: 460px;
+}
+
+#benefits h3 {
+	background: transparent url(benefits.png) no-repeat;
+	width: 460px;
+	height: 50px;
+	margin-bottom: 20px;
+}
+
+#benefits h3 span {
+	display: none;
+}
+
+#benefits p {
+	line-height: 140%;
+}
+
+#requirements {
+	width: 460px;
+}
+
+#requirements h3 {
+	background: transparent url(requirements.png) no-repeat;
+	width: 460px;
+	height: 50px;
+	margin-bottom: 20px;
+}
+
+#requirements h3 span {
+	display: none;
+}
+
+#requirements p {
+	line-height: 140%;
+}
+
+#footer {
+	margin-top: 40px;
+	background: transparent url(footer.png) repeat-x;
+	height: 58px;
+	width: 800px;
+	text-align: center;
+	margin-left: -280px;
+}
+
+#linkList {
+	position: absolute;
+	top: 28em;
+	left: 30px;
+	width: 240px;
+}
+
+#linkList2 {
+	font: 10px georgia, times, serif;
+	text-transform: uppercase;
+}
+
+#linkList h3.select {
+	background: transparent url(select.png) no-repeat left top;
+	width: 240px;
+	height: 50px;
+	margin: 10px 0px 5px 0px;
+	margin-bottom: 10px;
+}
+
+#linkList h3.select span {
+	display: none;
+}
+
+#lselect {
+	padding-bottom: 20px;
+}
+
+#linkList h3.archives { 
+	background: transparent url(archives.png) no-repeat top left; 
+	width: 240px; 
+	height: 50px;
+	margin-bottom: 10px;
+	}
+
+#linkList h3.archives span {
+	display:none
+	}
+
+#linkList h3.resources { 
+	background: transparent url(resources.png) no-repeat top left; 
+	width: 250px; 
+	height: 50px;
+	margin-bottom: 10px;
+	}
+
+#linkList h3.resources span {
+	display:none
+	}
+
+#linkList ul {
+	margin: 0;
+	padding: 0;
+}
+
+#linkList li {
+	line-height: 2.5ex; 
+	display: block;
+	text-align: center;
+	padding-top: 5px;
+	padding-left: 20px;
+	padding-right: 20px;
+	margin-bottom: 5px;
+	list-style-type: none;
+	}
+
+#linkList li a:link { 
+	color: #000;
+	}
+
+#linkList li a:visited {
+	color: #333;
+	}
+
+
+#extraDiv1 { 
+	background: transparent url(certified.png) top left no-repeat; 
+	position: absolute; 
+	top: 160px; 
+	left: 0px; 
+	width: 100px; 
+	height: 110px;
+	z-index: 0;
+	}
+
+
+@media all {
+	#explanation {
+		margin-left: 280px;
+		}
+		
+	#participation {
+		margin-left: 280px;
+		}
+		
+	#benefits {
+		margin-left: 280px;
+		}
+		
+	#requirements {
+		margin-left: 280px;
+		}
+		
+	#footer {
+		margin-left: 0px;
+	}
+}

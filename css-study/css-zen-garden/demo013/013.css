@@ -1,0 +1,229 @@
+body {
+	margin: 0;
+	text-align: center;
+	font: 8pt/16pt georgia, serif;
+	color: #464128;
+	background: #fff url(coastal2.jpg) bottom center no-repeat;
+}
+
+p {
+	margin-top: 0px;
+	text-align: right;
+	font: 8pt/16pt georgia, serif;
+	color: #464128;
+	background-color: transparent;
+}
+
+h3 {
+	font: bold 8pt/16pt georgia, serif;
+	text-align: right;
+	padding-right: 14px;
+	margin-bottom: 0px;
+	background: transparent url(futz.gif) center right no-repeat;
+}
+
+a {
+	color: #464128; 
+	background-color: transparent;
+}
+a:visited {
+	color: #000;
+	background-color: transparent;
+}
+a:hover {
+	color: #A29D66;
+	background-color: transparent;
+}
+acronym {
+	border-bottom: none;
+	}
+
+#intro {
+	width: 700px;
+	margin-left: auto;
+	margin-right: auto;
+	background: transparent url(coastal.jpg) top left no-repeat;
+}
+
+#pageHeader {
+	text-align: right;
+	padding: 70px 60px 0px 0px;
+}
+
+#pageHeader h1 {
+	width: 192px;
+	height: 70px;
+	margin: 0px 0px 0px 448px;
+	background: transparent url(papier.jpg) top left no-repeat;
+}
+
+#pageHeader h1 span {
+	display: none;
+}
+
+
+#pageHeader h2 {
+	width: 83px;
+	height: 14px;
+	top: -17px;
+	position: relative;
+	margin: 0px 90px 0px 477px;
+	background: transparent url(beauty.gif) top left no-repeat;
+}
+
+#pageHeader h2 span {
+	display: none;
+}
+
+#preamble {
+	position: relative;
+	top: -80px;
+	padding-right: 250px;
+	padding-left: 140px; 
+}
+
+#quickSummary {
+	float: right;
+	text-align: left;
+	padding-right: 70px;
+	width: 160px;
+}
+
+#quickSummary p, #quickSummary .p1, #quickSummary .p2 {
+	font: italic 13pt/18pt garamond, serif;
+	text-align: left;
+	color: #A29D66;
+	background-color: transparent;
+}
+
+#supportingText {
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: 140px;
+	padding-right: 250px;
+	position: relative;
+	top: -70px;
+	width: 310px;
+}
+
+#linkList {
+	font: italic 9pt/14pt garamond, georgia, serif;
+	text-transform: lowercase;
+	text-align: left;
+	position: absolute;
+	top: 33em;
+	left: 0px;
+	width: 100%;
+	color: #A29D66
+	background-color: transparent;
+}
+
+#linkList2 {
+	padding-left: 470px;
+	padding-right: 70px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 160px;
+}
+
+#linkList h3 {
+	font: italic 12pt/15pt garamond, georgia, serif;
+	text-transform: capitalize;
+	color: #464128;
+	background-image: none;
+	text-align: left;
+}
+
+#linkList a {
+	font: italic 11pt/14pt garamond, georgia, serif;
+	color: #A29D66;
+	background-color: transparent;
+	text-decoration: none;
+}
+#linkList a:hover {
+	color: #464128;
+	background-color: transparent;
+	text-decoration: underline;
+}
+
+#linkList a.c {
+	font: italic 9pt/14pt garamond, georgia, serif;
+}
+
+#linkList ul {
+	margin: 0;
+	padding: 0;
+}
+
+#linkList li {
+	text-align: left;
+	list-style-type: none;
+}
+
+#linkList h3 {
+	margin-right: auto;
+	margin-left: 0px;
+	margin-top: 25px;
+}
+#linkList h3 span {
+	display: none;
+}
+
+#linkList h3.select {
+	width: 113px;
+	height: 19px;
+	background: transparent url(h-select.gif) top left no-repeat;
+}
+#linkList h3.archives {
+	width: 134px;
+	height: 17px;
+	background: transparent url(h-archives.gif) top left no-repeat;
+}
+
+#linkList h3.resources {
+	width: 125px;
+	height: 13px;
+	background: transparent url(h-resources.gif) top left no-repeat;
+	position: relative;
+	left: -10px;
+}
+
+#footer a {
+	font: italic 11pt/14pt garamond, georgia, serif;
+	color: #A29D66;
+	background-color: transparent;
+	text-decoration: none;
+	padding-left: 15px;
+}
+#footer a:hover {
+	color: #464128;
+	background: transparent url(fleurdelis.gif) center left no-repeat;
+	text-decoration: none;
+	border-bottom: dotted 1px #464128;
+}
+
+.accesskey {
+	font-weight: bold;
+	text-decoration: underline;
+	}
+
+#preamble .p3, #explanation .p2, #participation .p3, #benefits .p1, #requirements .p4 {
+	background: transparent url(filler.gif) bottom center no-repeat;
+	padding-bottom: 25px;
+}
+
+#extraDiv1 {
+	width: 100%;
+	top: 0;
+	left: 0;
+	position: absolute;
+	text-align: center;
+}
+
+#extraDiv1 span {
+	display: block;
+	width: 600px;
+	height: 82px;
+	margin: 0 auto;
+	background: transparent url(fleur.gif) no-repeat top right;
+}
