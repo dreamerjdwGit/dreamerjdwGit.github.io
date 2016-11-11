@@ -1,0 +1,260 @@
+body 
+{
+	width: 2300px;
+	margin: 0;
+	margin-bottom: 20px;
+	font: 11px/18px verdana;
+	color: #ffffff;
+	background: #000000 url(body-background.jpg) repeat-x;
+}
+
+p {
+	font: 11px/18px verdana;
+	margin-top: 0px;
+	text-align: left;
+}
+
+h3 {
+	font: 12pt georgia;
+	margin-top: 0;
+	margin-bottom: 5px;
+	color: #ffffff;
+}
+
+a:link {
+	font-weight: bold;
+	text-decoration: none;
+	color: #E8AD62;
+}
+
+a:visited {
+	font-weight: bold;
+	text-decoration: none;
+	color: E0922F;
+}
+
+a:hover, a:active {
+	text-decoration: underline;;
+	color: #ffcc00
+}
+
+#pageHeader h1{
+	width: 2300px;
+	height: 85px;
+	margin-top: 70px;
+	background: transparent url(title.jpg) no-repeat top left; 
+}
+
+#pageHeader h1 span{
+	display: none;
+}
+
+#pageHeader h2 span {
+	display: none;
+}
+
+#quickSummary {
+	position: absolute;
+	left: 55px;
+	top: 170px;
+	width: 250px;
+	z-index: 2;
+}
+
+#quickSummary p {
+	font: italic 10px/16px georgia;
+	text-align: right;
+}
+
+#preamble {
+	position: absolute;
+	width: 300px;
+	height: 431px;
+	top: 170px;
+	left: 545px;
+	background: transparent url(femur.jpg) no-repeat bottom left;
+	z-index: 2;
+}
+
+#preamble h3 {
+	width: 300px;
+	height: 25px;
+	background: transparent url(the_road.jpg) no-repeat top left; 
+}
+
+#preamble h3 span {
+	display: none;
+}
+
+#explanation {
+	position: absolute;
+	top: 170px;
+	left: 865px;
+	width: 300px;
+	z-index: 2;
+}
+
+#explanation h3 {
+	width: 300px;
+	height: 25px;
+	background: transparent url(so_what.jpg) no-repeat top left; 
+}
+
+#explanation h3 span {
+	display: none;
+}
+
+#participation {
+	position: absolute;
+	background: transparent url(tin_can.jpg) no-repeat top left;
+	top: 170px;
+	left: 1185px;
+	width: 300px;
+	z-index: 2;
+	padding-bottom: 40px;
+	}
+	
+#participation h3 {
+	background: transparent url(participation.jpg) no-repeat top left;  
+	width: 300px; 
+	height: 25px;
+	}
+	
+#participation h3 span {
+	display: none;
+	}
+	
+#benefits {
+	background: transparent url(ants.jpg) no-repeat top left; 
+	position: absolute;
+	top: 170px;
+	height: 450px;
+	left: 1505px;
+	width: 300px;
+	z-index: 2;
+	}
+	
+#benefits h3 {
+	background: transparent url(benefits.jpg) no-repeat top left; 
+	width: 300px;
+	height: 25px;
+	}
+	
+#benefits h3 span {
+	display: none;
+	}
+	
+#requirements {
+	position: absolute;
+	top: 170px;
+	left: 1825px;
+	width: 300px;
+	z-index: 2;
+	padding-bottom: 40px;
+	}
+	
+#requirements h3 {
+	background: transparent url(requirements.jpg) no-repeat top left; 
+	width: 300px;
+	height: 25px;
+	}
+	
+#requirements h3 span {
+	display: none;
+	}
+	
+#requirements p {
+	font: 9px/15px verdana;
+	}
+
+#footer { 
+	position: absolute;
+	background: transparent url(worm.jpg) no-repeat;
+	text-align: right;
+	top: 170px;
+	left: 2145px;
+	width: 100px; 
+	height: 325px;
+	z-index: 2;
+	}
+
+#footer a:link, #footer a:visited { 
+	display: block;
+	}
+
+#linkList {
+	position: absolute;
+	left: 325px;
+	top: 170px;
+	width: 200px;
+	z-index: 2;
+}
+
+#linkList2 {
+	font: 9px verdana, sans-serif;
+}
+
+#linkList h3.select {
+	width: 200px;
+	height: 25px;
+	background: transparent url(select.jpg) no-repeat top left;
+}
+
+#linkList h3.select span {
+	display: none;
+}
+
+#linkList h3.archives {
+	width: 200px;
+	height: 25px;
+	margin-top: 15px;
+	background: transparent url(archives.jpg) no-repeat top left;
+}
+
+#linkList h3.archives span {
+	display: none;
+}
+
+#linkList h3.resources {
+	width: 200px;
+	height: 25px;
+	margin-top: 15px;
+	background: transparent url(resources.jpg) no-repeat top left; 
+}
+
+#linkList h3.resources span {
+	display: none;
+}
+
+#linkList ul {
+	margin: 0;
+	padding: 0;
+}
+
+#linkList li {
+	line-height: 2.5ex;
+	list-style: none;
+	display: block;
+	padding-top: 5px;
+	margin-bottom: 5px;
+}
+
+#linkList li a:link { 
+	color: #E8AD62;
+	}
+#linkList li a:visited {
+	color: #E0922F;
+	}
+#linklist li a:hover, a:active {
+	color: #00CCFF;
+	}
+
+#extraDiv1 {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 2300px;
+	height: 630px;
+	background: transparent url(mole.jpg) no-repeat bottom left;
+	z-index: 1;
+}
