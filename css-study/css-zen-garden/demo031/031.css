@@ -1,0 +1,212 @@
+body {
+	background: #FFF url(bg_tree.gif) repeat-x;
+	margin: 0;
+	padding: 0;
+	color: #888;
+	text-align: center;
+}
+
+h1, h2, h3
+{
+	margin: 0;
+	background-repeat: no-repeat;
+	background-position: left top;
+}
+
+h1 span, h2 span,h3 span, #quickSummary p.p span { display: none; }
+
+#container {
+	position: relative;
+	margin: 0 auto;
+	padding: 0;
+	width: 732px;
+	text-align: left;
+}
+
+#pageHeader h1{
+	background: url(nutitle.gif) no-repeat;
+	height: 200px;
+	padding: 0;
+}
+
+#quickSummary p.p1
+{
+	position: absolute;
+	top: 12em;
+	right: 15px;
+	width: 120px;
+	margin: 75px 0 0 580px;
+	font-size: 80%;
+	text-align: right;
+}
+
+#quickSummary p.p2
+{
+	position: absolute;
+	top: 25em;
+	right: 15px;
+	width: 120px;
+	margin: 0;
+	font-size: 93%;
+	text-align: center;
+	padding-bottom: 90px;
+	background: url("barrow.gif") no-repeat bottom;
+	background-repeat: no-repeat;
+}
+
+#quickSummary p.p2 a:link, #quickSummary p.p2 a:visited
+{
+	white-space: nowrap;
+	font: bold 92%/1.3em Verdana,Arial,Sans-serif;
+	text-transform: uppercase;
+}
+
+#preamble {
+	position: relative;
+	left: 195px;
+	width: 400px;
+}
+
+#preamble h3 {
+	background: url(road.gif) no-repeat;
+	height: 70px;
+}
+
+#preamble p
+{
+	width: 350px;
+}
+
+#supportingText {
+	position: relative;
+	left: 195px;
+	width: 400px;
+	padding-bottom: 0px;
+	border-bottom: 2px solid #363;
+}
+
+#supportingText p
+{
+	line-height: 1.5em;
+}
+
+#supportingText h3 { height: 70px; }
+
+#explanation h3
+{
+	background-image: url("what.gif");
+}
+
+#participation h3
+{
+	background-image: url("participation.gif");
+}
+
+#benefits h3
+{
+	background-image: url("benefits.gif");
+}
+
+#requirements h3
+{
+	background-image: url("requirements.gif");
+}
+
+#linkList {
+	position: absolute;
+	top: 200px;
+	left: 0;
+	width: 190px;
+}
+
+#linkList h3 { height: 41px; }
+
+#lselect h3
+{
+	background-image: url("select.gif");
+}
+
+#larchives h3
+{
+	background-image: url("archives.gif");
+}
+
+#lresources h3
+{
+	background-image: url("resources.gif");
+}
+
+#linkList ul
+{
+	margin: 1em 0 1em;
+	padding: 0;
+	font-size: 90%;
+	list-style: none;
+	text-align: left;
+}
+
+#larchives li, #lresources li { text-transform: lowercase; }
+
+#linkList ul li
+{
+	margin: 0 0 .5em;
+
+	line-height: 1em;
+}
+
+#linkList li a:link, #linkList li a:visited
+{
+	font-family: Verdana,Arial,Sans-serif;
+	font-size: 90%;
+}
+
+#linkList #lselect a:link, #linkList #lselect a:visited { display: block; }
+
+#linkList #lselect a.c:link, #linkList #lselect a.c:visited
+{
+	display: inline;
+	font-family: Georgia,Serif;
+	font-weight: normal;
+	background-color: transparent;
+	text-transform: lowercase;
+}
+
+#footer
+{
+	background: #D9D98B;
+	color: #fff;
+	padding: 10px 20px;
+	border-top: 1px solid #363;
+	font: 85% Verdana,Arial,Sans-serif;
+	text-align: center;
+}
+
+#footer a:link, #footer a:visited
+{
+	padding: 0 5px;
+	font-weight: normal;
+}
+
+/* links
+--------------------------------- */
+
+a:link, a:visited
+{
+	color: #090;
+	background-color: transparent;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+a:hover
+{
+	color: #663;
+	background-color: transparent;
+	text-decoration: underline;
+}
+
+/* misc
+--------------------------------- */
+
+acronym { border-width: 0; }
+
