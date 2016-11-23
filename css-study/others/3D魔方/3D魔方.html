@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>3D魔方</title>
+	<style type="text/css">
+
+		.aside {
+			width: 180px;
+			height: 180px;
+			position: absolute;
+		}
+
+		.bside{
+            width: 180px;
+    		height: 180px;
+    		position: absolute;
+   			transform: translateX(-90px) translateZ(90px) rotateY(90deg);
+		}
+ 
+		.cside{
+   			width: 180px;
+    		height: 180px;
+  		    position: absolute;
+    		transform: translateZ(90px) translateY(90px) rotateX(90deg);
+		}
+ 
+		.dside{
+    		width: 180px;
+    		height: 180px;
+    		position: absolute;
+    		transform: translateZ(180px);
+		}
+ 
+		.eside{
+    		width: 180px;
+    		height: 180px;
+    		position: absolute;
+    		transform: translateZ(90px) translateY(-90px) rotateX(90deg);
+		}
+
+		.fside{
+    		width: 180px;
+    		height: 180px;
+    		position: absolute;
+    		transform: translateX(90px) translateZ(90px) rotateY(90deg);
+		}
+
+		.aside div {
+			width: 54px;
+			height: 54px;
+			border-radius: 4px;
+			float: left;
+			border: 3px solid #000;
+			background: green;
+		}
+
+		.bside div {
+			width: 54px;
+			height: 54px;
+			border-radius: 4px;
+			float: left;
+			border: 3px solid #000;
+			background: red;
+		}
+
+		.cside div {
+			width: 54px;
+			height: 54px;
+			border-radius: 4px;
+			float: left;
+			border: 3px solid #000;
+			background: yellow;
+		}
+
+		.dside div {
+			width: 54px;
+			height: 54px;
+			border-radius: 4px;
+			float: left;
+			border: 3px solid #000;
+			background: blue;
+		}
+
+		.eside div {
+			width: 54px;
+			height: 54px;
+			border-radius: 4px;
+			float: left;
+			border: 3px solid #000;
+			background: white;
+		}
+
+		.fside div {
+			width: 54px;
+			height: 54px;
+			border-radius: 4px;
+			float: left;
+			border: 3px solid #000;
+			background: orange;
+		}
+
+		.box {
+			width: 540px;
+			height: 540px;
+			left: 180px;
+			top: 180px;
+			position: relative;
+            animation: cube_animation ease-in-out 12s infinite forwards;
+			transform-style: preserve-3d;
+			transform-origin: 90px 90px 90px;
+		}
+
+		@keyframes cube_animation {
+			0% {
+    			
+    		}
+    		16% {
+    			transform: rotateY(-90deg);
+    		}
+    		33% {
+    			transform: rotateY(-90deg) rotateZ(135deg);
+    		}
+    		50% {
+    			transform: rotateY(225deg) rotateZ(135deg);
+    		}
+    		66% {
+    			transform: rotateY(135deg) rotateX(135deg);
+    		}
+    		83% {
+    			transform: rotateX(135deg);
+    		}
+    		100% {
+    			transform: rotateX(0deg);
+    		}
+		}
+	</style>
+</head>
+<body>
+<div class="box">
+	<div class="aside">
+    	<div></div>
+    	<div></div>
+    	<div></div>
+    	<div></div>
+    	<div></div>
+    	<div></div>
+    	<div></div>
+    	<div></div>
+    	<div></div>
+    </div>
+    <div class="bside">
+    	<div></div>
+    	<div></div>
+    	<div></div>
+    	<div></div>
+    	<div></div>
+    	<div></div>
+    	<div></div>
+    	<div></div>
+    	<div></div>
+    </div>
+    <div class="cside">
+    	<div></div>
+    	<div></div>
+    	<div></div>
+    	<div></div>
+    	<div></div>
+    	<div></div>
+    	<div></div>
+    	<div></div>
+    	<div></div>
+    </div>
+    <div class="dside">
+    	<div></div>
+    	<div></div>
+    	<div></div>
+    	<div></div>
+    	<div></div>
+    	<div></div>
+    	<div></div>
+    	<div></div>
+    	<div></div>
+    </div>
+    <div class="eside">
+    	<div></div>
+    	<div></div>
+    	<div></div>
+    	<div></div>
+    	<div></div>
+    	<div></div>
+    	<div></div>
+    	<div></div>
+    	<div></div>
+    </div>
+    <div class="fside">
+    	<div></div>
+    	<div></div>
+    	<div></div>
+    	<div></div>
+    	<div></div>
+    	<div></div>
+    	<div></div>
+    	<div></div>
+    	<div></div>
+    </div>
+</div>
+</body>
+</html>

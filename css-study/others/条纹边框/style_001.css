@@ -1,0 +1,14 @@
+.demo {
+	background: #9c27b0;
+	border: 20px dashed #2196f3;
+}
+
+.demo::after {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	background: #fff;
+}

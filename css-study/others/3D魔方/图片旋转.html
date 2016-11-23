@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style type="text/css">
+    	.demo {
+    		width: 220px;
+    		height: 150px;
+    		margin: 100px auto;
+    		background: url(pa.jpg) no-repeat;
+    		animation: run_animation 12s linear 8;
+
+    	}
+
+    	@keyframes run_animation {
+    		0% {
+    			transform: rotateX(0deg);
+    		}
+    		16% {
+    			transform: rotateY(-90deg);
+    		}
+    		33% {
+    			transform: rotateY(-90deg) rotateZ(135deg);
+    		}
+    		50% {
+    			transform: rotateY(225deg) rotateZ(135deg);
+    		}
+    		66% {
+    			transform: rotateY(135deg) rotateX(135deg);
+    		}
+    		83% {
+    			transform: rotateX(135deg);
+    		}
+    		100% {
+    			transform: rotateX(0deg);
+    		}
+    	}
+    </style>
+	<title>css3 animation</title>
+</head>
+<body>
+    <div class="demo">
+    	我是demo.
+    </div>
+</body>
+</html>

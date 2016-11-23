@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>css时钟</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<div class="container">
+		<div class="mirror">
+			<div class="clock">
+				<i class="hour hour3">3</i>
+				<i class="hour hour6">6</i>
+				<i class="hour hour9">9</i>
+				<i class="hour hour12">12</i>
+
+				<div id="second"></div>
+				<div id="minute"></div>
+				<div id="hour"></div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		var second = document.getElementById('second');
+		var minute = document.getElementById('minute');
+		var hour = document.getElementById('hour');
+
+		var clock = setInterval(function() {
+			var nowDate = new Date();
+			var hh = nowDate.getHours();
+			var mi = nowDate.getMinutes();
+			var mm = nowDate.getSeconds();
+
+			hour.style.transform = "rotate(" + hh % 12 * 30 + "deg)";
+			minute.style.transform = "rotate(" + mi  * 6 + "deg)";
+			second.style.transform = "rotate(" + mm  * 6 + "deg)";
+		}, 1000);
+	</script>
+</body>
+</html>

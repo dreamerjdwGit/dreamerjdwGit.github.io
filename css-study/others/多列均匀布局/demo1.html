@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+<style type="text/css">
+
+	.container {
+		width: 400px;
+		margin: 50px auto 0;
+	}
+
+	.justify {
+		position: relative;
+		width: 100%;
+		height: 24px;
+		text-align: justify;
+		margin-bottom: 20px;
+	}
+
+	.justify:after {
+		content: '';
+		width: 100%;
+		display: inline-block;
+		text-align: justify;
+	}
+
+	.justify i {
+		position: relative;
+		width: 24px;
+		line-height: 24px;
+		display: inline-block;
+		text-indent: 9px;
+		border-radius: 50%;
+		background: #333;
+		color: white;
+		overflow: hidden;
+		font-style: normal;
+	}
+</style>
+<body>
+	<div class="container">
+		<div class="justify">
+			<i>1</i>
+			<i>2</i>
+			<i>3</i>
+			<i>4</i>
+			<i>5</i>
+		</div>
+		<div class="justify">
+			<i>1</i>
+			<i>2</i>
+			<i>3</i>
+			<i>4</i>
+		</div>
+		<div class="justify">
+			<i>1</i>
+			<i>2</i>
+			<i>3</i>
+		</div>
+		<div class="justify">
+			<i>1</i>
+			<i>2</i>
+		</div>
+	</div>
+</body>
+</html>

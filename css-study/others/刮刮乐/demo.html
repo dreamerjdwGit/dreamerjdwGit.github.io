@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+<style type="text/css">
+
+	body {
+		margin: 0;
+		padding: 0;
+	}
+	.container {
+		width: 640px;
+		margin: auto;
+	}
+	#lottery {
+		position: relative;
+		width: 300px;
+		height: 200px;
+		margin: 10px;
+		background-color: lightskyblue;
+		border-radius: 5px;
+		float: left;
+	}
+
+	#firstClass {
+		position: absolute;
+		width: 300px;
+		height: 200px;
+		line-height: 200px;
+		top: 0;
+		left: 0;
+		font-size: 56px;
+		font-weight: bold;
+		color: indianred;
+		text-align: center;
+		z-index: 1;
+	}
+
+	#canvas {
+		position: absolute;
+		width: 300px;
+		height: 200px;
+		top: 0;
+		left: 0;
+		z-index: 2;
+	}
+
+	#drawPen {
+		width: 300px;
+		height: 500px;
+		margin: 10px;
+		border-radius: 10px;
+		overflow: hidden;
+		float: right;
+	}
+</style>
+<body>
+	<div class="container">
+		<div id="lottery">
+			<div id="firstClass">一等奖</div>
+			<canvas id="canvas"></canvas>
+		</div>
+		<div id="drawPen"></div>
+	</div>
+</body>
+<script type="text/javascript">
+	var canvas = document.getElementById('canvas');
+	var context = canvas.getContext('2d');
+
+	context.fillStyle='#A9AB9D';
+	context.fillRect(0,0,300,180);
+	context.fillStyle='#000';
+	context.font='50px Arial';
+	context.fillText('刮奖区',75,115);
+
+	var brush = function() {
+		context.clearRect(event.offsetX-20,event.offsetY-20,20,20)
+	};
+	canvas.onmousedown = function() {
+		canvas.addEventListener('mousemove', brush, false);
+	}
+	canvas.onmouseup = function() {
+		canvas.removeEventListener('mousemove', brush, false);
+	}
+
+
+</script>
+</html>

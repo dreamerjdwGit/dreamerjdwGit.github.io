@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>贪吃蛇</title>
+</head>
+<style type="text/css">
+	.myCanvas {
+		width: 240px;
+		height: 240px;
+		border: 1px solid #d3d3d3;
+	}
+</style>
+<body>
+	<canvas id="myCanvas"></canvas>
+	<script type="text/javascript">
+		var ctx= document.getElementById('myCanvas').getContext('2d');
+		var r= [{
+			x: 10,
+			y:9
+		}, {
+			x:10,
+			y:8
+		}];
+		var co = 40;
+		var e = null;
+
+		var timer = setInterval(doMove, 200);
+
+		function doMove() {
+
+			// 添加阴影
+			ctx.shadowBlur = 20;
+			ctx.shadowColor = 'black';
+
+  			// 判断游戏是否已经结束
+  			if(r[0].x < 0 || r[0].x >= 24 || r[0].y < 0 || r[0].y >= 24|| check(r[0], 0)) {
+  				return;
+  			}
+
+  			e != null && (
+  				(co == 40 && r[0].x == e.x && r[0].y + 1 == e.y) ||
+  				(co == 38 && r[0].x == e.x && r[0].y - 1 == e.y) ||
+  				(co == 37 && r[0].x - 1 == e.x && r[0].y == e.y) ||
+  				(co == 39 && r[0].x + 1 == e.x && r[0].y == e.y)) ?
+  			(r.unshift(e), e = null, r.unshift(r.pop())) : (r.unshift(r.pop()));
+
+  			// 重新设定数组首元素坐标，进行移动
+  			if(co == 40 || co == 38) {
+  				var shift;
+  				if(co == 40) {
+  					shift = 1;
+  				} else {
+  					shift = -1;
+  				}
+
+  				r[0].x = r[1].x;
+  				r[0].y = r[1].y + shift;
+
+  			} else {
+  				var shift;
+  				if(co == 39) {
+  					shift = 1;
+  				} else {
+  					shift = -1;
+  				}
+
+  				r[0].x = r[1].x + shift;
+  				r[0].y = r[1].y;
+  			}
+
+  			ctx.clearRect(0, 0, 240, 240);
+
+  			if(e) {
+  				ctx.fillRect(e.x * 10, e.y * 10, 10, 10);
+  			}
+
+  			for(var i = 0, len = r.length; i < len ; i++) {
+  				ctx.fillRect(r[i].x * 10, r[i].y * 10, 10, 10);
+  			}
+
+  			while(e == null || check(e) ) {
+  				e ={
+  					y: (Math.floor(Math.random() * 24)),
+  					x: (Math.floor(Math.random() * 24))
+  				};
+  			}
+
+
+
+		}
+
+		function check(e, j) {
+			for(var i = 0, len = r.length; i < len; i++) {
+				if(j != i && r[i].x == e.x && r[i].y == e.y) {
+					return true;
+				}
+			}
+			return false;
+		}
+
+		document.onkeydown = function(event) {
+			if(event.keyCode >= 37 && event.keyCode <= 40 && (Math.abs(event.keyCode - co) != 2)) {
+				co = event.keyCode;
+			}
+		}
+	</script>
+</body>
+</html>
