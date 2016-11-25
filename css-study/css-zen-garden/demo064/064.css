@@ -1,0 +1,245 @@
+html {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background: #000 url(bg1.gif) repeat;
+	margin: 0;
+	padding: 0;
+	color: #A05B00;
+	text-align: center;
+	font: 11px/18px helvetica, arial, sans-serif;
+	text-transform: lowercase;
+}
+
+a:link {
+	color: #FFC000;
+	text-decoration: none;
+	}
+a:visited {
+	color: #D79900;
+	text-decoration: underline;
+	}
+a:hover {
+	color: #FF0;
+	text-decoration: underline;
+	}
+
+p {
+	padding: 0 0 0.3em 14px;
+	}
+
+h3 {
+	background: transparent url(w1.gif) 0 2px no-repeat;
+	margin-bottom: 0;
+	padding-left: 14px;
+	color: #CA7400;
+	font-size: 12px;
+}
+
+h3 + p {
+	margin-top: 0;
+	}
+acronym {
+	font-style: normal;
+	border-bottom: none;
+	}
+
+#container {
+	background-color: #000;
+	width: 770px;
+	text-align: left;
+	margin: 0 auto;
+	border-left: double 3px #332511;
+	border-right: double 3px #332511;
+}
+
+#pageHeader h1 {
+	background: #000 url(bg2.gif) no-repeat;
+	width: 770px;
+	height: 166px;
+	margin: 0;
+}
+
+#pageHeader h2 {
+	background: #000 url(h1.gif) no-repeat;
+	position: absolute;
+	width: 244px;
+	height: 42px;
+	top: 120px;
+	margin: 0 0 0 495px;
+}
+
+#pageHeader h1 span, #pageHeader h2 span {
+	display: none;
+}
+
+#quickSummary, #preamble, #supportingText {
+	background: transparent url(bg4.gif) repeat-y;
+	width: 342px;
+	margin: 0 0 0 400px;
+	padding: 1px 0;
+}
+
+#quickSummary h3, #preamble h3, #supportingText h3 {
+	margin: 0 10px;
+}
+#quickSummary p, #preamble p, #supportingText p {
+	margin: 0 0 10px 10px;
+}
+
+#quickSummary {
+	border-top: solid 1px #332511;
+	padding-top: 10px;
+	}
+
+#linkList {
+	position: absolute;
+	top: 166px;
+	width: 400px;
+	height: 633px;
+	color: #132F5B;
+	background: transparent url(bg3.gif) repeat-x;
+	border-top: 1px solid #332511;
+	line-height: 12px;
+	padding-top: 20px;
+}
+
+#linkList ul {
+	margin: 0;
+	padding: 0;
+}
+
+#linkList li {
+	list-style-type: none;
+	padding: 0;
+	margin-bottom: 0.5em;
+}
+
+#lselect li {
+	padding: 3px 3px 3px 16px;
+	background: transparent url(w2.gif) 3px 3px no-repeat;
+}
+
+#lselect li a:link, #lselect li a:visited {
+	display: block;
+}
+
+#linkList h3 {
+	padding-left: 0;
+	background-image: none;
+	}
+#linkList h3 span {
+	display: none;
+}
+#linkList a, #linkList a:link {
+	color: #AF4F0A;
+	font-weight: bold;
+}
+#linkList li a.c:link, #linkList li a.c:visited {
+	color: #742500;
+	font-weight: normal;
+	display: inline;
+	text-decoration: none;
+}
+#linkList a.c:hover {
+	text-decoration: underline;
+}
+
+#linkList h3.select {
+	width: 160px;
+	height: 12px;
+	background: transparent url(h-select.gif) top left no-repeat;
+	margin-bottom: 0.5em;
+}
+#linkList h3.archives {
+	width: 180px;
+	height: 12px;
+	background: transparent url(h-archives.gif) top left no-repeat;
+	margin-bottom: 0.5em;
+}
+#linkList h3.resources {
+	width: 180px;
+	height: 12px;
+	background: transparent url(h-resources.gif) top left no-repeat;
+	margin-bottom: 0.5em;
+}
+
+
+#lselect {
+	width: 160px;
+	float: left;
+	padding-left: 50px;
+}
+
+/* CSS MOSe hovers */
+* > #lselect li {
+	margin-top: -7px;
+	padding: 5px 5px 5px 18px;
+	background-position: 5px 5px;
+	margin-right: 10px;
+	border: solid 1px transparent;
+}
+#lselect li:hover {
+	background: #2A1812;
+	border-color: #452310;
+}
+#lselect li:hover a {
+	color: #FF9D14;
+}
+#lselect li:hover a.c {
+	color: #E84900;
+}
+
+
+#larchives {
+	padding-top: 1px;
+}
+#larchives, #lresources {
+	padding-left: 200px;
+}
+
+#footer {
+	text-align: right;
+	padding: 5px 10px 100px 15px;
+	background: url(skyline.jpg) bottom left repeat-x;
+	position: relative;
+	left: 3px;
+	width: 342px;
+	margin: 0;
+}
+
+#extraDiv1 {
+	position: absolute;
+	top: 41px;
+	left: 0;
+	text-align: center;
+	width: 100%;
+}
+
+#extraDiv1 span {
+	width: 400px;
+	height: 123px;
+	background: transparent url(granville.jpg) no-repeat;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+	padding-right: 370px;
+}
+
+#extraDiv2 {
+	position: absolute;
+	top: 41px;
+	right: 0;
+	width: 100%;
+}
+
+#extraDiv2 span{
+	width: 770px;
+	height: 70px;
+	background: transparent url(falsecreek.jpg) no-repeat top right;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+}
