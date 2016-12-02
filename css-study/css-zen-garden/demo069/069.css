@@ -1,0 +1,199 @@
+body {
+	color: #000;
+	background: #fff url(bg_garden2.jpg) no-repeat top right;
+	font: normal 11px "Lucida Grande", Verdana, Arial, Helvetica, sans-serif;
+	padding: 0;
+	margin: 0;
+}
+
+h3 {
+	font: bold 16px Georgia, "Times New Roman", Times, serif;
+	color: #003300;
+	background: url(bonsai.gif) no-repeat;
+	padding-left: 28px;
+	height: 23px;
+	margin-top: 14px;
+	margin-bottom: -5px;
+}
+
+h3 span {
+	border-bottom: 1px dotted #000000;
+	padding-bottom: 3px;
+}
+
+p {
+	line-height: 165%;
+}
+
+ul {
+	list-style: none;
+	padding: 0 0 0 13px;
+	margin: 10px 0 0 0;
+}
+
+li {
+	line-height: 16px;
+	padding-bottom: 8px;
+}
+
+a:link, a:visited, a:hover, a:active {
+	color: #003300;
+	font-weight: bold;
+}
+
+#linkList {
+	position: absolute;
+	width: 200px;
+	top: 300px;
+	right: 7%;
+	color: #FFFFFF;
+	font-style: italic;
+	font-size: 9px;
+	font-family: Georgia, "Times New Roman", Times, serif;
+	text-shadow: 0 0 3px #000000;
+}
+
+#linkList a:link, #linkList a:visited {
+	color: #FFFFFF;
+	font-size: 12px;
+	font-style: normal;
+	text-decoration: none;
+	font-family: "Lucida Grande", Verdana, Arial, Helvetica, sans-serif;
+	text-shadow: 0 0 3px #000000;
+	font-weight: bold;
+	display: block;
+}
+
+#linkList h3 span {
+	background-color: #000000;
+	padding: 4px 20px 4px 20px;
+	position: relative;
+	top: -7px;
+}
+
+#lselect, #larchives, #lresources {
+	background-image: url(bg_black.gif);
+	margin-bottom: 25px;
+	padding-bottom: 3px;
+}
+
+#quickSummary {
+	font-style: italic;
+	font-family: Georgia, "Times New Roman", Times, serif;
+	width: 380px;
+	border-left: 1px dotted #000000;
+	padding-left: 8px;
+}
+
+#pageHeader {
+	position: absolute;
+	top: 29px;
+	height: 116px;
+	text-align: center;
+	width: 92%;
+	background: url(header.gif) no-repeat center;
+}
+
+#pageHeader h1 {
+	font: normal 85px Georgia, "Times New Roman", Times, serif;
+	text-shadow: 0 0 7px #000000;
+	text-transform: lowercase;
+	margin: 0;
+	padding: 0;
+	color: #111133;
+	display: none;
+}
+
+#pageHeader h2 {
+	font: bold 12px Georgia, "Times New Roman", Times, serif;
+	text-transform: lowercase;
+	position: relative;
+	left: -143px;
+	top: -20px;
+	color: #000000;
+	padding-top: 6px;
+	display: none;
+}
+
+#pageHeader h2 span {
+	border-top: 1px dotted #000000;
+	padding-top: 3px;
+}
+
+#container {
+	width: 92%;
+	margin-left: 40px;
+	padding-bottom: 40px;
+}
+
+#intro {
+	padding-top: 162px;
+}
+
+#explanation, #participation, #benefits, #requirements, #preamble {
+	width: 53%;
+}
+
+#lselect a:link.c , #lselect a:visited.c {
+	color:#EBE2A8;
+	text-decoration: none;
+	display: inline;
+}
+
+#lselect a:hover.c, #lselect a:active.c {
+	text-decoration: underline;
+	display: inline;
+}
+
+#extraDiv1 {
+	position: fixed;
+	background-image: url(platform.png);
+	top: 270px;
+	right: 85px;
+	width: 85px;
+	height: 184px;
+	margin: -85px;
+}
+
+#extraDiv2 {
+	background: url(edge_bottom_black.gif) repeat-x;
+	position: fixed;
+	bottom: 0;
+	left: 100%;
+	width: 100%;
+	height: 20px;
+	margin-left: -100%;
+}
+
+#extraDiv3 {
+	background-image: url(edge_top_black.gif);
+	background-repeat: repeat-x;
+	position: fixed;
+	top: 0;
+	left: 100%;
+	width: 100%;
+	height: 20px;
+	margin-left: -100%;
+}
+
+#extraDiv4 {
+	background-image: url(edge_left_black.gif);
+	background-repeat: repeat-y;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 20px;
+	height: 100%;
+	margin: 0;
+}
+
+#extraDiv5 {
+	background-image: url(edge_right_black.gif);
+	background-repeat: repeat-y;
+	position: fixed;
+	top: 0;
+	right: 0;
+	width: 20px;
+	height: 100%;
+	margin: 0;
+}
