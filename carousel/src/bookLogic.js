@@ -1,7 +1,7 @@
 (function() {
 	
 	// --- URL 検索書籍--- //
-	var GET_BOOKLIST = 'src/bookList.json';
+	var GET_BOOKLIST = 'src/booklist.json';
 
 	/**
 	 * 書籍ロジック
