@@ -65,7 +65,13 @@
 
 			_promise.done(function(data) {
 
-				var bookList = JSON.parse(data);
+				var bookList;
+
+				if(typeof data === 'object') {
+    				bookList = data;
+				} else {
+    				bookList = JSON.parse(data);
+				}
 
 				// カルーセル初期化
 				var $carouselRoot = $(that._carouselController.rootElement);
