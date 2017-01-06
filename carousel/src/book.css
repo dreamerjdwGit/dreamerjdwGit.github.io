@@ -42,7 +42,7 @@ body {
 
 #result #list-header {
 	margin-left: 57px;
-	width: 810px;
+	width: 795px;
 	height: 30px;
 	line-height: 30px;
 	background: #CDB38B;
@@ -70,6 +70,10 @@ body {
 	width: 150px;
 }
 
+#result #list-header span:nth-child(5){
+	width: 67px;
+}
+
 #result .booklist {
 	margin: 0 0 0 56px;
 	width: 813px;
@@ -93,26 +97,35 @@ tr.selectedTr {
 }
 
 #result .booklist td {
+	float:left;
 	border: 1px solid #fff;
+	padding: 0;
+	margin: 0;
 	text-align: center;
 	display: inline-block;
-	width: 79px;
+	width: 82px;
 	height: 40px;
 	line-height: 50px;
 	overflow: hidden;
 }
 
 #result .booklist td:nth-child(1){
-	width: 179px;
+	width: 182px;
 }
 
 #result .booklist td:nth-child(2){
-	width: 299px;
+	width: 302px;
 }
 
 #result .booklist td:nth-child(3){
 	width: 150px;
 }
+
+#result .booklist td:nth-child(5){
+	width: 67px;
+}
+
+
 
 
 
