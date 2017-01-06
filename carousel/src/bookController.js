@@ -65,15 +65,15 @@
 
 			_promise.done(function(data) {
 
+				var bookList = JSON.parse(data);
+
 				// カルーセル初期化
 				var $carouselRoot = $(that._carouselController.rootElement);
-				that._bookLogic.makeCarouselElement($carouselRoot, data);
+				that._bookLogic.makeCarouselElement($carouselRoot, bookList);
 				that._carouselController.init();
 
-				// var bookList = JSON.parse(data);
-
 				that.view.append('#list', 'list', {
-					data: data
+					data: bookList
 				});
 			});
 		},
@@ -82,14 +82,8 @@
 			
 			var $target = $(context.event.target).parent();
 			var itemID = $target.data('tr-id')
-			var scrollList = $('.scrollingBase').children();
-			for(var i=0, len=scrollList.length; i<len; i++) {
-				var $now = $(scrollList[i]);
-				if(itemID == $now.data('item-id')) {
-					this._carouselController.scrollToByElm($now);
-					break;
-				}
-			}	
+			var $now = $("div[data-item-id=" + itemID + "]");
+			this._carouselController.scrollToByElm($now);
 			$('.selectedTr').removeClass('selectedTr');
 		},
 
@@ -117,17 +111,26 @@
 			var booklist = $('tr.rows');
 			booklist.removeClass('selectedTr');
 			
-			for(var i=0, len=booklist.length; i<len; i++) {
-				var $now = $(booklist[i]);
-				if(id == $now.data('tr-id')) {
-					$now.addClass('selectedTr');
-					break;
-				}
-			}
+			var $now = $("tr[data-tr-id=" + id + "]");
+			$now.addClass('selectedTr');
 
 			var dx = 46 * id;
 
 			this.scrollToLocation(dx);	
+		},
+
+		'#randomSee click': function() {
+			var booklist = $('tr.rows');
+			var selectedNum = Math.floor((Math.random()*booklist.length));
+
+			var $scroll = $("div[data-item-id=" + selectedNum + "]");
+			this._carouselController.scrollToByElm($scroll);
+
+			booklist.removeClass('selectedTr');
+			var $_selected = $(booklist[selectedNum]);
+			$_selected.addClass('selectedTr');
+			var dx = 46 * selectedNum;
+			this.scrollToLocation(dx);
 		},
 
 		scrollToLocation: function(dx) {

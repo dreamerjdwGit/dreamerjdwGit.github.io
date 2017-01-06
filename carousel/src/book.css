@@ -116,7 +116,7 @@ span.ui-jqgrid-title{
 }
 
 #result {
-	margin: 120px 0 20px 0;
+	margin: 20px 0 20px 0;
 	
 }
 
@@ -169,11 +169,11 @@ span.ui-jqgrid-title{
 
 #result .booklist tr:hover {
 	cursor: pointer;
-	background: red;
+	background: #ADD8E6;
 }
 
 tr.selectedTr {
-	background: red !important;
+	background: #ADD8E6 !important;
 }
 
 #result .booklist td {
