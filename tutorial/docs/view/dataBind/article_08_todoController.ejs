@@ -1,0 +1,97 @@
+<script type="text/ejs" id="article_08_todoController">
+
+
+		<header class="main-header">
+			<span class="header-span">教程（基本篇）</span>
+			<h1 class="header-h1">08.todo小应用 Controller的创建</h1>
+		</header>
+		<article>
+			<h2 class="translate-cn">概要</h2>
+			<h2 class="translate-jp hidden">概要</h2>
+
+			<p class="translate-cn">
+在这一节中，我们将创建TODO应用的Controller。实现对视图中定义的按钮、表格等元素进行相应的处理。<br>
+这里，Controller会使用前面所创建好的Logic，来实现数据的插入、更新和删除。<br>
+现在，我们将把todoController.js代码作为例子进行说明。
+
+			</p>
+			<p class="translate-jp hidden"> 
+本章ではコントローラを作成します。ビューに定義したボタンやテーブル、フォーム要素の操作によって行われる処理を実装します。<br>
+コントローラでは前章で作成したロジックを使用して、データを登録や更新、削除を行います。<br>
+このページで説明するコードは、サンプルコードのtodoController.jsに記述されています。
+ </p>
+
+ 			<h2 class="translate-cn"> Controller的组成  </h2>
+			<h2 class="translate-jp hidden"> コントローラの構成 </h2>
+
+			<p class="translate-cn">
+控制器ToDoController，将包含了以下处理：<br>
+<strong>TODO插入表格</strong><br>
+&nbsp;&nbsp;&nbsp;・ 点击登录按钮，TODO文本框中的值将被登录到DataModel中。<br>
+&nbsp;&nbsp;&nbsp;・ 在TODO文本框中按下Enter键，TODO文本框中的值将被登录到DataModel中。<br>
+<strong>TODO一览</strong><br>
+&nbsp;&nbsp;&nbsp;・ 点击表格的任一一行，表格下会显示出该行的详细信息。<br>
+&nbsp;&nbsp;&nbsp;・ 点击checkbox，对应的status会进行更新。<br>
+&nbsp;&nbsp;&nbsp;・ 将任一一行的checkbox勾选时，相应的TODO内容上会出现删除线。<br>
+<strong>TODO详细信息</strong><br>
+&nbsp;&nbsp;&nbsp;・ 点击删除按钮，现在显示的DataItem信息将从ToDoModel中删除掉，并反映到画面中。<br>
+&nbsp;&nbsp;&nbsp;・ 点击更新按钮，对应的DataItem的值将被画面表格中相应的值所替换。<br>
+在生命周期的__ready阶段，ToDoLogic会通过执行init()函数来获取TODO数据，并与注释视图相绑定。
+			</p>
+			<p class="translate-jp hidden">
+コントローラToDoControllerに、以下の処理を実装します。<br>
+<strong>TODO登録フォーム</strong><br>
+&nbsp;&nbsp;&nbsp;・ 登録ボタンが押されたら、TODOテキストボックスに入力された値をデータモデルに登録する。<br>
+&nbsp;&nbsp;&nbsp;・ TODOテキストボックスでエンターが押されたら、TODOテキストボックスに入力された値をデータモデルに登録する。<br>
+<strong>TODO一覧</strong><br>
+&nbsp;&nbsp;&nbsp;・ テーブルの行がクリックされたら、テーブルの下にTODOの詳細を表示する。<br>
+&nbsp;&nbsp;&nbsp;・ ステータスのチェックボックスが操作されたら、操作に応じてToDoModelのstatusを更新する。<br>
+&nbsp;&nbsp;&nbsp;・ ステータスのチェックボックスがチェックされたら、TODO内容に打ち消し線をつける。<br>
+<strong>TODO詳細</strong><br>
+&nbsp;&nbsp;&nbsp;・ 削除ボタン押されたら、現在詳細に表示しているデータアイテムをToDoModelから削除し、画面を更新する。<br>
+&nbsp;&nbsp;&nbsp;・ 更新ボタンが押されたら、フォームで入力された値でデータアイテムを更新する。<br>
+また、__readyのライフサイクルイベントで、ToDoLogic#init()を実行してTODOデータを取得し、コメントビューにそのデータをバインドします。
+			</p>	
+
+			<h2 class="translate-cn"> 代码例子 </h2>
+			<h2 class="translate-jp hidden"> サンプルコード </h2>
+
+			<p class="translate-cn">
+ToDoController的代码如下所示：
+			</p>
+			<p class="translate-jp hidden">
+ToDoControllerのコードは以下のとおりです。
+			</p>	
+
+			<div class="box code"><span style="font-weight: bold; color: #008000; ">var</span> todoController <span style="color: #666666; ">=</span> {<br>&nbsp;&nbsp;&nbsp;&nbsp;__name<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'sample.todo.controller.TodoController'</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;todoLogic<span style="color: #666666; ">:</span> sample.todo.logic.TodoLogic,<br> &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">/**<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* TODOリストのデータをサーバから取得し画面に表示します。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* &lt;p&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* ※今回はJSONファイルからサンプルデータを取得しています。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span><br>&nbsp;&nbsp;&nbsp;&nbsp;__ready<span style="color: #666666; ">:</span> <span style="font-weight: bold; color: #008000; ">function</span>() {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">var</span> that <span style="color: #666666; ">=</span> <span style="font-weight: bold; color: #008000; ">this</span>;<br><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">this</span>.todoLogic.init().done(<span style="font-weight: bold; color: #008000; ">function</span>(data) {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;that.view.bind(<span style="color: #BA2121; ">'h5view#tmplTodos'</span>, {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;todos<span style="color: #666666; ">:</span> data<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br> &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">/**<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* 登録ボタンが押下されたときの処理<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* &lt;p&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* テキストに入力されたTODOの内容をデータモデルに登録します。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @param {Object} context イベントコンテキスト<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span><br> &nbsp;&nbsp;&nbsp;<span style="color: #BA2121; ">'#btnRegist click'</span><span style="color: #666666; ">:</span> <span style="font-weight: bold; color: #008000; ">function</span>(context) {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">this</span>._insertToDo(context);<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br> &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">/**<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* TODOのテキストボックスでエンターキーが押下されたときの処理<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* &lt;p&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* テキストに入力されたTODOの内容をデータモデルに登録します。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @param {Object} context イベントコンテキスト<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span><br> &nbsp;&nbsp;&nbsp;<span style="color: #BA2121; ">'#todoRegForm submit'</span><span style="color: #666666; ">:</span> <span style="font-weight: bold; color: #008000; ">function</span>(context) {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">this</span>._insertToDo(context);<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br> &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">/**<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* TODOリスト一覧のチェックボックスが操作されたときの処理<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* &lt;p&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* チェックまたは未チェックによって、データアイテムのステータスを更新します。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @param {Object} context イベントコンテキスト<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span><br> &nbsp;&nbsp;&nbsp;<span style="color: #BA2121; ">'#list tbody input[type="checkbox"] click'</span><span style="color: #666666; ">:</span> <span style="font-weight: bold; color: #008000; ">function</span>(context) {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">var</span> target <span style="color: #666666; ">=</span> context.event.currentTarget;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">var</span> id <span style="color: #666666; ">=</span> <span style="font-weight: bold; color: #008000; ">this</span>._getSelectedItemId($(target).closest(<span style="color: #BA2121; ">'tr'</span>));<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">var</span> status <span style="color: #666666; ">=</span> target.checked;<br><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">this</span>.todoLogic.update(id, {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;status<span style="color: #666666; ">:</span> status<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;context.event.stopPropagation();<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br> &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">/**<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* 選択された行のTODO情報の詳細を表示します。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @param {Object} context イベントコンテキスト<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span><br> &nbsp;&nbsp;&nbsp;<span style="color: #BA2121; ">'#list tbody tr click'</span><span style="color: #666666; ">:</span> <span style="font-weight: bold; color: #008000; ">function</span>(context) {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">var</span> that <span style="color: #666666; ">=</span> <span style="font-weight: bold; color: #008000; ">this</span>;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">var</span> id <span style="color: #666666; ">=</span> <span style="font-weight: bold; color: #008000; ">this</span>._getSelectedItemId(context.event.currentTarget);<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">var</span> detail <span style="color: #666666; ">=</span> <span style="font-weight: bold; color: #008000; ">this</span>.todoLogic.getDetail(id);<br><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">if</span> ($(<span style="color: #BA2121; ">'#detailForm'</span>).children().length <span style="color: #666666; ">===</span> <span style="color: #666666; ">0</span>) {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">this</span>.view.bind(<span style="color: #BA2121; ">'h5view#tmplDetail'</span>, {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;detail<span style="color: #666666; ">:</span> detail<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// 詳細画面に移動する<br></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;setTimeout(<span style="font-weight: bold; color: #008000; ">function</span>() {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #008000; ">window</span>.scrollTo(<span style="color: #666666; ">0</span>, that.$find(<span style="color: #BA2121; ">'#detailForm'</span>).offset().top);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}, <span style="color: #666666; ">100</span>);<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br> &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">/**<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* 詳細画面のテキストボックスでエンターキーが押下されたときの処理<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* &lt;p&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* submitが動作しないようイベントをキャンセルします。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @param {Object} context イベントコンテキスト<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span><br> &nbsp;&nbsp;&nbsp;<span style="color: #BA2121; ">'#detailForm submit'</span><span style="color: #666666; ">:</span> <span style="font-weight: bold; color: #008000; ">function</span>(context) {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// formのsubmitが動作しないようイベントをキャンセルする<br></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;context.event.preventDefault();<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br> &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">/**<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* 削除ボタンが押下されたときの処理<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* &lt;p&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* 詳細画面に表示されているTODOデータを削除します。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @param {Object} context イベントコンテキスト<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span><br> &nbsp;&nbsp;&nbsp;<span style="color: #BA2121; ">'#btnDel click'</span><span style="color: #666666; ">:</span> <span style="font-weight: bold; color: #008000; ">function</span>(context) {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">var</span> params <span style="color: #666666; ">=</span> <span style="font-weight: bold; color: #008000; ">this</span>._getFormData();<br><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">this</span>.todoLogic.remove(<span style="color: #008000; ">parseInt</span>(params.id));<br><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// formのsubmitが動作しないよう伝播を止める<br></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;context.event.stopPropagation();<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// ページの先頭に移動する<br></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;h5.ui.scrollToTop();<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br> &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">/**<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* 更新ボタンが押下されたときの処理<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* &lt;p&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* 詳細画面に入力された情報でTODOデータを更新します。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @param {Object} context イベントコンテキスト<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span><br> &nbsp;&nbsp;&nbsp;<span style="color: #BA2121; ">'#btnUpdate click'</span><span style="color: #666666; ">:</span> <span style="font-weight: bold; color: #008000; ">function</span>(context) {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">var</span> params <span style="color: #666666; ">=</span> <span style="font-weight: bold; color: #008000; ">this</span>._getFormData();<br><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">this</span>.todoLogic.update(params.id, {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content<span style="color: #666666; ">:</span> params.content,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;status<span style="color: #666666; ">:</span> <span style="color: #666666; ">!!</span>params.status<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});<br><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// formのsubmitが動作しないよう伝播を止める<br></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;context.event.stopPropagation();<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// ページの先頭に移動する<br></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;h5.ui.scrollToTop();<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br> &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">/**<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* TODOデータの登録処理を行います。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @param {Object} ctx イベントコンテキスト<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span><br>&nbsp;&nbsp;&nbsp;&nbsp;_insertToDo<span style="color: #666666; ">:</span> <span style="font-weight: bold; color: #008000; ">function</span>(ctx) {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">var</span> $txtTodo <span style="color: #666666; ">=</span> <span style="font-weight: bold; color: #008000; ">this</span>.$find(<span style="color: #BA2121; ">'#txtTodo'</span>);<br><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">if</span> ($txtTodo.val() <span style="color: #666666; ">===</span> <span style="color: #BA2121; ">''</span>) {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alert(<span style="color: #BA2121; ">'TODOを入力して下さい。'</span>);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <span style="font-weight: bold; color: #008000; ">else</span> {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">this</span>.todoLogic.add($txtTodo.val());<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$txtTodo.val(<span style="color: #BA2121; ">''</span>);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// formのsubmitが動作しないよう伝播を止める<br></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ctx.event.preventDefault();<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br> &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">/**<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* 一覧で選択された行のアイテムIDを取得します。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @param targetElem {DOMElement} イベント発生要素<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @returns アイテムID<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span><br>&nbsp;&nbsp;&nbsp;&nbsp;_getSelectedItemId<span style="color: #666666; ">:</span> <span style="font-weight: bold; color: #008000; ">function</span>(targetElem) {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">return</span> $(targetElem).find(<span style="color: #BA2121; ">'input[data-h5-bind="id"]'</span>).val();<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br> &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">/**<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* 詳細画面の入力値を取得します。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @returns {Object} 入力値が格納されたオブジェクト<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span><br>&nbsp;&nbsp;&nbsp;&nbsp;_getFormData<span style="color: #666666; ">:</span> <span style="font-weight: bold; color: #008000; ">function</span>() {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">var</span> param <span style="color: #666666; ">=</span> {};<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$.each(<span style="font-weight: bold; color: #008000; ">this</span>.$find(<span style="color: #BA2121; ">'#detailForm'</span>).serializeArray(), <span style="font-weight: bold; color: #008000; ">function</span>(i, obj) {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;param[obj.name] <span style="color: #666666; ">=</span> obj.value;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});<br><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">return</span> param;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>};<br><br><span style="font-weight: italic; color: #408080; ">// sample.todo.controller.ToDoControllerでグローバルに公開する<br></span>h5.core.expose(todoController);</div>
+
+
+			<p class="translate-cn">
+
+			</p>
+			<p class="translate-jp hidden">
+
+			</p>	
+
+			<p class="translate-cn">
+最后，通过h5.core.controller()方法将DOM元素与sample.todo.controller.ToDoController绑定起来。
+			</p>
+			<p class="translate-jp hidden">
+sample.todo.controller.ToDoControllerに公開したコントローラを、h5.core.controller()でDOM要素にバインドします。
+			</p>	
+
+			<h2 class="translate-cn"> 例子的运行（对Controller的绑定） </h2>
+			<h2 class="translate-jp hidden"> サンプルコードを実行する(コントローラのバインド) </h2>
+
+			<p class="translate-cn">
+到这里，我们就完成了整个应用中的DataModel、View、Logic、Controller的创建。<br>
+接下来，通过执行下面的代码，将DOM元素和Controller绑定起来，使得TODO管理应用正常运行起来。
+			</p>
+			<p class="translate-jp hidden">
+以上で、データモデル、ビュー、ロジック、コントローラを作成は全て完了しました。<br>
+あとは、以下のコードを実行して、コントローラをDOM要素にバインドしTODO管理アプリを実行して下さい。
+			</p>	
+			<div class="code">h5.core.controller(<span style="color: #BA2121; ">'#content'</span>, sample.todo.controller.TodoController);</div>
+
+		</article>
+</script>

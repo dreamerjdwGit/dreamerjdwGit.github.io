@@ -1,0 +1,50 @@
+<script type="text/ejs" id="article_01_forStart">
+<header class="main-header">
+			<span class="header-span">教程（基本篇）</span>
+			<h1 class="header-h1">01.准备</h1>
+		</header>
+		<article>
+			<h2 class="translate-cn">hifive的导入方法</h2>
+			<h2 class="translate-jp hidden">hifiveの読み込み方法</h2>
+
+			<p class="translate-cn">我们可以从这个页面来下载hifive。
+并且，为使用的人提供了源代码的托管服务（可以不用下载到本地，使用服务器上的源代码）。
+如下所示，在HTML文档中首先下载读取hifive相应的CSS文件和JS文件。
+但是，因为hifive是依赖于jQuery的，所以不要忘记首先应该下载读取jQuery文件。
+			</p>
+			<p class="translate-jp hidden">hifiveはこちらのページからダウンロードできます。
+また、お試し利用のためにコードホスティングも行っています。
+
+以下のようにして、必要なCSSファイル、JSファイルを読み込んでください。
+なお、hifiveはjQueryに依存していますので、先にjQueryを読み込むのを忘れないようにしましょう。</p>
+			<p></p>
+	<div class="box code"><span style="color: #BC7A00; ">&lt;!doctype html&gt;</span> &nbsp;<br><span style="font-weight: bold; color: #008000; ">&lt;html&gt;</span><br> &nbsp;<span style="font-weight: bold; color: #008000; ">&lt;head&gt;</span><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;meta</span> <span style="color: #7D9029; ">charset=</span><span style="color: #BA2121; ">"UTF-8"</span><span style="font-weight: bold; color: #008000; ">&gt;</span><br><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">&lt;!-- hifiveスタイルシートの読み込み --&gt;</span><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;link</span> <span style="color: #7D9029; ">href=</span><span style="color: #BA2121; ">"//code.htmlhifive.com/h5.css"</span> <span style="color: #7D9029; ">rel=</span><span style="color: #BA2121; ">"stylesheet"</span><span style="font-weight: bold; color: #008000; ">&gt;</span><br><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">&lt;!-- jQueryの読み込み。IE8以下の場合は1.xを、それ以外の場合は2.xを読み込む --&gt;</span><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">&lt;!--[if lt IE 9]&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;script src="//code.jquery.com/jquery-1.11.1.min.js"&gt;&lt;/script&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;![endif]--&gt;</span><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">&lt;!--[if gte IE 9]&gt;&lt;!--&gt;</span><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;script&nbsp;</span><span style="color: #7D9029; ">src=</span><span style="color: #BA2121; ">"//code.jquery.com/jquery-2.1.1.min.js"</span><span style="font-weight: bold; color: #008000; ">&gt;&lt;/script&gt;</span><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">&lt;!--&lt;![endif]--&gt;</span><br><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">&lt;!-- hifiveフレームワークの読み込み --&gt;</span><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;script&nbsp;</span><span style="color: #7D9029; ">src=</span><span style="color: #BA2121; ">"//code.htmlhifive.com/ejs-h5mod.js"</span><span style="font-weight: bold; color: #008000; ">&gt;&lt;/script&gt;</span><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;script&nbsp;</span><span style="color: #7D9029; ">src=</span><span style="color: #BA2121; ">"//code.htmlhifive.com/h5.dev.js"</span><span style="font-weight: bold; color: #008000; ">&gt;&lt;/script&gt;</span><br> &nbsp;<span style="font-weight: bold; color: #008000; ">&lt;/head&gt;</span><br> &nbsp;<span style="font-weight: bold; color: #008000; ">&lt;body&gt;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;Hello.<br> &nbsp;<span style="font-weight: bold; color: #008000; ">&lt;/body&gt;</span><br><span style="font-weight: bold; color: #008000; ">&lt;/html&gt;</span></div>
+		
+			<p class="translate-cn">※以上的例子使用了hifive源代码的在线托管服务。
+hifive已经下载到本地，或者应用正式上线等时候，请将以上的各文件地址修改为本地对应的文件地址。</p>
+			
+			<p class="translate-jp hidden">※上のサンプルではお試し用のコードホスティングを利用しています。
+hifiveを手元にダウンロードした場合、また本番利用などの際は、自分でホストしたファイルを読み込むようにパスを書き換えてください。</p>
+
+			<h2 class="translate-cn">运行确认</h2>
+			<h2 class="translate-jp hidden">動作確認</h2>
+			<p class="translate-cn">请在浏览器中打开已作成的页面（HTML文件）。
+然后、打开浏览器的开发者工具（按F12）、请确认控制台下将显示如下信息：</p>
+			<p class="translate-jp hidden">作成したページをブラウザで開いてください。
+そして、ブラウザの開発者ツールを開き(F12キーを押すと開きます)、コンソールにこういうログメッセージが出力されていることを確認してください。</p>
+			<p class="translate-cn">   “[INFO] hifive开发用版已读取成功。应用正式上线发布时，请使用Minify版（h5.js）。”</p>
+			<p class="translate-jp hidden">   [INFO] 開発版のhifiveの読み込みが完了しました。リリース時はMinify版（h5.js）を使用してください。 </p>
+
+
+			<p class="translate-cn">该日志消息不表示时，请确认如下几点：</p>
+			<p class="translate-jp hidden">ログメッセージが表示されない場合の確認ポイント</p>
+				<ul>
+					<li><p class="translate-cn">文件保存好了吗？</p><p class="translate-jp hidden">ファイルを保存しましたか？</p></li>
+					<li><p class="translate-cn">JavaScript的URL是否正确？</p><p class="translate-jp hidden">JavaScriptのURLは間違っていませんか？</p></li>
+					<li><p class="translate-cn">读取hifive之前，是否已导入jQuery？</p><p class="translate-jp hidden">hifiveの前に、jQueryを読み込んでいますか？</p></li>
+					<li><p class="translate-cn">控制台上有出现什么错误消息吗？</p><p class="translate-jp hidden">コンソールにエラーは出ていませんか？</p></li>
+					<li><p class="translate-cn">由于不同浏览器的设置不一样，当以文件形式打开HTML时（URL的开头为file://），会有JavaScript不读取执行的情况出现。解决方法有以下两种：浏览器设置为允许JavaScript执行，或者将文件放在HTTP服务器上，以http://的URL形式打开。（※第一种解决方案可能会出现一部分功能仍无法运行，因此推荐第二种解决方案）。</p><p class="translate-jp hidden">ブラウザによっては、ファイルとしてHTMLを開く（URLがfile://で始まる状態）と、JavaScriptの読み込みが行われない場合があります。その場合は、JavaScriptの実行を許可するか、適当なHTTPサーバを立ててhttp://のURLでファイルを開いてください。（※ファイルとして開いた場合、一部の機能が動作しない場合があるので、後者を推奨します。）</p></li>
+
+				</ul>
+		</article>
+</script>

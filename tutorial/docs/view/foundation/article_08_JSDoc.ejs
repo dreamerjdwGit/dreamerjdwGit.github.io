@@ -1,0 +1,80 @@
+<script type="text/ejs" id="article_08_JSDoc">
+
+
+<header class="main-header">
+			<span class="header-span">教程（基本篇）</span>
+			<h1 class="header-h1">08.文档的编写和生成（JSDoc）</h1>
+		</header>
+		<article>
+			<h2 class="translate-cn">概要</h2>
+			<h2 class="translate-jp hidden">概要</h2>
+
+			<p class="translate-cn">在这一节中，说明了如何使用JSDoc3为一般的Controller和Logic生成文档。  </p>
+			<p class="translate-jp hidden"> このページでは、JSDoc3を使ったドキュメント生成に適した一般的なコントローラ、ロジックの定義について記述します。 </p>
+
+			<h4 class="translate-cn">使用JSDoc的理由  </h4>
+			<h4 class="translate-jp hidden"> JSDocを書く理由 </h4>
+
+			<p class="translate-cn"> 在eclipse中，可以通过已编写的JSDoc，使编写中的代码自动完成，还能显示出类和类型的详细一览。<br>同时，也可以从JSDoc以HTML的形式生成API文档。<br>这样一来，增加的代码的易读性，并且使得编码以及维护也变得更加容易。 </p>
+			<p class="translate-jp hidden">  eclipse上で、ソースコードに記述したJSDocを元にコード入力中に補完候補を表示したり、<br>
+アウトラインにクラス名や型の一覧を詳細に表示させることができる様になります。<br>
+また、JSDocからHTML形式の、APIドキュメントを出力することもできます。<br>
+これにより、コード自体の可読性、コーディング作業や保守が容易になります。
+</p>
+
+			<h2 class="translate-cn"> 准备 </h2>
+			<h2 class="translate-jp hidden"> 準備 </h2>
+
+
+			<h4 class="translate-cn"> Eclipse的设置方法 </h4>
+			<h4 class="translate-jp hidden">Eclipseの設定方法 </h4>
+
+			<p class="translate-cn"> <strong>日语版</strong><br>
+ウィンドウ -> 設定 -> JavaScript -> バリデーター -> JSDoc -> 勾选『JSDoc のコメント処理 (検索およびリファクタリングを含む)』
+ </p>
+			<p class="translate-jp hidden"> <strong>日本語版</strong><br>
+ウィンドウ -> 設定 -> JavaScript -> バリデーター -> JSDoc -> 『JSDoc のコメント処理 (検索およびリファクタリングを含む)』をチェック </p>
+
+			<p class="translate-cn"> <strong>英語版</strong><br> 
+			Window -> Preferences -> JavaScript -> Validator -> JSDoc -> 勾选『Process JSDoc comments』 </p>
+			<p class="translate-jp hidden"><strong> 英語版</strong><br>
+			Window -> Preferences -> JavaScript -> Validator -> JSDoc -> 『Process JSDoc comments』をチェック </p>
+
+			<p class="translate-cn"> <strong>对于开发项目</strong><br>
+			JavaScript开发应创建JavaScript项目。<br>
+			&nbsp;&nbsp;o 新建JavaScript工程<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;新建 -> 其他 -> JavaScript -> JavaScript工程<br>
+			&nbsp;&nbsp;o 修改已有的JavaScript工程<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;右键点击工程 -> 组成 -> 转变为JavaScript工程
+ 			</p>
+			<p class="translate-jp hidden"><strong>開発プロジェクトについて</strong><br>
+			JavaScript開発ではJavaScriptプロジェクトとしてプロジェクト作成します。<br>
+			&nbsp;&nbsp;o 新規JavaScriptプロジェクトの作成<br>
+			 &nbsp;&nbsp;&nbsp;&nbsp;新規 -> その他 -> JavaScript -> JavaScriptプロジェクト<br>
+			&nbsp;&nbsp;o 既存プロジェクトをJavaScriptプロジェクトに変更<br>
+			&nbsp;&nbsp;&nbsp;&nbsp;プロジェクト右クリック -> 構成 -> JavaScriptプロジェクトへ変換</p>
+
+			<h4 class="translate-cn"> 输入JSDoc时，member标签自动生成的方法 </h4>
+			<h4 class="translate-jp hidden"> JSDoc入力時、memberOfタグを自動補完する方法 </h4>
+
+			<p class="translate-cn">通过以下顺序，只用输入/** */ ，就能自动地生成@memberOf <namespace>。<br>
+			&nbsp;&nbsp;&nbsp;1. 工程目录 -> 属性 -> JavaScript -> 代码风格 -> 打开代码模板。<br>
+			&nbsp;&nbsp;&nbsp;（工程目录可通过右键点击Project・Explorer出现）<br>
+			&nbsp;&nbsp;&nbsp;2. 可以通过勾选相应选项，还原工程默认设置。<br>
+			&nbsp;&nbsp;&nbsp;3. 按下导入选项。<br>
+			&nbsp;&nbsp;&nbsp;4. 指定代码模板为XML，然后按下OK按钮。
+  			</p>
+			<p class="translate-jp hidden"> 以下の順番で設定を行うことにより、/** */ を入力すると、@memberOf <namespace> が自動補完されます。<br>
+			&nbsp;&nbsp;&nbsp;1.プロジェクトのコンテキストメニュー -> プロパティ -> JavaScript -> コード・スタイル -> コード・テンプレート を開く。<br>
+			&nbsp;&nbsp;&nbsp;（コンテキストメニューは、プロジェクト・エクスプローラーでプロジェクトのアイコンを右クリックすると出せます。）<br>
+			&nbsp;&nbsp;&nbsp;2. プロジェクト固有の設定を可能にする。にチェックを入れる。<br>
+			&nbsp;&nbsp;&nbsp;3. インポートを押下。<br>
+			&nbsp;&nbsp;&nbsp;4. コードテンプレートXMLを指定してOKボタンを押下。 </p>
+
+			<p class="translate-cn" style="color:red;"> 请注意如果省略了以上任一步骤，@memberOf都不能自动生成。 </p>
+			<p class="translate-jp hidden" style="color:red;">
+			@memberOfを１つ以上記述しないと、アウトライン候補に表示されないため注意。 </p>
+
+
+		</article>
+</script>

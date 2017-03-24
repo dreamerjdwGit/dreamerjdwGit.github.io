@@ -1,0 +1,294 @@
+<script type="text/ejs" id="article_03_controller">
+<header class="main-header">
+			<span class="header-span">教程（基本篇）</span>
+			<h1 class="header-h1">03.Controller</h1>
+		</header>
+		<article>
+			<h2 class="translate-cn">概要</h2>
+			<h2 class="translate-jp hidden">概要</h2>
+
+			<p class="translate-cn">控制器是与用户交互处理的中心，具体表现为：</p>
+			<p class="translate-jp hidden">コントローラはユーザーとのインタラクション処理の中心となります。具体的には</p>
+
+			
+
+			<ul>
+					<li><p class="translate-cn">事件绑定</p><p class="translate-jp hidden">イベントのハンドリング</p></li>
+					<li><p class="translate-cn">使用Logic、View（模板）声明</p><p class="translate-jp hidden">使用するLogic、View(テンプレート)の宣言</p></li>
+					<li><p class="translate-cn">定义了生命周期事件</p><p class="translate-jp hidden">ライフサイクルイベントの定義</p></li>
+					<li><p class="translate-cn">DOM操作</p><p class="translate-jp hidden">DOM操作</p></li>
+			</ul>
+
+			<p class="translate-cn">在这里，我们创建了下面的项目，来说明控制器的编写方法。</p>
+			<p class="translate-jp hidden">ここでは、以下の項目建てで、コントローラの記述方法を説明します。</p>
+
+			<h2 class="translate-cn">什么是「控制器化」？</h2>
+			<h2 class="translate-jp hidden">「コントローラ化」とは？</h2>
+
+			<p class="translate-cn">在详细说明控制器之前，先解释一下「控制器化」这个词语。</p>
+			<p class="translate-jp hidden">コントローラについて詳細に説明する前に、「コントローラ化」という言葉について説明します。</p>
+
+			<p class="translate-cn">如教程02.HelloWorld所示，调用hifive中的h5.core.controller()方法，将定义成控制器的对象与元素绑定，并使之处于可运行状态。</p>
+			<p class="translate-jp hidden">チュートリアル02.HelloWorldで示したように、hifiveではh5.core.controller()メソッドを呼ぶことで
+コントローラ定義オブジェクトを要素にバインドし実際に動作する状態にします。</p>
+
+			<p class="translate-cn">此时在控制器与元素绑定之前,内部进行了</p>
+			<p class="translate-jp hidden">このとき内部では、コントローラを要素にバインドする前に</p>
+
+			<ul>
+					<li><p class="translate-cn">基于被定义为控制器的对象，生成实例（克隆）。</p><p class="translate-jp hidden">コントローラ定義オブジェクトに基づいてインスタンスを生成（クローン）する</p></li>
+					<li><p class="translate-cn">实例中默认自动生成可使用的一系列常用的函数。</p><p class="translate-jp hidden">デフォルトで使える便利な関数をインスタンスに追加する</p></li>
+					<li><p class="translate-cn">设置事件句柄</p><p class="translate-jp hidden">イベントハンドラを設定する</p></li>
+			</ul>
+
+			<p class="translate-cn"> 等等处理，被称为「控制器化」。</p>
+			<p class="translate-jp hidden">などの処理を行っており、これを「コントローラ化」と呼んでいます。</p>
+
+			<p class="translate-cn">在学习的现阶段，把「控制器化」理解为
+「调用h5.core.controller()方法，并使之处于可运行状态」。
+</p>
+			<p class="translate-jp hidden">今の段階では、コントローラ化は
+「h5.core.controller()メソッドを呼んで動作可能状態にすること」
+と覚えておけばよいでしょう。</p>
+
+			<h2 class="translate-cn">事件句柄的写法</h2>
+			<h2 class="translate-jp hidden">イベントハンドラの書き方</h2>
+
+			<p class="translate-cn"> 由于发生的某事件而被调用的函数被称为事件句柄。</p>
+			<p class="translate-jp hidden">イベントハンドラとは、何らかのきっかけ（イベント）が起きたときに呼び出される関数のことです。</p>
+
+			<p class="translate-cn"> 事件大多数是由用户通过点击鼠标、键盘输入等操作所产生的。</p>
+			<p class="translate-jp hidden">「イベント」の多くは、マウスのクリック、キーボード入力などのユーザー操作に対応して発生します。</p>
+
+			<p class="translate-cn"> 事件处理（事件绑定）是控制器所控制的最基本的处理。</p>
+			<p class="translate-jp hidden">コントローラが行う最も基本的な処理はイベント処理（イベントハンドリング）です。</p>
+
+			<p class="translate-cn"> hifive的控制器中，通过特定的写法定义属性，不仅可以自动将其识别为事件句柄，而且在发生按钮点击等事件时也能自动调用该函数。</p>
+			<p class="translate-jp hidden">hifiveでは、コントローラに特定の記法でプロパティを記述するとそれを自動的にイベントハンドラとして認識し、
+ボタンがクリックされた、などのイベントが発生したときにその関数を呼び出すことができます。</p>
+			
+			<h4 class="translate-cn">基本结构</h4>
+			<h4 class="translate-jp hidden">基本構文</h4>
+
+			<p class="translate-cn"> 一起来制作一个控制器，控制一个id为btn的元素，当点击它时（click事件发生时）触发处理程序。</p>
+			<p class="translate-jp hidden">idがbtnである要素が押されたとき（clickイベントが発生する）に処理を行うコントローラを作成してみましょう。</p>
+
+			<div class="box code"><span style="font-weight: bold; color: #008000; ">var</span> sampleController <span style="color: #666666; ">=</span> { &nbsp;<br>&nbsp;&nbsp;__name<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'SampleController'</span>, &nbsp;<br> &nbsp;&nbsp;<br> &nbsp;<span style="color: #BA2121; ">'#btn click'</span><span style="color: #666666; ">:</span> <span style="font-weight: bold; color: #008000; ">function</span>(context, $el) { &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;alert(<span style="color: #BA2121; ">'ボタンがクリックされました。'</span>); &nbsp;<br>&nbsp;&nbsp;} &nbsp;<br>};</div>
+
+			<p class="translate-cn"> 第二行的__name属性为控制器名称（__name属性是必须定义的属性，否则会发生错误）。</p>
+			<p class="translate-jp hidden">2行目の__nameプロパティはコントローラの名前を表します(__nameプロパティは必須プロパティで、記述がない場合エラーが発生します)。</p>
+
+			<p class="translate-cn"> 在这里所指定的值相当于Java或者C#、Ruby等语言中的类名</p>
+			<p class="translate-jp hidden">ここで指定する値はJavaやC#、Ruby等における「クラス名（パッケージ修飾付きの完全修飾クラス名）」に相当するもので、</p>
+
+			<p class="translate-cn"> 在hifive框架中，原则上与之同名的被当做同一事物（类）所看待。</p>
+			<p class="translate-jp hidden">hifiveフレームワークは基本的に、この名前が同一のものは同じもの（≒クラス）として扱います。</p>
+
+			<p class="translate-cn">因此，请务必为每个控制器定义不同的名字。若使用了已被定义绑定了的名字，程序可能会出现不正确的行为。</p>
+			<p class="translate-jp hidden">従って、コントローラごとに必ず異なる名前を付けてください。名前がバッティングした場合、動作が不正になる可能性があります。</p>
+
+			<p class="translate-cn">实际开发中、</p>
+			<p class="translate-jp hidden">実開発では、</p>
+
+			<p class="translate-cn">__name属性开头还将添加有该包的全名。</p>
+			<p class="translate-jp hidden">__nameプロパティはフルパッケージ名として表記して下さい。</p>
+
+			<p class="translate-cn">因此，请务必为每个控制器定义不同的名字。若使用了已被定义绑定了的名字，程序可能会出现不正确的行为。</p>
+			<p class="translate-jp hidden">*__nameプロパティの他に、ロジック・ビューテンプレート・子コントローラをプロパティとして宣言する事ができます(詳しくは、以降のステップで学びます)。</p>
+
+			<h4 class="translate-cn">事件句柄</h4>
+			<h4 class="translate-jp hidden">イベントハンドラ</h4>
+
+			<p class="translate-cn">第4行定义了事件句柄。该事件句柄结构如下：</p>
+			<p class="translate-jp hidden">4行目がイベントハンドラの定義です。イベントハンドラの構文は以下のように記述します。</p>
+			
+			<div class="box code"><span style="color: #BA2121; ">'(セレクタ) (イベント名)'</span><span style="color: #666666; ">:</span> <span style="font-weight: bold; color: #008000; ">function</span>(context, $el) { &nbsp;<br> &nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// 処理 &nbsp;<br></span> }&nbsp;&nbsp;</div>
+
+			<p class="translate-cn">我们可以这样理解：</p>
+			<p class="translate-jp hidden">以下のように考えるとわかりやすいでしょう。</p>
+
+			<div class="box code"><span style="color: #BA2121; ">'(このセレクタ条件にマッチする要素で) (このイベントが起きたら)'</span><span style="color: #666666; ">:</span> funciton(){}<span style="font-weight: italic; color: #408080; ">//(このfunctionを実行する)<br></span></div>
+
+			<p class="translate-cn">事件名，不仅仅是click或submit等既定事件，而且也能指定为自定义事件。</p>
+			<p class="translate-jp hidden">イベント名は、clickやsubmitといった既定のものだけではなく、独自のカスタムイベントも指定することができます。 </p>
+
+			<h4 class="translate-cn">控制器化</h4>
+			<h4 class="translate-jp hidden">コントローラ化</h4>
+
+			<p class="translate-cn">控制器定义结束后，将对元素进行绑定。绑定时，请调用方法h5.core.controller()。</p>
+			<p class="translate-jp hidden"> コントローラの定義が終わったら、要素にバインドします。バインドするときは、h5.core.controller()メソッドを呼びだします。 </p>
+
+			<div class="box code">h5.core.controller(selector, controller, param);&nbsp;</div>
+
+			<p class="translate-cn">selector</p>
+			<p class="translate-jp hidden">selector</p>
+
+			<p class="translate-cn">&nbsp;&nbsp;&nbsp;选择器绑定。可指定为选择器或是元素的参照物。</p>
+			<p class="translate-jp hidden">&nbsp;&nbsp;&nbsp;コントローラをバインドする要素を指定します。セレクタ、もしくは要素への参照のどちらかを指定します。</p>
+
+			<p class="translate-cn">controller</p>
+			<p class="translate-jp hidden">controller</p>
+
+			<p class="translate-cn">&nbsp;&nbsp;&nbsp;指定了选择器定义的对象。  </p>
+			<p class="translate-jp hidden">&nbsp;&nbsp;&nbsp;コントローラ定義オブジェクトを指定します。</p>
+
+			<p class="translate-cn">param</p>
+			<p class="translate-jp hidden">param</p>
+
+			<p class="translate-cn"> &nbsp;&nbsp;&nbsp; 向控制器所传递的初期参数。</p>
+			<p class="translate-jp hidden">&nbsp;&nbsp;&nbsp;コントローラに渡す初期化パラメータを指定します。</p>
+
+			<p class="translate-cn">Returns</p>
+			<p class="translate-jp hidden">Returns</p>
+
+			<p class="translate-cn"> &nbsp;&nbsp;&nbsp;返回控制器对象。 </p>
+			<p class="translate-jp hidden">&nbsp;&nbsp;&nbsp;コントローラオブジェクトを返します。</p>
+
+			<h2 class="translate-cn">事件句柄参数</h2>
+			<h2 class="translate-jp hidden"> イベントハンドラの引数 </h2>
+
+			<h4 class="translate-cn">第1参数：事件上下文</h4>
+			<h4 class="translate-jp hidden">第1引数：イベントコンテキスト</h4>
+
+			<p class="translate-cn">事件句柄的第1参数：事件上下文对象。</p>
+			<p class="translate-jp hidden"> イベントハンドラの第1引数には、イベントコンテキストオブジェクトが渡されます。 </p>
+
+			<p class="translate-cn">虽然形参可以定义为任意名字，但是无特殊理由还是统一定义为「context」。
+事件上下文对象包含的属性如下：
+</p>
+			<p class="translate-jp hidden"> 仮引数名は任意の名前にすることができますが、特別な理由がない限り「context」で統一しておくのがよいでしょう。
+イベントコンテキストオブジェクトのプロパティは以下の通りです。 </p>
+
+			<p class="translate-cn">event</p>
+			<p class="translate-jp hidden"> event </p>
+
+			<p class="translate-cn">&nbsp;&nbsp;&nbsp;jQueryEvent对象 </p>
+			<p class="translate-jp hidden">&nbsp;&nbsp;&nbsp;jQueryEventオブジェクト</p>
+
+			<p class="translate-cn">controller</p>
+			<p class="translate-jp hidden">controller</p>
+
+			<p class="translate-cn">&nbsp;&nbsp;&nbsp; 控制器</p>
+			<p class="translate-jp hidden">&nbsp;&nbsp;&nbsp;コントローラの参照</p>
+
+			<p class="translate-cn">evArg</p>
+			<p class="translate-jp hidden">evArg</p>
+
+			<p class="translate-cn">&nbsp;&nbsp;&nbsp;使用trigger方法所传递的参数</p>
+			<p class="translate-jp hidden">&nbsp;&nbsp;&nbsp;triggerメソッドを使用して渡したパラメータ</p>
+
+			<h4 class="translate-cn"> 第2个参数：事件的目标元素 </h4>
+			<h4 class="translate-jp hidden"> 第2引数：イベントターゲット要素 </h4>
+
+			<p class="translate-cn"> 第2个参数是版本ver.1.1.4中追加的，在此之前不传递第2个参数。 </p>
+			<p class="translate-jp hidden"> 第2引数はver.1.1.4で追加されました。
+それ以前のバージョンでは第2引数は渡されません。 </p>
+
+			<p class="translate-cn"> 现在，第2个参数是发生该事件的目标元素。虽然形参可以定义为任意的名字，但是无特殊理由统一定义为「$el」（"el"是element的简称）。也就是说，是将事件句柄中选择器所指定的元素包装为jQuery对象，然后进行传递的参数。若直接为该元素设置事件句柄，句柄中调用的”this”指向元素本身。 </p>
+			<p class="translate-jp hidden"> 第2引数には、現在イベントを処理している要素が渡されます。
+仮引数名は任意の名前にすることができますが、特別な理由がない限り「$el」で統一しておくのがよいでしょう（"el"はelementの略）。
+この引数は、$(context.event.currentTarget)と同等です（contextはハンドラの第1引数）。
+つまり、イベントハンドラのセレクタで指定した要素をjQueryオブジェクト化したもの、が渡されます。
+要素に直接イベントハンドラをセットするとそのハンドラが呼ばれたときの"this"は要素自身を指しますが、
+これに相当するものです。 </p>
+
+			<div class="box code"><span style="font-weight: bold; color: #008000; ">&lt;ul</span> <span style="color: #7D9029; ">class=</span><span style="color: #BA2121; ">"list"</span><span style="font-weight: bold; color: #008000; ">&gt;</span><br> &nbsp;<span style="font-weight: bold; color: #008000; ">&lt;li</span> <span style="color: #7D9029; ">class=</span><span style="color: #BA2121; ">"listItem"</span><span style="font-weight: bold; color: #008000; ">&gt;</span>リストアイテム<span style="font-weight: bold; color: #008000; ">&lt;/li&gt;</span> &nbsp;<span style="font-weight: italic; color: #408080; ">&lt;!-- この要素をクリック --&gt;</span><br><span style="font-weight: bold; color: #008000; ">&lt;/ul&gt;</span></div>
+
+			<div class="box code"><span style="font-weight: bold; color: #008000; ">var</span> listController <span style="color: #666666; ">=</span> {<br>&nbsp;&nbsp;__name<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'ListController'</span>,<br><br> &nbsp;<span style="color: #BA2121; ">'.listItem click'</span><span style="color: #666666; ">:</span> <span style="font-weight: bold; color: #008000; ">function</span>(context, $el) {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">//$elはli要素を指す<br></span> &nbsp;}<br>}<br>h5.core.controller(<span style="color: #BA2121; ">'.list'</span>, listController);</div>
+
+			<div class="box code">h5.settings.listenerElementType <span style="color: #666666; ">=</span> <span style="color: #666666; ">0</span>;</div>
+
+			<p class="translate-cn">虽然传递的$el默认为jQuery对象，但是也可以传递原生元素，不对其进行jQuery包装。想要传递原生对象时，请在读取h5.js文件后编写如下代码。 </p>
+			<p class="translate-jp hidden">なお、$elはデフォルトではjQueryオブジェクトが渡されますが、jQuery化せず
+ネイティブの要素への参照を渡すようにすることもできます。
+ネイティブの要素を渡してほしい場合は、以下のコードをh5.jsの読み込み後に記述してください（参照：listenerElementType）。</p>
+
+			<div class="box code">h5.settings.listenerElementType <span style="color: #666666; ">=</span> <span style="color: #666666; ">0</span>;</div>
+
+			<p class="translate-cn">注意：事件冒泡 <br> 如上所示，$el指定为「发生该事件的元素（由选择器指定）」。
+但当选择器指定的元素包含了子元素，子元素上发生事件时，「事件发生的根元素」和$el是不同的。
+ </p>
+			<p class="translate-jp hidden">注：イベントがバブリングしている場合<br>上記の通り、$elは「現在イベントを処理している（セレクタで指定された）要素」を指します。
+そのため、セレクタの要素が子要素を持ち、その子要素でイベントが発生した場合、
+「イベントの発生元要素」と$elは異なります。  </p>
+	
+			<div class="box code"><span style="font-weight: bold; color: #008000; ">&lt;div</span> <span style="color: #7D9029; ">id=</span><span style="color: #BA2121; ">"container"</span><span style="font-weight: bold; color: #008000; ">&gt;</span> &nbsp;<span style="font-weight: italic; color: #408080; ">&lt;!-- この要素にコントローラをバインド --&gt;</span><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;div</span> <span style="color: #7D9029; ">class=</span><span style="color: #BA2121; ">"parent"</span><span style="font-weight: bold; color: #008000; ">&gt;</span> <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;a</span> <span style="color: #7D9029; ">class=</span><span style="color: #BA2121; ">"target"</span> <span style="color: #7D9029; ">href=</span><span style="color: #BA2121; ">"#"</span><span style="font-weight: bold; color: #008000; ">&gt;</span>LINK<span style="font-weight: bold; color: #008000; ">&lt;/a&gt;</span> &nbsp;<span style="font-weight: italic; color: #408080; ">&lt;!-- この要素をクリック --&gt;</span><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;/div&gt;</span><br><span style="font-weight: bold; color: #008000; ">&lt;/div&gt;</span></div>
+
+			<div class="box code"><span style="font-weight: bold; color: #008000; ">var</span> sampleController <span style="color: #666666; ">=</span> {<br>&nbsp;&nbsp;__name<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'SampleController'</span>,<br><br> &nbsp;<span style="color: #BA2121; ">'.parent click'</span><span style="color: #666666; ">:</span> <span style="font-weight: bold; color: #008000; ">function</span>(context, $el) {<br> &nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">//aタグをクリックした場合でも、セレクタで指定しているのは親のdiv要素なので<br></span> &nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">//$elは(parentクラスを指定した)div要素を指す。<br></span> &nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">//イベントの発生元要素を知りたい場合は$(context.event.target)と記述する。<br></span> &nbsp;},<br><br> &nbsp;<span style="color: #BA2121; ">'.target click'</span><span style="color: #666666; ">:</span> <span style="font-weight: bold; color: #008000; ">function</span>(context, $el) {<br> &nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">//aタグ(を指定するセレクタ)を指定したハンドラでは、<br></span> &nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">//もちろん$elはaタグを指す。<br></span> &nbsp;}<br>};<br>h5.core.controller(<span style="color: #BA2121; ">'#container'</span>, sampleController);</div>
+
+			<h2 class="translate-cn">事件句柄的有效范围</h2>
+			<h2 class="translate-jp hidden"> イベントハンドラの有効範囲 </h2>
+
+			<p class="translate-cn">控制器中定义的事件句柄，原则上，只有在「该控制器绑定元素的子元素上事件发生时」才运行。这样一来，在明确了控制器的责任范围的同时，也可以防止一些不正确的行为，例如：选择器条件范围很大的时候，若控制器范围外的元素上有事件发生，也不会启动该事件处理程序。</p>
+			<p class="translate-jp hidden"> コントローラで定義したイベントハンドラは、原則として
+「そのコントローラがバインドした要素の子要素でイベント発生した場合」にのみ動作します。
+これにより、コントローラの責任範囲が明確になると同時に、たとえばセレクタの条件が広い場合に
+コントローラの範囲外の要素で発生したイベントで不用意にハンドラが動作することを防ぐことができます。
+従って、たとえば </p>
+
+			
+			<p class="translate-cn">HTML：</p>
+			<p class="translate-jp hidden">HTML：</p>
+
+			<div class="box code"><span style="font-weight: bold; color: #008000; ">&lt;body&gt;</span> &nbsp;<br> &nbsp;<span style="font-weight: bold; color: #008000; ">&lt;div</span> <span style="color: #7D9029; ">id=</span><span style="color: #BA2121; ">"container"</span><span style="font-weight: bold; color: #008000; ">&gt;</span> &nbsp;<br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;input</span> <span style="color: #7D9029; ">type=</span><span style="color: #BA2121; ">"button"</span> <span style="color: #7D9029; ">name=</span><span style="color: #BA2121; ">"click1"</span> <span style="color: #7D9029; ">value=</span><span style="color: #BA2121; ">"click1"</span> <span style="font-weight: bold; color: #008000; ">/&gt;</span> &nbsp;<br> &nbsp;<span style="font-weight: bold; color: #008000; ">&lt;/div&gt;</span> &nbsp;<br> &nbsp;<span style="font-weight: bold; color: #008000; ">&lt;div&gt;</span> &nbsp;<br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;input</span> <span style="color: #7D9029; ">type=</span><span style="color: #BA2121; ">"button"</span> <span style="color: #7D9029; ">name=</span><span style="color: #BA2121; ">"click2"</span> <span style="color: #7D9029; ">value=</span><span style="color: #BA2121; ">"click2"</span> <span style="font-weight: bold; color: #008000; ">/&gt;</span> &nbsp;<br> &nbsp;<span style="font-weight: bold; color: #008000; ">&lt;/div&gt;</span> &nbsp;<br><span style="font-weight: bold; color: #008000; ">&lt;/body&gt;</span>&nbsp;&nbsp;</div>
+
+			<p class="translate-cn">JavaScript：</p>
+			<p class="translate-jp hidden">JavaScript：</p>
+
+			<div class="box code"><span style="font-weight: bold; color: #008000; ">var</span> selectorController <span style="color: #666666; ">=</span> { &nbsp;<br>&nbsp;&nbsp;__name<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'SelectorController'</span>, &nbsp;<br> &nbsp;&nbsp;<br> &nbsp;<span style="color: #BA2121; ">'input[type=button] click'</span><span style="color: #666666; ">:</span> <span style="font-weight: bold; color: #008000; ">function</span>(context, $el) { &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;alert(<span style="color: #BA2121; ">'clicked!'</span>); &nbsp;<br>&nbsp;&nbsp;} &nbsp;<br>}; &nbsp;<br>h5.core.controller(<span style="color: #BA2121; ">'#container'</span>, selectorController);&nbsp;&nbsp;</div>
+
+			<p class="translate-cn">比如上面的例子，因为selectorController绑定的元素是id="container"，因为按下click1按钮时（click1是id="container" 的子元素）会弹出消息，而按下click2按钮时什么也不会发生。<br>但是，也会有一些例外，想要把控制器范围外的元素也作为处理对象。<br>想要将画面上所有的元素（控制器外、或者是包含的同级元素）作为选择器的对象时，只需要在选择器外加上中括弧就OK了。</p>
+			<p class="translate-jp hidden">という例の場合、selectorControllerはid="container"の要素にバインドされているため、
+click1ボタンを押下すると（click1はid="container"の子要素なので）メッセージが表示されますが
+click2ボタンを押下しても何も起きません。<br>ただし、例外的に、コントローラの外側の要素を対象にしたい場合もあるでしょう。
+画面に存在するすべての要素（コントローラの外側、もしくは横の要素を含む）をセレクタの対象としたい場合は
+セレクタを中括弧で囲めばOKです。<br>上の例の場合、コントローラの定義を</p>
+
+			<div class="box code"><span style="font-weight: bold; color: #008000; ">var</span> selectorController <span style="color: #666666; ">=</span> { &nbsp;<br>&nbsp;&nbsp;__name<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'SelectorController'</span>, &nbsp;<br> &nbsp;&nbsp;<br> &nbsp;<span style="color: #BA2121; ">'{input[type=button]} click'</span><span style="color: #666666; ">:</span> <span style="font-weight: bold; color: #008000; ">function</span>(context, $el) { &nbsp;<span style="font-weight: italic; color: #408080; ">//セレクタを{}で囲んだ &nbsp;<br></span> &nbsp;&nbsp;&nbsp;alert(<span style="color: #BA2121; ">'clicked!'</span>); &nbsp;<br>&nbsp;&nbsp;} &nbsp;<br>};</div>
+
+			<p class="translate-cn">如果控制器定义为这样，按下任意按钮，都有会消息弹出。
+还有就是，不能将选择器指定为控制器本身所绑定的元素。
+如果想要为元素本身设置事件句柄时，选择器需要替换为{rootElement}。
+</p>
+			<p class="translate-jp hidden">とすると、どちらのボタンを押下してもメッセージが表示されるようになります。
+また、セレクタでは、“コントローラをバインドしている要素自身”を指定することはできません。
+バインドしている要素自体で発生するイベントに対してハンドラを設定したい場合は、
+セレクタの場所に「{rootElement}」と記述します。</p>
+
+			<div class="box code"><span style="font-weight: bold; color: #008000; ">var</span> selectorController <span style="color: #666666; ">=</span> { &nbsp;<br>&nbsp;&nbsp;__name<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'SelectorController'</span>, &nbsp;<br> &nbsp;&nbsp;<br> &nbsp;<span style="color: #BA2121; ">'{rootElement} click'</span><span style="color: #666666; ">:</span> <span style="font-weight: bold; color: #008000; ">function</span>(context, $el) { &nbsp;<span style="font-weight: italic; color: #408080; ">//{rootElement}と書くと、コントローラをバインドした要素自身を指す &nbsp;<br></span> &nbsp;&nbsp;&nbsp;alert(<span style="color: #BA2121; ">'clicked!'</span>); &nbsp;<br>&nbsp;&nbsp;} &nbsp;<br>};&nbsp;&nbsp;</div>
+
+			<h2 class="translate-cn">控制器的生命周期</h2>
+			<h2 class="translate-jp hidden">コントローラ化のライフサイクル</h2>
+
+			<p class="translate-cn">控制器在绑定元素到正常运作的状态是需要经过几个阶段的（生命周期）。<br>
+控制器的生命周期如下所示：
+</p>
+			<p class="translate-jp hidden">コントローラが要素にバインドされ動作する状態になるまでには、いくつかの段階（ライフサイクル）があります。<br>
+コントローラ化のライフサイクルは以下のようになっています。</p>
+
+			<img src="../img/lifecycle1.jpg" alt="lifecycle1.jpg">
+
+			<p class="translate-cn">想要处理程序在生命周期的特定阶段运行时，只需在相应的关键字下设置处理函数即可，到了相应的时间段函数会自动调用运行。</p>
+			<p class="translate-jp hidden">特定のライフサイクル段階で処理を行いたい場合、特定のキー名で関数をセットしておくと、そのタイミングに達したときに呼び出されます。</p>
+
+
+			<p class="translate-cn">__construct<br>&nbsp;&nbsp;&nbsp;控制器化结束阶段运行。资源（视图模板）的读取尚未结束。</p>
+			<p class="translate-jp hidden">__construct<br>&nbsp;&nbsp;&nbsp;コントローラ化が終わったタイミングで実行されます。リソース（ビューテンプレート）の読み込みは終わっていません。</p>
+
+			<p class="translate-cn">__init<br>&nbsp;&nbsp;&nbsp;控制器化和必要的资源读取后，在视图绑定结束阶段运行。此时，事件句柄尚未绑定。</p>
+			<p class="translate-jp hidden">__init<br>&nbsp;&nbsp;&nbsp;コントローラ化と動作に必要なリソースの読み込みとViewへのバインドが終わったタイミングで実行されます。まだイベントハンドラはバインドされていま
+せん。</p>
+
+			<p class="translate-cn">__ready<br>&nbsp;&nbsp;&nbsp;控制器化和必要的资源读取，以及视图绑定结束后的阶段运行。
+ 控制器化可运行状态下想要让程序再做点什么时，几乎都是使用__ready。
+</p>
+			<p class="translate-jp hidden">__ready<br>&nbsp;&nbsp;&nbsp;コントローラ化と動作に必要なリソースの読み込み、Viewとイベントハンドラのバインドが終わったタイミングで実行されます。
+「コントローラが動作可能状態になったら何かしたい」場合、ほとんどのケースでは__readyイベントを使用すればよいでしょう。</p>
+
+
+			<p class="translate-cn">在理解了控制器生命周期各阶段的定义和作用后，按照该规范编写，可以使得源代码更加自然和易于理解，并且作用域更加明确。</p>
+			<p class="translate-jp hidden">コントローラの役割を理解し定義に従って書くことで、
+自然とスコープが明確でいつ何が起きるのかわかりやすいコードになっていくはずです。
+次は、画面（ビュー）の操作について説明します。</p>
+		</article>
+</script>

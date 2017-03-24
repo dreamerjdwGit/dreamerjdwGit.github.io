@@ -1,0 +1,166 @@
+<script type="text/ejs" id="article_06_asyn">
+<header class="main-header">
+			<span class="header-span">教程（基本篇）</span>
+			<h1 class="header-h1">06.异步处理</h1>
+		</header>
+		<article>
+			<h2 class="translate-cn">概要</h2>
+			<h2 class="translate-jp hidden">概要</h2>
+
+			<p class="translate-cn">为实现操作性和交互性更强的优质画面，我们必须用到异步处理。接下来，我们开始来学习异步处理吧。<br>
+通过与服务器异步地交换数据，不但可以减少画面的迁移，而且还可以使得在客户端与服务器通信时，浏览器画面不会锁住。异步处理，是作为制作交互性强的优质的web应用所必须的技术手段。<br>
+在这一章节，我们通过使用异步获取到商品列表的例子来对异步处理进行说明。
+			</p>
+			<p class="translate-jp hidden"> ここでは、操作性が高く使い勝手の良いリッチな画面を実現するために必須となる、非同期処理の取り扱いについて説明します。<br>
+非同期でサーバとのデータのやりとりができれば、画面遷移を減らすことができ、サーバとの通信中もブラウザをブロックしなくて済みます。非同期処理は、使い勝手の良いリッチなウェブアプリケーションの作成には必須となります。<br>
+この章では、商品リストを非同期で取得して表示するサンプルの作成を通して、非同期処理について説明します。 </p>
+			
+			<h4 class="translate-cn"> 实例 </h4>
+			<h4 class="translate-jp hidden"> 実装例 </h4>
+
+			<p class="translate-cn"> 逻辑中记录了从服务器上取得数据的部分，控制器中记录了画面操作的部分。<br>
+以下就是通过异步处理，获取到与画面选取相同的商品的详细信息的逻辑。
+ </p>
+			<p class="translate-jp hidden">サーバからデータを取得する部分はロジック、画面操作はコントローラに記述します。<br>
+以下は、画面で選択されたカテゴリと一致する商品情報をサーバから非同期で取得するロジックです。 </p>
+
+			<div class="box code"><span style="font-weight: bold; color: #008000; ">var</span> itemSearchLogic <span style="color: #666666; ">=</span> { &nbsp;<br> &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">/** <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* ロジック名 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span> &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;__name<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'ItemSearchLogic'</span>, &nbsp;<br> &nbsp;&nbsp;<br> &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">/** <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* 商品リスト(商品名と税込価格)を取得する。 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @param categoryId {Number} カテゴリID <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @returns 商品リスト <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span> &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;getItemList<span style="color: #666666; ">:</span> <span style="font-weight: bold; color: #008000; ">function</span>(categoryId) { &nbsp;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">var</span> dfd <span style="color: #666666; ">=</span> <span style="font-weight: bold; color: #008000; ">this</span>.deferred(); &nbsp;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">var</span> result <span style="color: #666666; ">=</span> <span style="font-weight: bold; color: #008000; ">null</span>; &nbsp;<br> &nbsp;&nbsp;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">this</span>._getItemData(categoryId).done(<span style="font-weight: bold; color: #008000; ">function</span>(data) { &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result <span style="color: #666666; ">=</span> $.map(data, <span style="font-weight: bold; color: #008000; ">function</span>(obj) { &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;obj.price <span style="color: #666666; ">=</span> <span style="color: #008000; ">Math</span>.floor(obj.price <span style="color: #666666; ">*</span> <span style="color: #666666; ">1.05</span>); &nbsp;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">return</span> obj; &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}); &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dfd.resolve(result); &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}).fail(<span style="font-weight: bold; color: #008000; ">function</span>(error) { &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dfd.reject(error.message); &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}); &nbsp;<br> &nbsp;&nbsp;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">return</span> dfd.promise(); &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;}, &nbsp;<br> &nbsp;&nbsp;<br> &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">/** <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* カテゴリIDから商品(商品名と税抜価格)リストをサーバから取得する。 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @param categoryId {Number} カテゴリID <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @returns 商品リスト <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span> &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;_getItemData<span style="color: #666666; ">:</span> <span style="font-weight: bold; color: #008000; ">function</span>(categoryId) {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// [ {"itemname":"hoge", "price": "1000"}, ...] のようなJSONオブジェクトを返す &nbsp;<br></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">var</span> promise <span style="color: #666666; ">=</span> h5.ajax(<span style="color: #BA2121; ">'./itemList'</span>, { <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'GET'</span>, &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dataType<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'json'</span>, &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data<span style="color: #666666; ">:</span> {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;categoryId<span style="color: #666666; ">:</span> categoryId &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">return</span> promise;<br>&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;<br>};</div>
+
+			<ul>
+					<li><p class="translate-cn">getItemList为共有方法。预想为被控制器所调用。
+像以上代码，区分功能作用，分别编写了数据取得和处理数据的方法。通过这样的编写方式，当getItemList想要处理其他事情的时候，数据的取得方法（_getItemData）原封不动地保留，只需要重新编写处理数据的方法，修改变得十分容易。
+</p><p class="translate-jp hidden">getItemListメソッドはパブリックメソッドです。コントローラから呼ばれることを想定しています。
+このように、データを取得するメソッドと取得したデータに対して処理を行うメソッドと役割を分けて作成することで、getItemListとは異なる処理を行いたい場合は、データを取得するメソッド(_getItemData)はそのままで処理を行うメソッドのみを新規に作成すればよいだけなので、修正が容易です。</p></li>
+					<li><p class="translate-cn">通过getItemList作成了Deferred对象。之前的逻辑章节也说明过，通过逻辑化，框架会自动地添加deferred方法。</p><p class="translate-jp hidden">getItemListでDeferredオブジェクトを作成しています。ロジックのステップにも記述しましたが、ロジック化されると、フレームワークによってdeferredメソッドが追加されます。</p></li>
+					<li><p class="translate-cn">通过getItemList，返回了一个Promise对象。</p><p class="translate-jp hidden">getItemListでPromiseオブジェクトを返しています。</p></li>
+
+					<li><p class="translate-cn">_getItemData中的h5.ajax，是jQuery中Ajax通信用的方法。因为ajax方法的返回值是一个Promise对象，因此可以像this._getItemData(categoryId).done()一样，通过done方法取得异步处理的结果并进行处理。同时，也可以通过fail方法来取得错误的结果。 </p>
+			<p class="translate-jp hidden"> _getItemData内のh5.ajaxは、jQueryで用意されているAjax通信を行うためのメソッドです。ajaxメソッドの戻り値はPromiseオブジェクトなので、this._getItemData(categoryId).done()のようにして、doneメソッドで非同期処理の結果を取得することができます。なお、エラーはfailメソッドで取得することができます。 </p></li>
+			</ul>
+
+			<p class="translate-cn"> 下面为控制器的部分。 </p>
+			<p class="translate-jp hidden"> 次に、コントローラの記述です。 </p>
+
+			<div class="code"><span style="font-weight: bold; color: #008000; ">var</span> itemSearchController <span style="color: #666666; ">=</span> { &nbsp;<br> &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">/** <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* コントローラ名 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span> &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;__name<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'ItemSearchController'</span>, &nbsp;<br> &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">/** <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* テンプレート <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span> &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;__templates<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'template.ejs'</span>, &nbsp;<br> &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">/** <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* 商品検索ロジック <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span> &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;itemSearchLogic<span style="color: #666666; ">:</span> itemSearchLogic, &nbsp;<br> &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">/** <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* 検索ボタン押下アクション <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span> &nbsp;<br> &nbsp;&nbsp;&nbsp;<span style="color: #BA2121; ">'#searchBtn click'</span><span style="color: #666666; ">:</span> <span style="font-weight: bold; color: #008000; ">function</span>(context) { &nbsp;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">var</span> $resultDiv <span style="color: #666666; ">=</span> <span style="font-weight: bold; color: #008000; ">this</span>.$find(<span style="color: #BA2121; ">'#resultList'</span>); &nbsp;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">var</span> that <span style="color: #666666; ">=</span> <span style="font-weight: bold; color: #008000; ">this</span>; &nbsp;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$resultDiv.empty(); &nbsp;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// 画面で選択されたカテゴリ &nbsp;<br></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">var</span> category <span style="color: #666666; ">=</span> <span style="font-weight: bold; color: #008000; ">this</span>.$find(<span style="color: #BA2121; ">'#select-category option:selected'</span>).val(); &nbsp;<br> &nbsp;&nbsp;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">this</span>.itemSearchLogic.getItemList(category).done(<span style="font-weight: bold; color: #008000; ">function</span>(resultData) { &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;that.view.append($resultDiv, <span style="color: #BA2121; ">'template1'</span>, {listData<span style="color: #666666; ">:</span> resultData}); &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}).fail(<span style="font-weight: bold; color: #008000; ">function</span>(errMsg) { &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alert(<span style="color: #BA2121; ">'取得に失敗しました'</span> <span style="color: #666666; ">+</span> errMsg); &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}); &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;<br>}; &nbsp;<br> &nbsp;&nbsp;<br>h5.core.controller(<span style="color: #BA2121; ">'#container'</span>, itemSearchController);&nbsp;&nbsp;</div>
+
+			<p class="translate-cn"> 调用执行itemSearchLogic#getItemList。返回值是一个Promise对象。<br>
+getItemList的返回值也是一个Promise。在done里的回调函数中描述了异步处理后的控制器处理。<br>
+在这里，通过Ajax获取到的数据，与模板绑定后，作为一览画面显示出来。
+ </p>
+			<p class="translate-jp hidden"> itemSearchLogic#getItemListを実行します。戻り値はPromiseオブジェクトです。<br>
+getItemListの戻り値はPromiseオブジェクトです。doneコールバックにロジックの非同期処理後のコントローラの処理を記述しています。<br>
+ここでは、Ajaxで取得したデータを、一覧としてテンプレートを使用して画面に出力しています。 </p>
+
+
+			<h2 class="translate-cn"> 相关的jQuery Deferred API </h2>
+			<h2 class="translate-jp hidden">jQuery Deferred APIについて </h2>
+
+			<p class="translate-cn"> hifive的异步处理控制中所用的Deferred是在jQuery的Deferred API的基础上构建的。<br>
+基本上，jQuery的Deferred API所能提供的功能都能使用。
+ </p>
+			<p class="translate-jp hidden"> hifiveの非同期制御で用いるDeferredはjQueryのDeferred APIをベースにしています。<br>
+jQueryのDeferred APIで提供されている機能は基本的にすべて利用可能です。 </p>
+
+			<h4 class="translate-cn"> deferred.notify, deferred.progress的实例 </h4>
+			<h4 class="translate-jp hidden">  deferred.notify, deferred.progressの実装例</h4>
+
+			<p class="translate-cn">7-1实例中，追加了notify, progress的相关代码。 </p>
+			<p class="translate-jp hidden"> 7-1の実装例にnotify, progressを使ったコードを追記します。 </p>
+
+			<div class="code"><span style="font-weight: bold; color: #008000; ">var</span> itemSearchLogic <span style="color: #666666; ">=</span> { &nbsp;<br> &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">/** <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* ロジック名 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span> &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;__name<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'ItemSearchLogic'</span>, &nbsp;<br> &nbsp;&nbsp;<br> &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">/** <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* 商品リスト(商品名と税込価格)を取得する。 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @param categoryId {Number} カテゴリID <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @returns 商品リスト <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span> &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;getItemList<span style="color: #666666; ">:</span> <span style="font-weight: bold; color: #008000; ">function</span>(categoryId) { &nbsp;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">var</span> dfd <span style="color: #666666; ">=</span> <span style="font-weight: bold; color: #008000; ">this</span>.deferred(); &nbsp;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">var</span> result <span style="color: #666666; ">=</span> <span style="font-weight: bold; color: #008000; ">null</span>; &nbsp;<br> &nbsp;&nbsp;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">this</span>._getItemData(categoryId).done(<span style="font-weight: bold; color: #008000; ">function</span>(data) { &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result <span style="color: #666666; ">=</span> $.map(data, <span style="font-weight: bold; color: #008000; ">function</span>(obj) { &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dfd.notify(data.length); &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;obj.price <span style="color: #666666; ">=</span> <span style="color: #008000; ">Math</span>.floor(obj.price <span style="color: #666666; ">*</span> <span style="color: #666666; ">1.05</span>); &nbsp;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">return</span> obj; &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}); &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dfd.resolve(result); &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}).fail(<span style="font-weight: bold; color: #008000; ">function</span>(error) { &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dfd.reject(error.message); &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}); &nbsp;<br> &nbsp;&nbsp;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">return</span> dfd.promise(); &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;}, &nbsp;<br> &nbsp;&nbsp;<br> &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">/** <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* カテゴリIDから商品(商品名と税抜価格)リストをサーバから取得する。 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @param categoryId {Number} カテゴリID <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @returns 商品リスト <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span> &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;_getItemData<span style="color: #666666; ">:</span> <span style="font-weight: bold; color: #008000; ">function</span>(categoryId) { &nbsp;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// [ {"itemname":"hoge", "price": "1000"}, ...] のようなJSONオブジェクトを返す &nbsp;<br></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">var</span> promise <span style="color: #666666; ">=</span> h5.ajax(<span style="color: #BA2121; ">'./itemList'</span>, { <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'GET'</span>, &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dataType<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'json'</span>, &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data<span style="color: #666666; ">:</span> {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;categoryId<span style="color: #666666; ">:</span> categoryId &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">return</span> promise; <br>&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;<br>};&nbsp;&nbsp;</div>
+
+			<p class="translate-cn"> _getItemData()的done回调函数中使用了deferred.notify。每件数据的含税金额完成时，都会通知画面当前完成的计算件数。<br>
+			虽然这次的例子中，因为计算处理简单，程序很快就结束了。但是当计算处理所花时间较长时，因为执行过程中可以不断通知用户，所以这个方法也十分有用。 </p>
+			<p class="translate-jp hidden"> _getItemData()のdoneコールバックの中でdeferred.notifyを使用しています。データ1件に対する税込金額の計算が完了した件数を画面に通知しています。
+今回の例では、簡単な処理のため処理がすぐに終了してしまいますが、時間のかかる処理を実行中に、途中経過をユーザに通知したりする場合に役立ちます。 </p>
+
+			<div class="code"><span style="font-weight: bold; color: #008000; ">var</span> itemSearchController <span style="color: #666666; ">=</span> { &nbsp;<br> &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">/** <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* コントローラ名 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span> &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;__name<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'ItemSearchController'</span>, &nbsp;<br> &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">/** <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* テンプレート <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span> &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;__templates<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'template.ejs'</span>, &nbsp;<br> &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">/** <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* 商品検索ロジック <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span> &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;itemSearchLogic<span style="color: #666666; ">:</span> itemSearchLogic, &nbsp;<br> &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">/** <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* 検索ボタン押下アクション <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span> &nbsp;<br> &nbsp;&nbsp;&nbsp;<span style="color: #BA2121; ">'#searchBtn click'</span><span style="color: #666666; ">:</span> <span style="font-weight: bold; color: #008000; ">function</span>(context) { &nbsp;<br>	<span style="font-weight: bold; color: #008000; ">var</span> indicator <span style="color: #666666; ">=</span> <span style="font-weight: bold; color: #008000; ">this</span>.indicator({<br>		message<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'検索中'</span>,<br>		target<span style="color: #666666; ">:</span> <span style="color: #008000; ">document</span><br>	}).show(); &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br> &nbsp;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// 画面で選択されたカテゴリ &nbsp;<br></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">var</span> category <span style="color: #666666; ">=</span> $(<span style="color: #BA2121; ">'#select-category option:selected'</span>).val(); &nbsp;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">var</span> $resultDiv <span style="color: #666666; ">=</span> <span style="font-weight: bold; color: #008000; ">this</span>.$find(<span style="color: #BA2121; ">'#resultList'</span>); &nbsp;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">var</span> that <span style="color: #666666; ">=</span> <span style="font-weight: bold; color: #008000; ">this</span>; &nbsp;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">var</span> count <span style="color: #666666; ">=</span> <span style="color: #666666; ">0</span>; &nbsp;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$resultDiv.empty(); &nbsp;<br> &nbsp;&nbsp;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">this</span>.itemSearchLogic.getItemList(category).done(<span style="font-weight: bold; color: #008000; ">function</span>(resultData) { &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;that.view.append($resultDiv, <span style="color: #BA2121; ">'template1'</span>, {listData<span style="color: #666666; ">:</span> resultData}); &nbsp;<br>	 &nbsp;&nbsp;&nbsp;indicator.hide(); &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}).fail(<span style="font-weight: bold; color: #008000; ">function</span>(errMsg) { &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alert(<span style="color: #BA2121; ">'取得に失敗しました'</span> <span style="color: #666666; ">+</span> errMsg); &nbsp;<br>	 &nbsp;&nbsp;&nbsp;indicator.hide();<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}).progress(<span style="font-weight: bold; color: #008000; ">function</span>(total) { &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;indicator.message(<span style="color: #BA2121; ">'検索中'</span> <span style="color: #666666; ">+</span> <span style="color: #666666; ">++</span>count <span style="color: #666666; ">+</span> <span style="color: #BA2121; ">'/'</span> <span style="color: #666666; ">+</span> total); &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}); &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;<br>}; &nbsp;<br><br>h5.core.controller(<span style="color: #BA2121; ">'#container'</span>, itemSearchController);&nbsp;&nbsp;</div>
+
+			<p class="translate-cn"> progress方法使用了getItemList()的返回值，在其回调函数中调用。<br>
+progress回调函数结束时，画面将显示当前已完成的处理件数。<br>
+ </p>
+			<p class="translate-jp hidden"> getItemList()の戻り値にprogressメソッドを使用して、progressコールバックを登録しています。<br>
+progressコールバックは完了した処理の件数が画面に表示される処理を実行します。
+動作確認 </p>
+
+			<h2 class="translate-cn">异步处理的合并  </h2>
+			<h2 class="translate-jp hidden"> 非同期処理の待ち合わせ </h2>
+
+			<p class="translate-cn"> 使用h5.async.when()方法，程序会等待参数中的多个Promise对象都被resolve()后再接着执行。与$.when()的使用方法相同。参数中的Promise对象个数没有任何限制。但是，与$.when()不同的一点在于这里的参数可以为Promise对象的数组。 </p>
+			<p class="translate-jp hidden"> h5.async.when()を使うと、引数に渡した複数のプロミスオブジェクトがresolve()されるのを待つことができます。$.when()と使い方は同じです。引数にプロミスオブジェクトを可変長で複数取ります。また、$.when()と違い、引数にプロミスオブジェクトの配列を取ることができます。</p>
+
+
+
+			<h4 class="translate-cn"> 实例 </h4>
+			<h4 class="translate-jp hidden"> 実装例 </h4>
+
+			<p class="translate-cn"> Logic的部分 </p>
+			<p class="translate-jp hidden"> ロジックの一部 </p>
+
+			<div class="code"><span style="font-weight: italic; color: #408080; ">// getPlanList()は、3つの非同期処理を呼び出して、それを待ち合わせるメソッドです。<br>// _getDepart(), _getReturn(), _getHotel() はそれぞれ非同期処理を行ってプロミスを返します。<br>// 3つの非同期が終わってから実行する処理を、getPlanList()のdoneコールバックに記述できます。<br></span><br>getPlanList<span style="color: #666666; ">:</span> <span style="font-weight: bold; color: #008000; ">function</span>() {<br>	<span style="font-weight: italic; color: #408080; ">// 3つのメソッド呼び出しを待ち合わせる<br></span>	<span style="font-weight: italic; color: #408080; ">// 全ての非同期処理が完了してからdoneコールバックが呼ばれる。<br></span>	<span style="font-weight: bold; color: #008000; ">return</span> h5.async.when(<span style="font-weight: bold; color: #008000; ">this</span>._getDepart(), <span style="font-weight: bold; color: #008000; ">this</span>._getReturn(), <span style="font-weight: bold; color: #008000; ">this</span>._getHotel());<br>},</div>
+			
+<p class="translate-cn">  </p>
+			<p class="translate-jp hidden">  </p>
+
+			<p class="translate-cn"> Controller中调用getPlanList的部分 </p>
+			<p class="translate-jp hidden"> コントローラの一部(getPlanListの呼び出し)</p>
+
+			<div class="code"><span style="font-weight: bold; color: #008000; ">this</span>.planSearchLogic.getPlanList().done(<br>	<span style="font-weight: bold; color: #008000; ">function</span>(depatFlightList, returnFlightList, hotelList) {<br>		that.log.debug(<span style="color: #BA2121; ">"データの取得が完了しました"</span>);<br>	});</div>
+
+			<h2 class="translate-cn">  异步处理链</h2>
+			<h2 class="translate-jp hidden"> 非同期処理のチェーン </h2>
+
+			<p class="translate-cn"> 在某个异步处理结束后，想要接着处理另一个异步处理时，可以使用then()。<br>
+(jQuery1.8版本以下请使用pipe()。)
+ </p>
+			<p class="translate-jp hidden"> ある非同期処理が終わってから、次の非同期処理を行いたい場合は、then()を使います。<br>
+(jQuery1.8未満の場合はpipe()を使います。) </p>
+
+			<h2 class="translate-cn">commonFailHandler  </h2>
+			<h2 class="translate-jp hidden"> commonFailHandler </h2>
+
+			<p class="translate-cn"> hifive中的Deferred对象与jQuery中的Deferred几乎相同。但是，hifive生成的Deferred对象可以设置一个共有的错误处理句柄(commonFailHandler)。<br>
+			当commonFailHandler未设定而异步请求失败时，将执行共有的fail回调函数。<br>
+			 commonFailHandler是由h5.settings.commonFailHandler句柄（函数）所设定的。</p>
+			<p class="translate-jp hidden"> hifiveのDeferredオブジェクトは、jQueryのDeferredオブジェクトと同様の挙動です。ただし、hifiveで生成したDeferredオブジェクトオブジェクトは共通のエラーハンドラ(commonFailHandler)を設定することができます。<br>
+commonFailHandlerは、failハンドラを設定していないDeferredオブジェクトが失敗した場合に、共通のfailハンドラとして実行されます。failハンドラの設定されている非同期処理が失敗した場合は実行されません。<br>
+commonFailHandlerの設定は、h5.settings.commonFailHandlerにハンドラ(関数)を設定します。 </p>
+
+			<div class="code">h5.settings.commonFailHandler <span style="color: #666666; ">=</span> <span style="font-weight: bold; color: #008000; ">function</span>(e){<br> &nbsp;<span style="font-weight: italic; color: #408080; ">// 共通のエラー処理<br></span> &nbsp;alert(<span style="color: #BA2121; ">'エラーが発生しました'</span>);<br>}<br><br>h5.ajax(<span style="color: #BA2121; ">'hoge'</span>).done(<span style="font-weight: bold; color: #008000; ">function</span>(){<br> &nbsp;<span style="font-weight: italic; color: #408080; ">// 成功時の処理<br></span>});<br><span style="font-weight: italic; color: #408080; ">// 非同期処理が失敗したら共通のエラー処理が実行される<br></span><br>h5.ajax(<span style="color: #BA2121; ">'hoge'</span>).fail(<span style="font-weight: bold; color: #008000; ">function</span>(){<br> &nbsp;<span style="font-weight: italic; color: #408080; ">// 失敗時の処理<br></span>});<br><span style="font-weight: italic; color: #408080; ">// failハンドラが登録されている場合は失敗しても共通のエラー処理は実行されない<br></span><br>h5.ajax(<span style="color: #BA2121; ">'hoge'</span>).always(<span style="font-weight: bold; color: #008000; ">function</span>(){<br> &nbsp;<span style="font-weight: italic; color: #408080; ">// 終了時(成功時または失敗時)の処理<br></span>});<br><span style="font-weight: italic; color: #408080; ">// alwaysを使ってfail時の処理が記述されている場合も共通のエラー処理は実行されない<br></span></div>
+
+			<p class="translate-cn"> 这个共有的fail句柄，就是hifive生成的Deferred对象中的共有fail句柄，例如h5.async.deferred()、h5.ajax()等生成的Deferred对象。但是不适用于通过$.Deferred()所生成的异步对象。 </p>
+			<p class="translate-jp hidden"> この共通のfailハンドラは、hifiveが生成するDeferredオブジェクトに共通するfailハンドラとなります。h5.async.deferred()や、h5.ajax()等で生成されるDeferredオブジェクトなどです。$.Deferred()で生成した非同期オブジェクトへは適用されません。 </p>
+
+			<h2 class="translate-cn"> 常见问题 </h2>
+			<h2 class="translate-jp hidden">  よくある質問</h2>
+
+			<h4 class="translate-cn"> 逻辑中该如何决定API的使用密度？ </h4>
+			<h4 class="translate-jp hidden"> ロジックのAPIの粒度はどう考えるべき？ </h4>
+
+			<p class="translate-cn"> 一个方法中一个异步处理。<br>
+当使用了Deferred，不管是调整异步处理的顺序，或是不得不在追加其他的异步处理的情况发生时，都可以非常灵活地处理。
+ </p>
+			<p class="translate-jp hidden"> 1つの非同期処理は1メソッドとした方が良いでしょう。<br>
+Deferredを使ってさえいれば、非同期処理の順番が変わったり、間に別の非同期処理を追加しなければならなくなった場合でも柔軟に対応できます。</p>
+
+			<h4 class="translate-cn">  异步处理的途中想要在画面上反映时怎么办？</h4>
+			<h4 class="translate-jp hidden"> 処理の進行途中で画面に反映させたい場合はどうすればいい？ </h4>
+
+			<p class="translate-cn"> Deferred中有notify()方法，在最终完成通知前可以发送当前进度通知。<br>
+所以，我们可以在使用Deferred中的notify()方法后，通过调用Promise的progress()的回调函数来实现画面的刷新。<br>
+notify()方法可以取得对象，并作为参数传递给progress()中设置的回调函数，因此可以通过数据来实现画面的更新。<br>
+ </p>
+			<p class="translate-jp hidden"> Deferredにはnotify()というメソッドがあり、最終的な完了通知の前に進捗を通知することができます。<br>
+Deferredでnotify()メソッドを呼ぶとPromiseのprogress()で登録したコールバック関数が呼ばれるので、<br>
+この仕組みを利用して画面を書き換えるとよいでしょう。<br>
+notify()メソッドは引数にオブジェクトをとることができ、渡したオブジェクトは<br>
+progress()でセットしたコールバック関数の引数に渡されるので、データに基づいた画面更新も可能です。 </p>
+
+			<h4 class="translate-cn"> 处理完成花费时间过长或者数据量过多时怎么办？ </h4>
+			<h4 class="translate-jp hidden"> 最終的な処理完了までに非常に時間がかかる・データ量が多くなる場合はどうすればいい？ </h4>
+
+			<p class="translate-cn"> 因为可以通过使用progress()等方法中途调用回调函数，所以在编写逻辑的API时可以在处理繁重的情况下，通过传递数组或是对象，在必要的时候用progress()进行相应处理。 </p>
+			<p class="translate-jp hidden"> progress()等を使うことで途中でコールバックを呼べるので、ロジックのAPIとしては「処理したいものがたくさんあるときは、配列やオブジェクトで一括で渡し、必要に応じてprogress()する」ようにするのが良いでしょう。 </p>
+			
+		</article>
+</script>

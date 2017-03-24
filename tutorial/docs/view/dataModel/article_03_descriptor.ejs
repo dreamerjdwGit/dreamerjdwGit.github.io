@@ -1,0 +1,205 @@
+<script type="text/ejs" id="article_03_descriptor">
+
+
+<header class="main-header">
+			<span class="header-span">教程（基本篇）</span>
+			<h1 class="header-h1">03.描述符的写法</h1>
+		</header>
+		<article>
+		
+			<h2 class="translate-cn">概要</h2>
+			<h2 class="translate-jp hidden">概要 </h2>
+
+			<p class="translate-cn">
+在hifive的数据模型里，描述符（descriptor）是用来描述数据模型名称、该数据模型中的各个dataItem中包含的属性，并且规定了属性的类型和校验规则。<br>
+类比于数据库和数据库中的Schema（数据库对象的集合，一个用户一般对应一个schema）。
+			</p>
+			<p class="translate-jp hidden">
+hifiveのデータモデルにおける「ディスクリプタ」とは、データモデルの名前、このデータモデルに属する各データアイテムがどのようなプロパティを持っているか、またそのプロパティにはどのような型・制約があるか、などを記述したものです。<br>
+データベースにおけるスキーマ定義と似たようなものです。<br>
+データモデルを作成する時には、このディスクリプタを指定する必要があります。<br>		
+			</p>
+
+			<h2 class="translate-cn"> 描述符的写法 </h2>
+			<h2 class="translate-jp hidden"> ディスクリプタの基本的な書き方 </h2>
+
+			<p class="translate-cn">
+描述符是以对象的形式来定义的（之后我们将统一称为描述符对象）。<br>
+在数据模型生成时，描述符对象作为参数传入。<br>
+一个描述符可以用来描述一个数据模型。<br>
+描述符对象的写法如下所示：
+			</p>
+			<p class="translate-jp hidden">
+ディスクリプタは、オブジェクトの形で定義します（以降このオブジェクトを「ディスクリプタオブジェクト」と呼びます）。<br>
+データモデル生成時は、このオブジェクトを引数として渡します。<br>
+1つのディスクリプタオブジェクトには、1つのデータモデルについての定義を記述できます。<br>
+ディスクリプタオブジェクトは以下のように記述します。			
+			</p>
+
+			<div class="box code"><span style="font-weight: bold; color: #008000; ">var</span> descriptor <span style="color: #666666; ">=</span> {<br>&nbsp;&nbsp;&nbsp;&nbsp;name<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'SampleDataModel'</span>, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// データモデルの名前（必須）<br></span> &nbsp;&nbsp;&nbsp;schema<span style="color: #666666; ">:</span> {...} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// データアイテムのプロパティ定義（スキーマオブジェクト、必須）<br></span>};<br><br><span style="font-weight: italic; color: #408080; ">// 記述したディスクリプタオブジェクトを基にデータモデルを作成<br></span><span style="font-weight: bold; color: #008000; ">var</span> model <span style="color: #666666; ">=</span> sample.dataManager.createModel(descriptor);</div>
+
+			<p class="translate-cn">
+			在这个数据模型中的dataItem的属性定义位于schema对象内。
+			</p>
+			<p class="translate-jp hidden">
+			このデータモデルに属するデータアイテムのプロパティ定義は、スキーマオブジェクト（上記schemaプロパティ）に記述します。
+			</p>
+
+			<h2 class="translate-cn"> dataItem的属性定义（schema）的基本写法 </h2>
+			<h2 class="translate-jp hidden"> データアイテムのプロパティ定義（スキーマ）の基本的な書き方 </h2>
+
+			<p class="translate-cn">
+schema对象中，定义了属于该数据模型的各个dataItem的属性。<br>
+如上面的例子所示，schema对象在描述符对象中被定义为schema属性。<br>
+schema对象的定义写法如下所示：
+			</p>
+			<p class="translate-jp hidden">
+このデータモデルに属する各データアイテムがどのようなプロパティを持つかは、スキーマオブジェクトで定義します。<br>
+スキーマオブジェクトは、先の例の通り、ディスクリプタオブジェクトのschemaプロパティにセットします。<br>
+スキーマオブジェクトには、データモデルに定義するプロパティとその定義を以下のように記述します。
+			</p>
+
+			<div class="box code">schema<span style="color: #666666; ">:</span> {<br>&nbsp;&nbsp;&nbsp;&nbsp;プロパティ名1<span style="color: #666666; ">:</span> {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;性質1<span style="color: #666666; ">-</span><span style="color: #666666; ">1</span><span style="color: #666666; ">:</span> 値1<span style="color: #666666; ">-</span><span style="color: #666666; ">1</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;性質1<span style="color: #666666; ">-</span><span style="color: #666666; ">2</span><span style="color: #666666; ">:</span> 値1<span style="color: #666666; ">-</span><span style="color: #666666; ">2</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;プロパティ名2<span style="color: #666666; ">:</span> {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;性質2<span style="color: #666666; ">-</span><span style="color: #666666; ">1</span><span style="color: #666666; ">:</span> 値2<span style="color: #666666; ">-</span><span style="color: #666666; ">1</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;...<br>}</div>
+
+			<p class="translate-cn">
+
+			</p>
+			<p class="translate-jp hidden">
+			
+			</p>
+
+			<p class="translate-cn">
+			例：
+			</p>
+			<p class="translate-jp hidden">
+			例：
+			</p>
+
+			<div class="box code">schema<span style="color: #666666; ">:</span> {<br> &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// データアイテムを識別するためのID<br></span> &nbsp;&nbsp;&nbsp;id<span style="color: #666666; ">:</span> { id<span style="color: #666666; ">:</span> <span style="font-weight: bold; color: #008000; ">true</span> }, &nbsp;<span style="font-weight: italic; color: #408080; ">//id:trueの意味については後述<br></span><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// 名前<br></span> &nbsp;&nbsp;&nbsp;name<span style="color: #666666; ">:</span> <span style="font-weight: bold; color: #008000; ">null</span>,<br><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// アドレス<br></span> &nbsp;&nbsp;&nbsp;address<span style="color: #666666; ">:</span> <span style="font-weight: bold; color: #008000; ">null</span><br>}</div>
+
+			<h4 class="translate-cn">schema的ID属性设定 </h4>
+			<h4 class="translate-jp hidden">スキーマのIDプロパティ指定 </h4>
+
+			<p class="translate-cn">
+在hifive的数据模型中，如数据库中的主键一样，每个dataItem都有唯一的一个属性用来标示该对象。<br>
+这个属性在schema中被指定为id: true。<br>
+对于schema对象来说，必须要拥有一个属性被指定为{id: true}。<br>
+被指定的该属性，则成为了标识该dataItem的ID了。<br>
+不同的dataItem实例中，这个属性值一定不能相同。<br>
+			</p>
+			<p class="translate-jp hidden">
+hifiveのデータモデルでは、データベースにおける主キー列のように、各データアイテムのいずれか1つのプロパティが各インスタンスを識別できる（異なる値を持つ）必要があります。<br>
+この指定を行うのが、スキーマ定義における「id: true」の指定です。<br>
+スキーマオブジェクトには、{id: true}が指定されているプロパティが必ず1つだけ必要です。<br>
+id:true指定したプロパティが、このデータモデルが持つデータアイテムを識別するためのIDプロパティとなります。<br>
+このプロパティの値は、必ずインスタンスごとに異なっていなければいけません。
+			</p>
+
+			<h4 class="translate-cn">其他性质 </h4>
+			<h4 class="translate-jp hidden"> その他の性質の記述 </h4>
+
+			<p class="translate-cn">
+			用null来指定某个属性时，该属性值的设置将不会受到任何规则所制约。
+			</p>
+			<p class="translate-jp hidden">
+			各プロパティには、性質を記述できます。nullを指定した場合は、一切の制約がないとみなされます。
+			</p>
+
+			<p class="translate-cn">
+			<strong>type定义</strong>
+			</p>
+			<p class="translate-jp hidden">
+			<strong>type指定</strong>
+			</p>
+
+			<p class="translate-cn">
+我们也可以通过字符串来规定属性的类型。省略时，该属性的值可被定义为任何类型。<br>
+类型可以指定为字符串、数字、bool型等等。
+			</p>
+			<p class="translate-jp hidden">
+プロパティに格納できる「型」を文字列で指定することができます。省略した場合はany(型制限無し)です。<br>
+型には「文字列」「製数値」「真偽値」などを指定できます。
+			</p>
+
+			<p class="translate-cn">
+			指定了type的属性，该属性不能被设为该类型以外的值。
+			</p>
+			<p class="translate-jp hidden">
+			typeが設定されているプロパティには、設定された型以外の値を代入することはできません。
+			</p>
+
+			<p class="translate-cn">
+有个例外，类型被指定为数字（integer或者是number）的属性，其值可以被设为可转换成数字的字符串。<br>
+因为当值被设为字符串时，可以自动的进行类型转换变为数字。<br>
+这是为了在从视图（如input标签等）取得值时而不需要再进行类型转换而添加的功能。
+			</p>
+			<p class="translate-jp hidden">
+例外として、数値型（integerまたはnumber）の型指定がされたプロパティには、数値に変換可能な文字列を代入することができます。<br>
+文字列を代入した場合、自動的に数値型に変換されてデータアイテムに格納されます。<br>
+これは、ビュー（inputタグ等）から値を取得し、それをデータアイテムに格納する際のキャストを不要にするための対応です。
+			</p>
+
+			<p class="translate-cn">
+			指定了类型的例子：
+			</p>
+			<p class="translate-jp hidden">
+			型指定の例：
+			</p>
+
+			<div class="box code"><span style="font-weight: bold; color: #008000; ">var</span> productSchema <span style="color: #666666; ">=</span> {<br> &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// 商品ID<br></span> &nbsp;&nbsp;&nbsp;id<span style="color: #666666; ">:</span> {id<span style="color: #666666; ">:</span><span style="font-weight: bold; color: #008000; ">true</span>},<br> <br> &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// 商品名<br></span> &nbsp;&nbsp;&nbsp;name<span style="color: #666666; ">:</span> {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'string'</span><br>&nbsp;&nbsp;&nbsp;&nbsp;},<br><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// 単価<br></span> &nbsp;&nbsp;&nbsp;unitPrice<span style="color: #666666; ">:</span> {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'integer'</span><br>&nbsp;&nbsp;&nbsp;&nbsp;},<br> <br> &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// 数量<br></span> &nbsp;&nbsp;&nbsp;amount<span style="color: #666666; ">:</span> {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'integer'</span><br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>};</div>
+
+			<p class="translate-cn">
+			自动进行类型转换的例子：
+			</p>
+			<p class="translate-jp hidden">
+			型指定を行った場合の挙動例：
+			</p>
+
+			<div class="box code"><span style="font-weight: bold; color: #008000; ">var</span> model <span style="color: #666666; ">=</span> manager.createModel({<br>&nbsp;&nbsp;&nbsp;&nbsp;name<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'ProductModel'</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;schema<span style="color: #666666; ">:</span> productSchema &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// 上で記述したスキーマオブジェクト<br></span>});<br><br><span style="font-weight: bold; color: #008000; ">var</span> item <span style="color: #666666; ">=</span> model.create({<br>&nbsp;&nbsp;&nbsp;&nbsp;id<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'001'</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;name<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'ボールペン'</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;unitPrice<span style="color: #666666; ">:</span> <span style="color: #666666; ">100</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;amount<span style="color: #666666; ">:</span> <span style="color: #666666; ">5000</span><br>});<br><br><span style="font-weight: italic; color: #408080; ">// 型指定と異なる値はsetできない<br></span>item.set(<span style="color: #BA2121; ">'amount'</span>, <span style="color: #BA2121; ">'abc'</span>); &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// エラーになる<br></span>&nbsp;&nbsp;&nbsp;&nbsp;</div>
+
+			<p class="translate-cn">
+			<strong>类型指定为数组时</strong>
+			</p>
+			<p class="translate-jp hidden">
+			<strong>typeの配列指定</strong>
+			</p>
+
+			<p class="translate-cn">
+属性的类型也可以声明为数组。<br>
+指定为数组的时候，需要在类型名结尾添加[]。如"string[]", "any[]"。<br>
+若属性被声明为数组时，该属性（如下面例子中的属性list）在生成DataItem实例的时候会被自动设置为ObservableArray的实例。该实例不可被更改。<br>
+在使用DataItem的set方法对数组进行更改时，实际上进行的是深拷贝。
+			</p>
+			<p class="translate-jp hidden">
+あるプロパティを、特定の型を要素とする配列であると宣言できます。<br>
+配列指定するには、"string[]", "any[]"のように、型名の後ろに「[]」を付け加えます。<br>
+typeで配列指定すると、当該プロパティ（下の例でのlistプロパティ）にはDataItemインスタンス生成時に自動的にObservableArrayインスタンスがセットされます。このインスタンスを変更することはできません。<br>
+DataItemのset()で配列をセットしようとすると、配列そのものではなく、中身がシャローコピーされます。
+			</p>
+
+			<div class="box code"><span style="font-weight: bold; color: #008000; ">var</span> descriptor <span style="color: #666666; ">=</span> {<br>&nbsp;&nbsp;&nbsp;&nbsp;name<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">''</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;schema<span style="color: #666666; ">:</span> {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id<span style="color: #666666; ">:</span> {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id<span style="color: #666666; ">:</span> <span style="font-weight: bold; color: #008000; ">true</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;list<span style="color: #666666; ">:</span> {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'any[]'</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>};<br><br><span style="font-weight: bold; color: #008000; ">var</span> model <span style="color: #666666; ">=</span> manager.createModel(descriptor);<br><br><span style="font-weight: bold; color: #008000; ">var</span> item <span style="color: #666666; ">=</span> model.create({<br>&nbsp;&nbsp;&nbsp;&nbsp;id<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'001'</span><br>});<br><br><span style="font-weight: bold; color: #008000; ">var</span> obsAry <span style="color: #666666; ">=</span> item.get(<span style="color: #BA2121; ">'list'</span>); &nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// [] 初期値は空ObservableArray<br></span><br><span style="font-weight: italic; color: #408080; ">// 配列をset<br></span><span style="font-weight: bold; color: #008000; ">var</span> array <span style="color: #666666; ">=</span> [<span style="color: #BA2121; ">'a'</span>, <span style="color: #BA2121; ">'b'</span>, <span style="color: #BA2121; ">'c'</span>];<br>item.set(<span style="color: #BA2121; ">'list'</span>, array);<br><br>item.get(<span style="color: #BA2121; ">'list'</span>); &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// ['a', 'b', 'c'] のObservableArray<br></span><br>item.get(<span style="color: #BA2121; ">'list'</span>) <span style="color: #666666; ">!==</span> array; &nbsp;<span style="font-weight: italic; color: #408080; ">// true, インスタンスは別<br></span><br>item.get(<span style="color: #BA2121; ">'list'</span>) <span style="color: #666666; ">===</span> obsAry; <span style="font-weight: italic; color: #408080; ">// true, 値を変更してもデータアイテムが持つObservableArrayインスタンスは変わらない<br></span><br>item.get(<span style="color: #BA2121; ">'list'</span>).push(<span style="color: #BA2121; ">'d'</span>);<br><br>item.get(<span style="color: #BA2121; ">'list'</span>); &nbsp;<span style="font-weight: italic; color: #408080; ">// ['a', 'b', 'c', 'd'] のObservableArray<br></span></div>
+
+			<p class="translate-cn">
+			<strong>depend</strong>
+			</p>
+			<p class="translate-jp hidden">
+			<strong>depend</strong>
+			</p>
+
+			<p class="translate-cn">
+depend被定义为数据模型中属性的值（计算值）所依赖的对象。<br>
+包含depend属性的属性的值将不能被设置。（也不可设置defaultValue）<br>
+depend中包含了两个属性：与之相关联的属性，对关联属性值进行运算的函数。<br>
+与之关联的属性的值变化的时，会自动调用该函数进行值的计算，最后完成属性最终值的设定。
+			</p>
+			<p class="translate-jp hidden">
+dependは同一データモデル内のプロパティに依存する値（計算値）を定義したいときに指定します。<br>
+depend指定されたプロパティには値をセットすることはできません（defaultValueも設定できません）。<br>
+depend指定では、「どのプロパティに依存するか」と「このプロパティの値を計算する関数」を指定します。<br>
+依存するプロパティの値が変更されると、自動的に関数が呼ばれ、このプロパティの値としてセットされます。
+			</p>
+
+			<div class="box code"><span style="font-weight: bold; color: #008000; ">var</span> productSchema <span style="color: #666666; ">=</span> {<br> &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// 商品ID<br></span> &nbsp;&nbsp;&nbsp;id<span style="color: #666666; ">:</span> {id<span style="color: #666666; ">:</span><span style="font-weight: bold; color: #008000; ">true</span>},<br> <br> &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// 商品名<br></span> &nbsp;&nbsp;&nbsp;name<span style="color: #666666; ">:</span> {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'string'</span><br>&nbsp;&nbsp;&nbsp;&nbsp;},<br><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// 単価<br></span> &nbsp;&nbsp;&nbsp;unitPrice<span style="color: #666666; ">:</span> {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'integer'</span><br>&nbsp;&nbsp;&nbsp;&nbsp;},<br> <br> &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// 数量<br></span> &nbsp;&nbsp;&nbsp;amount<span style="color: #666666; ">:</span> {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'integer'</span><br>&nbsp;&nbsp;&nbsp;&nbsp;},<br><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// 単価×数量<br></span> &nbsp;&nbsp;&nbsp;totalPrice<span style="color: #666666; ">:</span> {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'integer'</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;depend<span style="color: #666666; ">:</span> {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;on<span style="color: #666666; ">:</span> [<span style="color: #BA2121; ">'unitPrice'</span>, <span style="color: #BA2121; ">'amount'</span>], <span style="font-weight: italic; color: #408080; ">// 同一データモデル内の、依存するプロパティを記述<br></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;calc<span style="color: #666666; ">:</span> <span style="font-weight: bold; color: #008000; ">function</span>(ev){<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// onに指定されたいずれか1つ以上のプロパティが更新されたときにこの関数が実行されます。<br></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// 引数(ev)はチェンジイベントオブジェクト<br></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// thisはデータアイテムインスタンス<br></span><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">return</span> <span style="font-weight: bold; color: #008000; ">this</span>.get(<span style="color: #BA2121; ">'unitPrice'</span>) <span style="color: #666666; ">*</span> <span style="font-weight: bold; color: #008000; ">this</span>.get(<span style="color: #BA2121; ">'amount'</span>);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// メッセージ："(商品)は(単価×数量)円分あります"<br></span> &nbsp;&nbsp;&nbsp;message<span style="color: #666666; ">:</span> {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'string'</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;depend<span style="color: #666666; ">:</span> {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;on<span style="color: #666666; ">:</span> [<span style="color: #BA2121; ">'name'</span>, <span style="color: #BA2121; ">'totalPrice'</span>], &nbsp;<span style="font-weight: italic; color: #408080; ">// depend指定されている項目をさらに依存先に指定できる<br></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;calc<span style="color: #666666; ">:</span> <span style="font-weight: bold; color: #008000; ">function</span>(ev) {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">return</span> <span style="font-weight: bold; color: #008000; ">this</span>.get(<span style="color: #BA2121; ">'name'</span>) <span style="color: #666666; ">+</span> <span style="color: #BA2121; ">'は'</span> <span style="color: #666666; ">+</span> <span style="font-weight: bold; color: #008000; ">this</span>.get(<span style="color: #BA2121; ">'totalPrice'</span>) <span style="color: #666666; ">+</span> <span style="color: #BA2121; ">'円分あります'</span>;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>};<br><br><span style="font-weight: italic; color: #408080; ">// データモデルの作成<br></span><span style="font-weight: bold; color: #008000; ">var</span> model <span style="color: #666666; ">=</span> manager.createModel({<br>&nbsp;&nbsp;&nbsp;&nbsp;name<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'ProductModel'</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;schema<span style="color: #666666; ">:</span> productSchema<br>});<br><br><span style="font-weight: italic; color: #408080; ">// アイテムの作成<br></span><span style="font-weight: bold; color: #008000; ">var</span> item <span style="color: #666666; ">=</span> model.create({<br>&nbsp;&nbsp;&nbsp;&nbsp;id<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'001'</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;name<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'ノート'</span><br>});<br><br>item.set({<br>&nbsp;&nbsp;&nbsp;&nbsp;unitPrice<span style="color: #666666; ">:</span> <span style="color: #666666; ">120</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;amount<span style="color: #666666; ">:</span> <span style="color: #666666; ">1000</span><br>});<br><br>item.get(<span style="color: #BA2121; ">'totalPrice'</span>); &nbsp;<span style="font-weight: italic; color: #408080; ">// 1200000<br></span>item.get(<span style="color: #BA2121; ">'message'</span>); &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// "ノートは120000円分あります"<br></span></div>
+
+		</article>
+</script>

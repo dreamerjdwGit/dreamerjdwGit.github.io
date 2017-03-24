@@ -1,0 +1,238 @@
+body, nav, h1 {
+	margin: 0;
+	padding: 0;
+	font-family: "Helvetica Neue",Arial,STHeiti,"Microsoft YaHei",sans-serif,Helvetica,"DroidSansFallback",FreeSans,Arimo,"Droid Sans","wenquanyi micro hei","Hiragino Sans GB","Hiragino Sans GB W3"!important;
+}
+
+body {
+	background: #F3F3F3;
+}
+
+table {
+	margin-bottom: 10px;
+}
+
+th,td{
+	border: 1px solid grey;
+}
+
+.main-nav {
+	height: 70px;
+	font-size: 20px;
+	color: #fff;
+	background: #6B8E23;
+}
+
+.l-pinned-top {
+	top: 0;
+	left: 0;
+	right: 0;
+	position: fixed;
+	z-index: 5;
+}
+
+.side-nav {
+	padding-top: 20px;
+	width: 204px;
+	font-size: 17px;
+	background: #EBEBEB;
+	overflow: auto;
+}
+
+.l-pinned-left {
+	top: 70px;
+	left: 0;
+	bottom: 0;
+	position: fixed;
+	z-index: 4;
+}
+
+.main-nav>h1 {
+	background: url(../img/icon_hifiveLogo.png) no-repeat;
+	width: 204px;
+	height: 70px;
+	float: left;
+}
+
+.main-nav>h1:hover {
+	cursor: pointer;
+}
+
+.main-nav>h1>span {
+	display: none;
+}
+
+.main-nav ul{
+	margin: 0;
+	padding: 0;
+	display: block;
+	list-style-type: none;
+}
+
+.main-nav li {
+	float: left;
+	height: 70px;
+	line-height: 70px;
+	width: 180px;
+	display: list-item;
+	text-align: center;
+}
+
+.l-list:hover {
+	background: #458B00;
+	cursor: pointer;
+}
+
+.side-nav ul{
+	padding: 0;
+	display: block;
+	color: #546E7A;
+	list-style-type: none;
+}
+
+.side-nav li {
+	margin: 0;
+	padding-left: 5px;
+	line-height: 47px;
+}
+
+.side-nav li:hover {
+	cursor: pointer;
+}
+
+.sidenav-section {
+	border: 1px solid rgba(207,216,220,0.56);
+	
+}
+
+/*.sidenav-section>a {
+	box-sizing: border-box;
+	display: block;
+	line-height: 47px;
+	text-decoration: none;
+	color: #607D8B;
+}*/
+
+.is-selected{
+	color: #1976D2 !important;
+	background: #C2C2C2 !important;
+}
+
+.list-selected{
+	background: green !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.main {
+	position: relative;
+	background: #fff;
+	margin: 80px 20px 70px 225px;
+	padding: 25px;
+	border: 1px solid #E3E3E3;
+}
+
+.main-header {
+	background: green;
+	color: #fff;
+	height: 100px;
+}
+
+article>h2{
+	padding-left: 10px;
+	background: #548B54;
+	color: #fff;
+	height: 50px;
+	line-height: 50px;
+}
+
+article>h4{
+	padding-left: 10px;
+	background: #698B69;
+	color: #fff;
+	height: 30px;
+	line-height: 30px;
+}
+
+.main p {
+	font-size: 16px;
+	margin: 0 0 20px 0;
+	line-height: 28px;
+	display: block;
+}
+
+.translate-jp {
+	font-family: "Lucida Grande", "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ ProN W3", Meiryo, メイリオ, sans-serif;
+	border-top: 1px dashed #0273D4;
+}
+
+p.translate-jp {
+	margin-top: -25px;
+}
+
+h2.translate-jp{
+	margin-top: -18px;
+}
+
+h4.translate-jp {
+	margin-top: -18px;
+}
+
+.hidden {
+	display: none !important;
+}
+
+ul p.translate-cn {
+	margin-bottom: 0px !important;
+}
+
+ul p.translate-jp {
+	margin-top: 0px !important;
+	margin-bottom: 2px !important;
+}
+
+.header-span, .header-h1 {
+	display: block;
+	padding: 10px;
+}
+
+.box {
+	background: #F3F3F3;
+	margin-bottom: 20px;
+}
+
+.code {
+	font-family: courier, "courier new", monospace;
+	white-space: pre;
+	line-height: 1.3em;
+}
+
+.informessage {
+	line-height: 28px;
+}
+
+
+
+
+
+footer {
+	height: 30px;
+	margin: -45px 30px 20px 224px;
+}
+
+.copyright {
+	display: block;
+	text-align: center;
+	color: #888888;
+	font-size: 0.7em;
+}

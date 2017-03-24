@@ -1,0 +1,120 @@
+<script type="text/ejs" id="article_04_refreshAndEvent">
+
+
+<header class="main-header">
+			<span class="header-span">教程（基本篇）</span>
+			<h1 class="header-h1">04.dataItem的更新和绑定</h1>
+		</header>
+		<article>
+		
+			<h2 class="translate-cn">概要</h2>
+			<h2 class="translate-jp hidden">概要 </h2>
+
+			<p class="translate-cn">
+hifive的数据模型结构中，当给每一个dataItem赋值时，会按照事先定义的schema来对值进行类型以及定义规则的检查。<br>
+并且，可以通过设置事件监听器来对赋值操作来进行监听。<br>
+下面，我们将对dataItem变更机制和更新时发生的事件进行说明。
+			</p>
+			<p class="translate-jp hidden">
+hifiveのデータモデル機構では、各データアイテムへの値の代入時に、事前に定義されたスキーマに従って代入される値が型や制約に違反しないかをチェックします。<br>
+また、代入操作を外部から監視する（イベントリスナーをセットする）ことができます。<br>
+以下では、データアイテム変更時の挙動と更新時のイベントについて説明します。
+			</p>
+
+			<h2 class="translate-cn">dataItem的更新  </h2>
+			<h2 class="translate-jp hidden"> データアイテムの更新 </h2>
+
+			<p class="translate-cn">
+当对dataItem的值进行更新（调用dataItem.set()方法）时，将会进行下面的处理。<br>
+&nbsp;&nbsp;&nbsp;1.对值进行隐式的类型转换（在数据模型规定的范围内）<br>
+&nbsp;&nbsp;&nbsp;2.值的类型检查<br>
+&nbsp;&nbsp;&nbsp;3.定义了depend的属性值的更新<br>
+&nbsp;&nbsp;&nbsp;4.变更事件的发生<br>
+dataItem的更新处理，是指对由create方法已创建的dataItem的值的变更，可以调用set方法来执行。<br>
+<strong>类型检查的例子：</strong>
+			</p>
+			<p class="translate-jp hidden">
+データアイテムの値を更新する（Dataitem.set()を呼ぶ）と、以下の処理が行われます。<br>
+&nbsp;&nbsp;&nbsp;1.値の暗黙型変換（データモデルの仕様で定められている範囲に限る）<br>
+&nbsp;&nbsp;&nbsp;2.値の型・制約チェック<br>
+&nbsp;&nbsp;&nbsp;3.depend指定されているプロパティの更新<br>
+&nbsp;&nbsp;&nbsp;4.変更イベントの発生<br>
+データアイテムの更新処理は、createによる既に登録されているアイテムの値の変更、またはset()メソッドの呼び出しで実行されます。<br>
+<strong>型・制約チェックの動作例：</strong>
+			</p>
+
+			<div class="box code"><span style="font-weight: italic; color: #408080; ">// アイテムの作成<br></span><span style="font-weight: bold; color: #008000; ">var</span> item <span style="color: #666666; ">=</span> model.create({<br>&nbsp;&nbsp;&nbsp;&nbsp;id<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'001'</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;val<span style="color: #666666; ">:</span> <span style="color: #666666; ">100</span> &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// type:'number'指定されているプロパティ<br></span>});<br><br><span style="font-weight: italic; color: #408080; ">// データアイテムitemのvalプロパティの値を123に変更<br>// 文字列からnumber型への型変換は自動で行われる<br></span>item.set(<span style="color: #BA2121; ">'val'</span>, <span style="color: #BA2121; ">'123'</span>);<br><br>item.get(<span style="color: #BA2121; ">'val'</span>) <span style="color: #666666; ">===</span> <span style="color: #666666; ">123</span>; &nbsp;<span style="font-weight: italic; color: #408080; ">// true（文字列から数値への値の型変換が行われている）<br></span><br><span style="font-weight: bold; color: #008000; ">try</span> {<br>&nbsp;&nbsp;&nbsp;&nbsp;item.set(<span style="color: #BA2121; ">'val'</span>, <span style="color: #BA2121; ">'ABC'</span>);<br>} <span style="font-weight: bold; color: #008000; ">catch</span> (e) {<br> &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// type:'number'と指定されている項目に数値変換できない文字列を代入するとエラーが発生<br></span> &nbsp;&nbsp;&nbsp;alert(<span style="color: #BA2121; ">'不正な値が代入されました'</span>);<br>}</div>
+
+			<h2 class="translate-cn"> 更新事件的概要 </h2>
+			<h2 class="translate-jp hidden"> 値の更新イベント概要</h2>
+			
+
+			<p class="translate-cn">
+当对dataItem进行更新时，从dataItem、dataModel到dataManager都会有各自的事件产生，然后事先设置好的事件监听器执行相应的程序。<br>
+通常一个dataItem值变化时，马上会有相应的一个事件产生。但是如果使用接下来将说明的beginUpdate()和endUpdate()方法， 为多个dataItem值的变化定义成一个事件。<br>
+			</p>
+			<p class="translate-jp hidden">
+データアイテムが更新されると、データアイテム、データモデル、データモデルマネージャからそれぞれイベントが発生し、事前にセットされたイベントリスナーが動作します。<br>
+通常は1つのデータアイテムを更新すると即座にイベントが発生しますが、後述するbeginUpdate(), endUpdate()メソッドを使用すると複数の変更を1つのイベントにまとめることができます。
+			</p>
+
+			<p class="translate-cn">
+各个事件监听程序被调用的时候，事件对象会作为参数被传入。<br>
+通过这个参数，可以获取到dataItem实例以及属性在变化前后等信息。
+			</p>
+			<p class="translate-jp hidden">
+各イベントリスナーが呼ばれるときには、イベントオブジェクトが引数として渡されます。<br>
+このオブジェクトを参照すると、変更されたデータアイテムインスタンス・プロパティ・変更前/後の値などの詳細を知ることができます。
+			</p>
+
+			<h2 class="translate-cn"> dataItem的change事件 </h2>
+			<h2 class="translate-jp hidden">  データアイテム changeイベント</h2>
+
+			<p class="translate-cn">
+dataItem的值变化时，change事件产生。<br>
+使用dataItem的addEventListener方法，可以为change事件设置事件监听程序。<br>
+此时，如果dataItem值变化时，这个设置的change事件的监听程序将被执行。<br>
+<strong>事件监听程序的例子：</strong>
+			</p>
+			<p class="translate-jp hidden">
+データアイテムの値が更新されると、changeイベントが発生します。<br>
+データアイテムのaddEventListenerメソッドを使ってchangeイベントにイベントリスナーをセットすると、更新を検知できます。<br>
+データアイテムが更新されると、changeイベントのリスナー関数が実行されます。<br>
+<strong>イベントリスナーの動作例：</strong>
+			</p>
+
+			<div class="box code">item <span style="color: #666666; ">=</span> model.create({<br>&nbsp;&nbsp;&nbsp;&nbsp;id<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'001'</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;val<span style="color: #666666; ">:</span> <span style="color: #666666; ">1</span><br>});<br><br><span style="font-weight: bold; color: #008000; ">var</span> listener <span style="color: #666666; ">=</span> <span style="font-weight: bold; color: #008000; ">function</span>(ev){<br>&nbsp;&nbsp;&nbsp;&nbsp;alert(<span style="color: #BA2121; ">'change!'</span>);<br>};<br>item.addEventListener(<span style="color: #BA2121; ">'change'</span>, listener);<br><br>item.set(<span style="color: #BA2121; ">'val'</span>,<span style="color: #666666; ">2</span>); &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// 「change!」を表示<br></span><br>model.create({<br>&nbsp;&nbsp;&nbsp;&nbsp;id<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'001'</span>, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// 既に存在するIDを指定してcreate()を呼ぶと、当該IDを持つデータアイテムの値が変更される<br></span> &nbsp;&nbsp;&nbsp;val<span style="color: #666666; ">:</span> <span style="color: #666666; ">3</span><br>}); &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// 「change!」を表示<br></span><br>item.set(<span style="color: #BA2121; ">'val'</span>, <span style="color: #666666; ">3</span>); &nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// 同じ値がセットされたので、イベントは発生しない（アラートが出ない）<br></span></div>
+
+			<h2 class="translate-cn"> dataModel的change事件 </h2>
+			<h2 class="translate-jp hidden"> データモデル itemsChangeイベント </h2>
+
+			<p class="translate-cn">
+当对dataItem进行添加、删除和更改的操作时，该dataItem所属的dataModel会产生itemsChange事件。同样，我们可以通过addEventListener方法来设置该事件的监听程序。<br>
+执行顺序：dataItem的change事件，然后才是dataModel的itemsChange事件。
+			</p>
+			<p class="translate-jp hidden">
+データアイテムの追加、削除、変更が行われると、そのアイテムが属しているデータモデルからitemsChangeイベントが発生します。データアイテムと同様、addEventListenerメソッドでイベントリスナーを登録します。<br>
+なお、データアイテムの変更時には、データアイテムのchangeイベントが起きてからデータモデルのitemsChangeイベントが発生します。
+			</p>
+
+			<div class="box code"><span style="font-weight: italic; color: #408080; ">// itemsChangeイベントにハンドラを追加<br></span><span style="font-weight: bold; color: #008000; ">var</span> listener <span style="color: #666666; ">=</span> <span style="font-weight: bold; color: #008000; ">function</span>(ev) {<br>&nbsp;&nbsp;&nbsp;&nbsp;alert(<span style="color: #BA2121; ">'itemsChange!'</span>);<br>}<br><br>model.addEventListener(<span style="color: #BA2121; ">'itemsChange'</span>, listener); &nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">//modelはDataModelのインスタンス<br></span><br><span style="font-weight: italic; color: #408080; ">// データアイテムの生成<br></span><span style="font-weight: bold; color: #008000; ">var</span> item <span style="color: #666666; ">=</span> model.create({<br>&nbsp;&nbsp;&nbsp;&nbsp;id<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'001'</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;val<span style="color: #666666; ">:</span> <span style="color: #666666; ">1</span><br>}); &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// 「itemsChange!」を表示<br></span><br><span style="font-weight: italic; color: #408080; ">// item.valの値の変更<br></span>item.set(<span style="color: #BA2121; ">'val'</span>, <span style="color: #666666; ">2</span>); &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// 「itemsChange!」を表示<br></span><br><span style="font-weight: italic; color: #408080; ">// itemにイベントハンドラを追加<br></span>item.addEventListener(<span style="color: #BA2121; ">'change'</span>, <span style="font-weight: bold; color: #008000; ">function</span>(ev) {<br>&nbsp;&nbsp;&nbsp;&nbsp;alert(<span style="color: #BA2121; ">'change!'</span>);<br>});<br><br>item.set(<span style="color: #BA2121; ">'val'</span>, <span style="color: #666666; ">3</span>); &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// 「change!」 → 「itemsChange!」の順に表示<br></span><br><span style="font-weight: italic; color: #408080; ">// itemの削除<br></span>model.remove(<span style="color: #BA2121; ">'001'</span>); &nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// 「itemsChange!」を表示<br></span></div>
+
+			<h2 class="translate-cn">dataManager的itemsChange事件  </h2>
+			<h2 class="translate-jp hidden"> データモデルマネージャ itemsChangeイベント </h2>
+
+			<p class="translate-cn">
+在dataModel的itemsChange事件发生后，该dataModel所属的dataManager也会产生相应的ItemsChange事件。<br>
+因此，事件的发生顺序如下：<br>
+<strong>dataItem的change事件 ⇒ dataModel的itemsChange事件 ⇒ dataManager的itemsChange事件</strong> <br>
+同样，我们也可以通过addEventListener方法，为dataManager的itemsChange事件设置事件监听程序。
+			</p>
+			<p class="translate-jp hidden">
+データモデルマネージャが管理するデータモデルのいずれかでitemsChangeイベントが発生すると、その後に、データモデルマネージャのitemsChangeイベントが発生します。つまり、<br>
+<strong>データアイテムのchangeイベント ⇒ データモデルのitemsChangeイベント ⇒ データモデルマネージャのitemsChangeイベント</strong><br>
+の順でイベントが発生します。<br>
+データアイテムやデータモデルと同様、addEventListenerでイベントリスナーを登録します。<br>
+			</p>
+
+			<div class="code"><span style="font-weight: bold; color: #008000; ">function</span> listener(ev) {<br> &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// 引数はデータモデルマネージャのitemsChangeイベントオブジェクト<br></span> &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// this は当該データモデルマネージャ<br></span>}<br>manager.addEventListener(<span style="color: #BA2121; ">'itemsChange'</span>, listener);</div>
+		</article>
+</script>

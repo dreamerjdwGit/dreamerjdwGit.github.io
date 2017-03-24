@@ -1,0 +1,56 @@
+<script type="text/ejs" id="article_02_helloWorld">
+<header class="main-header">
+			<span class="header-span">教程（基本篇）</span>
+			<h1 class="header-h1">02.HelloWorld</h1>
+		</header>
+		<article>
+			<h2 class="translate-cn">HelloWorld</h2>
+			<h2 class="translate-jp hidden">HelloWorld</h2>
+
+			<p class="translate-cn">首先，我们尝试做一个简单的应用：按下按钮，立刻弹出“Hello, World!”的对话框。</p>
+			<p class="translate-jp hidden">ボタンを押すと"Hello, World!"というアラートを表示する簡単なアプリケーションを作成してみましょう。</p>
+
+			<p class="translate-cn">沿着以下三步，可使用hifive来实现该应用。</p>
+			<p class="translate-jp hidden">3ステップで、hifiveを使ったアプリケーションは作成できます。</p>
+
+			<ul>
+					<li><p class="translate-cn">首先，定义hifive MVC模型中最核心的控制器。</p><p class="translate-jp hidden">まず、hifive MVCモデルの肝であるコントローラを定義し、</p></li>
+					<li><p class="translate-cn">然后，将控制器与相应的HTML元素绑定。</p><p class="translate-jp hidden">次に、コントローラを特定のHTML要素に対応付(バインド)します。</p></li>
+					<li><p class="translate-cn">最后，定义实现该HTML元素相应的事件响应程序。</p><p class="translate-jp hidden">最後に、対応付されたHTML要素内の操作に対応した処理をイベントハンドラとして定義します。</p></li>
+			</ul>
+
+			<p class="translate-cn">1. 编写JS文件（比如说step3.js）</p>
+			<p class="translate-jp hidden">1. JSファイルを作成します("step3.js"だとします)。</p>
+
+	<div class="box code">$(<span style="font-weight: bold; color: #008000; ">function</span>() {<br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">var</span> helloWorldController <span style="color: #666666; ">=</span> {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;__name<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'HelloWorldController'</span>,<br> <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #BA2121; ">'#btn click'</span><span style="color: #666666; ">:</span> <span style="font-weight: bold; color: #008000; ">function</span>() {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alert(<span style="color: #BA2121; ">'Hello, World!'</span>);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;};<br><br>&nbsp;&nbsp;&nbsp;&nbsp;h5.core.controller(<span style="color: #BA2121; ">'#container'</span>, helloWorldController );<br>});</div>
+
+			<ul>
+					<li><p class="translate-cn">第2行～8行，定义了「控制器」。</p><p class="translate-jp hidden">2行目から8行目までで、「コントローラ」を定義しています。</p></li>
+					<li><p class="translate-cn">第3行的_name为该控制器的名称。_name属性是必须定义的，否则会出现错误。</p><p class="translate-jp hidden">3行目の__nameはコントローラの名前を表します。__name プロパティは必須プロパティで、記述がない場合エラーが発生します。</p></li>
+					<li><p class="translate-cn">第5行～7行，定义了事件响应句柄。</p><p class="translate-jp hidden">5行目から7行目まではイベントハンドラの定義です。</p></li>
+					<li><p class="translate-cn">在hifive中，事件响应句柄的形式为：「(匹配该条件的HTML元素) (发生的事件): (事件发生时执行的函数)」。 
+  （我们将在下一节中详细说明）</p><p class="translate-jp hidden">hifiveでは、イベントハンドラを「(この条件にマッチする要素で) (このイベントが発生したら): (この関数を実行する)」という形式で定義します。
+  （次のステップで詳しく説明します。）</p></li>
+					<li><p class="translate-cn">第10行，控制器与HTML元素进行了绑定。在该程序中，我们将id为container的元素与控制器进行了绑定。 
+  为了让控制器实际能运行起来，必须确保它绑定了某个元素。</p><p class="translate-jp hidden">10行目で、コントローラを要素にバインドしています。ここでは id が container である要素にバインドしています。
+  コントローラを実際に動作させるためには要素にバインドする必要があります。</p></li>
+			</ul>
+
+			<p class="translate-cn">2. 编写HTML文件，读取已编写好的JS文件。</p>
+			<p class="translate-jp hidden">2. HTMLを用意し、上のJSファイルを読み込みます。</p>
+		
+			<div class="box code"><span style="color: #BC7A00; ">&lt;!doctype html&gt;</span><br><span style="font-weight: bold; color: #008000; ">&lt;html&gt;</span><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;head&gt;</span><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;meta</span> <span style="color: #7D9029; ">charset=</span><span style="color: #BA2121; ">"UTF-8"</span><span style="font-weight: bold; color: #008000; ">&gt;</span><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;script&nbsp;</span><span style="color: #7D9029; ">src=</span><span style="color: #BA2121; ">"jquery.js"</span><span style="font-weight: bold; color: #008000; ">&gt;&lt;/script&gt;</span><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;script&nbsp;</span><span style="color: #7D9029; ">src=</span><span style="color: #BA2121; ">"ejs-1.0.h5mod.js"</span><span style="font-weight: bold; color: #008000; ">&gt;&lt;/script&gt;</span><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;script&nbsp;</span><span style="color: #7D9029; ">src=</span><span style="color: #BA2121; ">"h5.js"</span><span style="font-weight: bold; color: #008000; ">&gt;&lt;/script&gt;</span><br><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">&lt;!-- ここで作成したjsファイルを読み込む --&gt;</span><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;script&nbsp;</span><span style="color: #7D9029; ">src=</span><span style="color: #BA2121; ">"step3.js"</span><span style="font-weight: bold; color: #008000; ">&gt;&lt;/script&gt;</span><br> <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;title&gt;</span>hifive Hello World<span style="font-weight: bold; color: #008000; ">&lt;/title&gt;</span><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;/head&gt;</span><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;body&gt;</span><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;div</span> <span style="color: #7D9029; ">id=</span><span style="color: #BA2121; ">"container"</span><span style="font-weight: bold; color: #008000; ">&gt;</span><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;input</span> <span style="color: #7D9029; ">type=</span><span style="color: #BA2121; ">"button"</span> <span style="color: #7D9029; ">id=</span><span style="color: #BA2121; ">"btn"</span> <span style="color: #7D9029; ">value=</span><span style="color: #BA2121; ">"hello world!"</span> <span style="font-weight: bold; color: #008000; ">/&gt;</span><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;/div&gt;</span><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;/body&gt;</span><br><span style="font-weight: bold; color: #008000; ">&lt;/html&gt;</span></div>
+
+			<p class="translate-cn">3. 运行确认</p>
+			<p class="translate-jp hidden">3. 動作確認</p>
+			
+
+			<p class="translate-cn">点击id=”btn”的按钮后，自动触发控制器中定义的点击事件程序，显示’Hello, World!’信息的对话框出现。</p>
+			<p class="translate-jp hidden">id="btn"で定義されたボタンをクリックする事で、
+コントローラ内に定義されたイベントハンドラが動き
+'Hello, World!'というダイアログが表示されたかと思います。
+</p>
+
+			
+		</article>
+</script>

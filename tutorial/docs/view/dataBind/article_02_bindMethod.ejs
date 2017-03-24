@@ -1,0 +1,155 @@
+<script type="text/ejs" id="article_02_bindMethod">
+
+
+<header class="main-header">
+			<span class="header-span">教程（基本篇）</span>
+			<h1 class="header-h1">02.基本使用方法</h1>
+		</header>
+		<article>
+			<h2 class="translate-cn">数据绑定</h2>
+			<h2 class="translate-jp hidden">データのバインド</h2>
+
+			<p class="translate-cn">
+进行数据绑定时，首先编写要绑定的HTML，然后将HTML中的子元素和对应的对象进行绑定。
+			</p>
+			<p class="translate-jp hidden">
+データのバインドは、まずバインドされるHTMLを作成し、そのHTMLを子に持つ要素に対してオブジェクトをバインドします。
+			</p>
+
+			<div class="box code"><span style="font-weight: bold; color: #008000; ">&lt;div</span> <span style="color: #7D9029; ">id=</span><span style="color: #BA2121; ">"bindtest"</span><span style="font-weight: bold; color: #008000; ">&gt;</span><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;h1</span> <span style="color: #7D9029; ">data-h5-bind=</span><span style="color: #BA2121; ">"title"</span><span style="font-weight: bold; color: #008000; ">&gt;&lt;/h1&gt;</span><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;div</span> <span style="color: #7D9029; ">data-h5-context=</span><span style="color: #BA2121; ">"item"</span><span style="font-weight: bold; color: #008000; ">&gt;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ID: <span style="font-weight: bold; color: #008000; ">&lt;span</span> <span style="color: #7D9029; ">data-h5-bind=</span><span style="color: #BA2121; ">"id"</span><span style="font-weight: bold; color: #008000; ">&gt;&lt;/span&gt;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name: <span style="font-weight: bold; color: #008000; ">&lt;span</span> <span style="color: #7D9029; ">data-h5-bind=</span><span style="color: #BA2121; ">"name"</span><span style="font-weight: bold; color: #008000; ">&gt;&lt;/span&gt;</span><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;/div&gt;</span><br><span style="font-weight: bold; color: #008000; ">&lt;/div&gt;</span></div>
+
+
+			<p class="translate-cn">
+比如上面的HTML，可以使用bind()方法来对视图中的某个class和对应的对象进行绑定。
+			</p>
+			<p class="translate-jp hidden">
+上のようなHTMLに対して、Viewクラスのbind()メソッドを使ってオブジェクトをバインドします。
+			</p>
+
+			<p class="translate-cn">
+			</p>
+			<p class="translate-jp hidden">
+			</p>
+
+			<div class="code"><span style="font-weight: italic; color: #408080; ">// 第1引数に要素(セレクタ、DOM要素、jQueryオブジェクト)<br>// 第2引数にバインドするオブジェクト<br></span>h5.core.view.bind(<span style="color: #BA2121; ">'#bindtest'</span>, {<br>&nbsp;&nbsp;&nbsp;&nbsp;title<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'データバインドテスト'</span>, <span style="font-weight: italic; color: #408080; ">// data-h5-bind="title" の要素にバインドされる<br></span><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// data-h5-context="item" の要素内で、使用するオブジェクトの指定<br></span> &nbsp;&nbsp;&nbsp;item<span style="color: #666666; ">:</span> {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'0001'</span>, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// data-h5-context="item" 要素の子要素でdata-h5-bind="id"の要素にバインド<br></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'taro'</span> &nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// ↑と同様<br></span> &nbsp;&nbsp;&nbsp;}<br>});</div>
+
+			<div class="code">出力結果<br><br><span style="font-weight: bold; color: #008000; ">&lt;div</span> <span style="color: #7D9029; ">id=</span><span style="color: #BA2121; ">"bindtest"</span><span style="font-weight: bold; color: #008000; ">&gt;</span><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;h1&gt;</span>データバインドテスト<span style="font-weight: bold; color: #008000; ">&lt;/h1&gt;</span><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;div&gt;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ID: <span style="font-weight: bold; color: #008000; ">&lt;span&gt;</span>0001<span style="font-weight: bold; color: #008000; ">&lt;/span&gt;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name: <span style="font-weight: bold; color: #008000; ">&lt;span&gt;</span>taro<span style="font-weight: bold; color: #008000; ">&lt;/span&gt;</span><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;/div&gt;</span><br><span style="font-weight: bold; color: #008000; ">&lt;/div&gt;</span></div>
+
+			<p class="translate-cn">
+			</p>
+			<p class="translate-jp hidden">
+			</p>
+
+			<p class="translate-cn">
+如上所示，将属性data-h5-bind指定为对象中的属性名，即可将该对象与HTML视图绑定起来。<br>
+包含有多个层级关系时，父元素指定为data-h5-context，子元素指定为data-h5-bind即可。<br>
+			</p>
+			<p class="translate-jp hidden">
+上記のように、data-h5-bind属性にオブジェクトのプロパティ名を指定することで、オブジェクトをHTMLにバインドにすることができます。<br>
+入れ子になったオブジェクトは、data-h5-context属性によって絞込むことができます。また、子要素のdata-h5-bindで入れ子になったオブジェクトのプロパティ名を指定してバインドすることができます。<br>
+さらに入れ子になっている場合も同様です。オブジェクトの入れ子関係に対応するように、data-h5-content属性を持つDOMの親子関係を記述します。
+			</p>
+
+			<div class="code">h5.core.view.bind(<span style="color: #BA2121; ">'#bindtest'</span>, {<br>&nbsp;&nbsp;&nbsp;&nbsp;title<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'データバインドテスト'</span>,<br><br>&nbsp;&nbsp;&nbsp;&nbsp;parentItem<span style="color: #666666; ">:</span> {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;childItem<span style="color: #666666; ">:</span> {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;grandChildItem<span style="color: #666666; ">:</span> {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'GrandChild'</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'Child'</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;childItem2<span style="color: #666666; ">:</span> {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'Child2'</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'Parent'</span><br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>});</div>
+
+			<div class="code"><span style="font-weight: bold; color: #008000; ">&lt;div</span> <span style="color: #7D9029; ">id=</span><span style="color: #BA2121; ">"bindtest"</span><span style="font-weight: bold; color: #008000; ">&gt;</span><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;h1</span> <span style="color: #7D9029; ">data-h5-bind=</span><span style="color: #BA2121; ">"title"</span><span style="font-weight: bold; color: #008000; ">&gt;&lt;/h1&gt;</span><br><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;div</span> <span style="color: #7D9029; ">data-h5-context=</span><span style="color: #BA2121; ">"parentItem"</span><span style="font-weight: bold; color: #008000; ">&gt;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name:<span style="font-weight: bold; color: #008000; ">&lt;span</span> <span style="color: #7D9029; ">data-h5-bind=</span><span style="color: #BA2121; ">"name"</span><span style="font-weight: bold; color: #008000; ">&gt;&lt;/span&gt;</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">&lt;!-- Parent --&gt;</span><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;div</span> <span style="color: #7D9029; ">data-h5-context=</span><span style="color: #BA2121; ">"childItem"</span><span style="font-weight: bold; color: #008000; ">&gt;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name:<span style="font-weight: bold; color: #008000; ">&lt;span</span> <span style="color: #7D9029; ">data-h5-bind=</span><span style="color: #BA2121; ">"name"</span><span style="font-weight: bold; color: #008000; ">&gt;&lt;/span&gt;</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">&lt;!-- Child --&gt;</span><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;div</span> <span style="color: #7D9029; ">data-h5-context=</span><span style="color: #BA2121; ">"grandChildItem"</span><span style="font-weight: bold; color: #008000; ">&gt;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name:<span style="font-weight: bold; color: #008000; ">&lt;span</span> <span style="color: #7D9029; ">data-h5-bind=</span><span style="color: #BA2121; ">"name"</span><span style="font-weight: bold; color: #008000; ">&gt;&lt;/span&gt;</span> &nbsp;<span style="font-weight: italic; color: #408080; ">&lt;!-- GrandChild --&gt;</span><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;/div&gt;</span><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;/div&gt;</span><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;div</span> <span style="color: #7D9029; ">data-h5-context=</span><span style="color: #BA2121; ">"childItem2"</span><span style="font-weight: bold; color: #008000; ">&gt;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name:<span style="font-weight: bold; color: #008000; ">&lt;span</span> <span style="color: #7D9029; ">data-h5-bind=</span><span style="color: #BA2121; ">"name"</span><span style="font-weight: bold; color: #008000; ">&gt;&lt;/span&gt;</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">&lt;!-- Child2 --&gt;</span><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;/div&gt;</span><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;/div&gt;</span><br><span style="font-weight: bold; color: #008000; ">&lt;/div&gt;</span></div>
+
+			<h2 class="translate-cn"> dataItem的绑定 </h2>
+			<h2 class="translate-jp hidden"> データアイテムのバインド </h2>
+
+			<p class="translate-cn">
+像刚才的例子一样，我们可以将item改为dataItem来进行数据绑定。
+			</p>
+			<p class="translate-jp hidden">
+先ほどの例のitemに指定したオブジェクトの代わりに、データアイテムを指定することもできます。
+			</p>
+
+			<div class="box code"><span style="font-weight: bold; color: #008000; ">var</span> manager <span style="color: #666666; ">=</span> h5.core.data.createManager(<span style="color: #BA2121; ">'TestManager'</span>);<br><br><span style="font-weight: italic; color: #408080; ">// idとnameを持つモデルの作成<br></span><span style="font-weight: bold; color: #008000; ">var</span> model <span style="color: #666666; ">=</span> manager.createModel({<br>&nbsp;&nbsp;&nbsp;&nbsp;name<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'NameModel'</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;schema<span style="color: #666666; ">:</span> {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id<span style="color: #666666; ">:</span> {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id<span style="color: #666666; ">:</span> <span style="font-weight: bold; color: #008000; ">true</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name<span style="color: #666666; ">:</span> {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'string'</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>});<br><br><span style="font-weight: italic; color: #408080; ">// id: 002, name: jiro のアイテムを作成<br></span><span style="font-weight: bold; color: #008000; ">var</span> item <span style="color: #666666; ">=</span> model.create({<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'002'</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'jiro'</span><br>});<br><br><span style="font-weight: italic; color: #408080; ">// viewにバインド<br></span>h5.core.view.bind(<span style="color: #BA2121; ">'#bindtest'</span>, {<br>&nbsp;&nbsp;&nbsp;&nbsp;title<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'データバインドテスト'</span>,<br><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// データアイテムを指定<br></span> &nbsp;&nbsp;&nbsp;item<span style="color: #666666; ">:</span> item<br>});</div>
+
+			<p class="translate-cn">
+
+			</p>
+			<p class="translate-jp hidden">
+
+			</p>
+
+			<p class="translate-cn">
+HTML的部分与先前一样。
+			</p>
+			<p class="translate-jp hidden">
+HTML部分は先ほどと変わりません。
+			</p>
+
+			<div class="box code">出力結果<br><br><span style="font-weight: bold; color: #008000; ">&lt;div</span> <span style="color: #7D9029; ">id=</span><span style="color: #BA2121; ">"bindtest"</span><span style="font-weight: bold; color: #008000; ">&gt;</span><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;h1&gt;</span>データバインドテスト<span style="font-weight: bold; color: #008000; ">&lt;/h1&gt;</span><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;div&gt;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ID: <span style="font-weight: bold; color: #008000; ">&lt;span&gt;</span>0002<span style="font-weight: bold; color: #008000; ">&lt;/span&gt;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name: <span style="font-weight: bold; color: #008000; ">&lt;span&gt;</span>jiro<span style="font-weight: bold; color: #008000; ">&lt;/span&gt;</span><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;/div&gt;</span><br><span style="font-weight: bold; color: #008000; ">&lt;/div&gt;</span></div>
+
+			<p class="translate-cn">
+用dataItem进行绑定时，将这个dataItem中的属性名用data-h5-bind的值来指定。与用对象进行绑定的做法几乎一样。
+			</p>
+			<p class="translate-jp hidden">
+データアイテムをバインドした場合は、そのデータアイテムが持つプロパティ名をdata-h5-bindに指定します。オブジェクトをバインドする場合とほぼ同様に扱うことができます。
+			</p>
+
+			<h4 class="translate-cn"> dataItem值的变化 </h4>
+			<h4 class="translate-jp hidden"> データアイテムの値変更 </h4>
+			
+			<p class="translate-cn">
+当用dataItem绑定后，如果dataItem的值变化时，对应绑定的元素值也会自动改写。<br>
+如上面的例子，改变item中name的值，<br>
+			</p>
+			<p class="translate-jp hidden">
+データアイテムをバインドし、そのデータアイテムの値に変更があった場合、変更されたプロパティをバインドしている要素について自動で書き換えが行われます。<br>
+先ほどの例の、itemのnameの値を以下のように変更します。
+			</p>
+
+			<div class="code">item.set(<span style="color: #BA2121; ">'name'</span>, <span style="color: #BA2121; ">'sabrow'</span>);</div>
+
+			<p class="translate-cn">
+在视图中可以立刻表现出来。
+			</p>
+			<p class="translate-jp hidden">
+すると即座にビューに反映されます。
+			</p>
+
+			<div class="code"><span style="font-weight: bold; color: #008000; ">&lt;div</span> <span style="color: #7D9029; ">id=</span><span style="color: #BA2121; ">"bindtest"</span><span style="font-weight: bold; color: #008000; ">&gt;</span><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;h1&gt;</span>データバインドテスト<span style="font-weight: bold; color: #008000; ">&lt;/h1&gt;</span><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;div&gt;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ID: <span style="font-weight: bold; color: #008000; ">&lt;span&gt;</span>0002<span style="font-weight: bold; color: #008000; ">&lt;/span&gt;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name: <span style="font-weight: bold; color: #008000; ">&lt;span&gt;</span>sabrow<span style="font-weight: bold; color: #008000; ">&lt;/span&gt;</span><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;/div&gt;</span><br><span style="font-weight: bold; color: #008000; ">&lt;/div&gt;</span></div>
+
+			<h2 class="translate-cn"> 注意：数据绑定的多重使用 </h2>
+			<h2 class="translate-jp hidden"> 注意：データバインドの多重使用について </h2>
+
+			<p class="translate-cn">
+在使用数据绑定功能时，不能将同一个对象同时与父子关系的两个元素相绑定。
+			</p>
+			<p class="translate-jp hidden">
+データバインド機構は、バインドが行われている要素およびその子孫要素の変更（タグや属性の追加削除）は<br>
+この機構によってのみ行われることを前提としています。<br>
+データバインド機構は多重に適用しないでください。
+			</p>
+
+			<p class="translate-cn">
+但是，可以像平时一样使用jQuery等进行值的读取。<br>
+并且，可以同时绑定没有父子元素的多个元素。
+			</p>
+			<p class="translate-jp hidden">
+なお、値の読み取りは通常通りjQuery等を使用してかまいません。<br>
+また、親子関係にない複数の要素に同時にデータバインドを使用することは可能です。
+			</p>
+
+			<h4 class="translate-cn"> 例 </h4>
+			<h4 class="translate-jp hidden"> 例 </h4>
+			
+			<p class="translate-cn">
+如下面的HTML中，在已经与div#bindTarget元素绑定了的情况下，<br>
+不能再与其子元素div#child或者div#grandChild进行绑定了。<br>
+但是，由于div#another和div#bindTarget是兄弟关系，可以同时进行数据绑定。
+			</p>
+			<p class="translate-jp hidden">
+以下のようなHTMLでdiv#bindTargetの要素にデータバインドを適用した場合、<br>
+div#bindTarget、およびその子孫要素のdiv#childやdiv#grandChildに対して<br>
+多重にデータバインドを適用してはいけない。<br>
+一方、div#anotherはdiv#bindTargetとは兄弟である（親子関係にない）ので<br>
+div#anotherとdiv#bindTargetで同時に（別の）データバインドを使用することは可能。
+			</p>
+
+			<div class="box code"><span style="font-weight: bold; color: #008000; ">&lt;body&gt;</span><br> &nbsp;<span style="font-weight: bold; color: #008000; ">&lt;div</span> <span style="color: #7D9029; ">id=</span><span style="color: #BA2121; ">"bindTarget"</span><span style="font-weight: bold; color: #008000; ">&gt;</span> &nbsp;<span style="font-weight: italic; color: #408080; ">&lt;!-- この要素をルートとしてデータバインドを適用 --&gt;</span><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;div</span> <span style="color: #7D9029; ">id=</span><span style="color: #BA2121; ">"child"</span><span style="font-weight: bold; color: #008000; ">&gt;</span><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;div</span> <span style="color: #7D9029; ">id=</span><span style="color: #BA2121; ">"grandChild"</span><span style="font-weight: bold; color: #008000; ">&gt;</span><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;/div&gt;</span><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;/div&gt;</span><br> &nbsp;<span style="font-weight: bold; color: #008000; ">&lt;/div&gt;</span><br><br> &nbsp;<span style="font-weight: bold; color: #008000; ">&lt;div</span> <span style="color: #7D9029; ">id=</span><span style="color: #BA2121; ">"another"</span><span style="font-weight: bold; color: #008000; ">&gt;</span><br> &nbsp;<span style="font-weight: bold; color: #008000; ">&lt;/div&gt;</span><br><span style="font-weight: bold; color: #008000; ">&lt;/body&gt;</span></div>
+
+		</article>
+</script>

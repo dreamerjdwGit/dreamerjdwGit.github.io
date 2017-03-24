@@ -1,0 +1,87 @@
+<script type="text/ejs" id="article_07_todoLogic">
+
+
+		<header class="main-header">
+			<span class="header-span">教程（基本篇）</span>
+			<h1 class="header-h1">07.todo小应用 Logic的创建</h1>
+		</header>
+		<article>
+			<h2 class="translate-cn">概要</h2>
+			<h2 class="translate-jp hidden">概要</h2>
+
+			<p class="translate-cn">
+在这一节中，我们将对数据模型ToDoModel中的DataItem的插入、更新、删除等操作进行编码。<br>
+这里封装好的方法，会在下一节创建的Controller中使用。<br>
+这一节将对例子todoLogic.js的代码进行说明。
+			</p>
+			<p class="translate-jp hidden"> 
+本章では、データモデルToDoModelにデータアイテムを登録する処理や、データアイテムの更新や削除を行う処理を実装します。<br>
+ここで実装したメソッドは、次章で作成するコントローラで使用します。<br>
+このページで説明するコードは、サンプルコードのtodoLogic.jsに記述されています。
+ </p>
+
+ 			<h2 class="translate-cn"> Logic的组成 </h2>
+			<h2 class="translate-jp hidden">ロジックの構成 </h2>
+
+			<p class="translate-cn">
+为了操作TodoModel创建了逻辑ToDoLogic。<br>
+TodoLogic中的方法如下：
+			</p>
+			<p class="translate-jp hidden">
+TodoModelを操作するためのロジックToDoLogicを作成します。<br>
+ToDoLogicには以下のメソッドを実装します。
+			</p>	
+
+			<table><tbody><tr><th scope="col">方法名</th><th scope="col">返回值</th><th scope="col">说明</th></tr><tr><td>init()</td><td>void</td><td>从服务器上取得TODO的数据（例子是通过读取json文件）</td></tr><tr><td>getItem(Number id)</td><td>DataItem</td><td>取得指定ID的DataItem</td></tr><tr><td>add(String content)</td><td>void</td><td>将TODO的内容插入到DataModel中</td></tr><tr><td>remove(Nubmer id)</td><td>void</td><td>删除指定ID的DataItem</td></tr><tr><td>update(id, data)</td><td>void</td><td>更新指定ID的DataItem</td></tr><tr><td>getDetail(Number id)</td><td>ObservableArray[DataItem]</td><td>取得指定ID的DataItem数组</td></tr></tbody></table>
+			
+			<p class="translate-cn">
+
+			</p>
+			<p class="translate-jp hidden">
+
+			</p>	
+
+			<p class="translate-cn">
+而ToDoLogic的属性如下所示：
+			</p>
+			<p class="translate-jp hidden">
+また、ToDoLogicは以下のプロパティを持っています。
+			</p>	
+
+			<table><tbody><tr><th scope="col">属性名</th><th scope="col">类型</th><th scope="col">说明</th></tr><tr><td>model</td><td>DataModel</td><td>sample.todo.model.ToDoModel</td></tr><tr><td>todos</td><td>ObservableArray[DataItem]</td><td>用来显示一览的DataItem的ObservableArray对象</td></tr><tr><td>detail</td><td>ObservableArray[DataItem]</td><td>用来显示详细信息的DataItem的ObservableArray对象</td></tr></tbody></table>
+
+			<p class="translate-cn">
+为了显示TODO一览，我们将相应的数组通过注释模板tmplTodos中的data-h5-loop-context="todos"进行了绑定。<br>
+而为了显示TODO详细信息，我们将相应的数组通过注释模板tmplDetail中的data-h5-loop-context="detail"进行了绑定。<br>
+通过ObservableArray对象进行绑定后，对数组的操作（插入、更新或者删除）时，都会自动在视图中反映出来。
+			</p>
+			<p class="translate-jp hidden">
+todosはTODO一覧を表示するために必要な配列で、コメントテンプレートtmplTodos内に記述されているdata-h5-loop-context="todos"にバインドします。<br>
+また、detailはTODOの詳細を表示するために必要な配列で、コメントテンプレートtmplDetail内に記述されているdata-h5-loop-context="detail"にバインドします。<br>
+コメントビューにObserbableArrayをバインドすると、配列が操作(要素の追加、更新または削除)されると、その操作が自動的にビューに反映されるようになります。
+			</p>	
+
+			<h2 class="translate-cn"> 代码例子</h2>
+			<h2 class="translate-jp hidden"> サンプルコード </h2>
+
+			<p class="translate-cn">
+ToDoLogic的代码如下：
+			</p>
+			<p class="translate-jp hidden">
+ToDoLogicのコードは以下のとおりです。
+			</p>	
+
+			<div class="box code"><span style="font-weight: bold; color: #008000; ">var</span> SAMPLE_DATA_FILEPATH <span style="color: #666666; ">=</span> <span style="color: #BA2121; ">'json/sampleData.json'</span>;<br><br><br><span style="font-weight: bold; color: #008000; ">var</span> todoLogic <span style="color: #666666; ">=</span> {<br>&nbsp;&nbsp;&nbsp;&nbsp;__name<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'sample.todo.logic.TodoLogic'</span>,<br><br><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">/**<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* TODOモデル<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span><br>&nbsp;&nbsp;&nbsp;&nbsp;model <span style="color: #666666; ">:</span> sample.todo.model.ToDoModel,<br><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">/**<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* 一覧表示用ObservableArray<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span><br>&nbsp;&nbsp;&nbsp;&nbsp;todos <span style="color: #666666; ">:</span> h5.core.data.createObservableArray(),<br><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">/** <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* 詳細表示用ObservableArray<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span><br>&nbsp;&nbsp;&nbsp;&nbsp;detail <span style="color: #666666; ">:</span> h5.core.data.createObservableArray(),<br><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">/**<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* サーバからTODOデータを取得します。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* &lt;p&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* ※今回はjsonファイルのサンプルデータを読み込んでいます。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @returns {Promise} Promiseオブジェクト<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span><br>&nbsp;&nbsp;&nbsp;&nbsp;init<span style="color: #666666; ">:</span> <span style="font-weight: bold; color: #008000; ">function</span>() {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">var</span> df <span style="color: #666666; ">=</span> <span style="font-weight: bold; color: #008000; ">this</span>.deferred();<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">var</span> that <span style="color: #666666; ">=</span> <span style="font-weight: bold; color: #008000; ">this</span>;<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$.ajax({<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;url<span style="color: #666666; ">:</span> SAMPLE_DATA_FILEPATH,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dataType<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'json'</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cache<span style="color: #666666; ">:</span> <span style="font-weight: bold; color: #008000; ">false</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;success<span style="color: #666666; ">:</span> <span style="font-weight: bold; color: #008000; ">function</span>(data) {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">var</span> dataItems <span style="color: #666666; ">=</span> that.model.create(data);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;that.todos.copyFrom(dataItems);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;df.resolve(that.todos);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;error<span style="color: #666666; ">:</span> <span style="font-weight: bold; color: #008000; ">function</span>() {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alert(<span style="color: #BA2121; ">'サンプルデータの読み込みに失敗しました。'</span>);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});<br><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">return</span> df.promise();<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br> &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">/**<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* 指定されたIDに紐づくデータアイテムを取得します。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @return {DataItem} TODOデータアイテム<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span><br>&nbsp;&nbsp;&nbsp;&nbsp;getItem<span style="color: #666666; ">:</span> <span style="font-weight: bold; color: #008000; ">function</span>(id) {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">return</span> <span style="font-weight: bold; color: #008000; ">this</span>.model.get(id);<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br> &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">/**<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* ToDoモデルにデータの登録し、一覧表示用ObservableArrayにデータアイテムを追加します。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @param content {String} TODO内容<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span><br>&nbsp;&nbsp;&nbsp;&nbsp;add<span style="color: #666666; ">:</span> <span style="font-weight: bold; color: #008000; ">function</span>(content) {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">var</span> item <span style="color: #666666; ">=</span> <span style="font-weight: bold; color: #008000; ">this</span>.model.create({<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id<span style="color: #666666; ">:</span> <span style="font-weight: bold; color: #008000; ">this</span>._getNewId(),<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;status<span style="color: #666666; ">:</span> <span style="font-weight: bold; color: #008000; ">false</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content<span style="color: #666666; ">:</span> content,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;insertDate<span style="color: #666666; ">:</span> <span style="color: #666666; ">+</span><span style="font-weight: bold; color: #008000; ">new</span> <span style="color: #008000; ">Date</span>()<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});<br><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">this</span>.todos.push(item);<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br> &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">/**<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* 指定されたアイテムIDに紐づくデータアイテムをモデルから削除します。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @param id {Number} アイテムID<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span><br>&nbsp;&nbsp;&nbsp;&nbsp;remove<span style="color: #666666; ">:</span> <span style="font-weight: bold; color: #008000; ">function</span>(id) {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">for</span> ( <span style="font-weight: bold; color: #008000; ">var</span> i <span style="color: #666666; ">=</span> <span style="color: #666666; ">0</span>, len <span style="color: #666666; ">=</span> <span style="font-weight: bold; color: #008000; ">this</span>.todos.length; i <span style="color: #666666; ">&lt;</span> len; i<span style="color: #666666; ">++</span>) {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">var</span> item <span style="color: #666666; ">=</span> <span style="font-weight: bold; color: #008000; ">this</span>.todos[i];<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">var</span> itemId <span style="color: #666666; ">=</span> item.get(<span style="color: #BA2121; ">'id'</span>);<br><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">if</span> (itemId <span style="color: #666666; ">===</span> id) {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">this</span>.model.remove(id);<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">this</span>.todos.splice(i, <span style="color: #666666; ">1</span>);<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">this</span>.detail.pop();<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">break</span>;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br> &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">/**<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* 指定されたアイテムIDに紐づくデータアイテムを更新します。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @param id {Number} アイテムID<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @param data {Object} 更新データ<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span><br>&nbsp;&nbsp;&nbsp;&nbsp;update<span style="color: #666666; ">:</span> <span style="font-weight: bold; color: #008000; ">function</span>(id, data) {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">var</span> item <span style="color: #666666; ">=</span> <span style="font-weight: bold; color: #008000; ">this</span>.model.get(id);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;item.set(data);<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br> &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">/**<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* 指定されたアイテムIDに紐づくデータアイテムが格納されたObservableArrayを取得します。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @param id {Number} アイテムID<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @returns データアイテムが格納されたObservableArray<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span><br>&nbsp;&nbsp;&nbsp;&nbsp;getDetail<span style="color: #666666; ">:</span> <span style="font-weight: bold; color: #008000; ">function</span>(id) {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">var</span> item <span style="color: #666666; ">=</span> <span style="font-weight: bold; color: #008000; ">this</span>.model.get(id);<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">this</span>.detail.splice(<span style="color: #666666; ">0</span>, <span style="color: #666666; ">1</span>, item);<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">return</span> <span style="font-weight: bold; color: #008000; ">this</span>.detail;<br>&nbsp;&nbsp;&nbsp;&nbsp;},<br> &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">/**<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* アイテムIDを採番します。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @returns {Number} アイテムID<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span><br>&nbsp;&nbsp;&nbsp;&nbsp;_getNewId<span style="color: #666666; ">:</span> <span style="font-weight: bold; color: #008000; ">function</span>() {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">for</span> ( <span style="font-weight: bold; color: #008000; ">var</span> i <span style="color: #666666; ">=</span> <span style="color: #666666; ">1</span>;; i<span style="color: #666666; ">++</span>) {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">if</span> (<span style="color: #666666; ">!</span><span style="font-weight: bold; color: #008000; ">this</span>.model.has(i)) {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">return</span> i;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>};<br><br><span style="font-weight: italic; color: #408080; ">// sample.todo.logic.ToDoLogicでグローバルに公開する<br></span>h5.core.expose(todoLogic);</div>
+
+			<p class="translate-cn">
+我们将ToDoModel设置为了一个叫this.model的全局变量。<br>
+这样一来，各种方法都可以对这个DataModel进行操作了。<br>
+			</p>
+			<p class="translate-jp hidden">
+this.modelには、グローバルに公開したToDoModelを設定しています。<br>
+各メソッドはこのモデルを操作します。<br>
+ロジックの作成は以上です。<br>
+次の章ではコントローラを作成します。画面で入力された情報をコントローラで受け取った後、本章で作成したロジックを呼び出してデータモデルの操作を行います。
+			</p>
+		</article>
+</script>

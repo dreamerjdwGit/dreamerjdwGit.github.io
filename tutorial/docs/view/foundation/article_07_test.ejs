@@ -1,0 +1,87 @@
+<script type="text/ejs" id="article_07_test">
+<header class="main-header">
+			<span class="header-span">教程（基本篇）</span>
+			<h1 class="header-h1">07.单体测试</h1>
+		</header>
+		<article>
+			<h2 class="translate-cn">概要</h2>
+			<h2 class="translate-jp hidden">概要</h2>
+
+			<p class="translate-cn">当逻辑实现繁琐的处理时，JavaScript也可以通过单体测试来保证编码的质量。<br>
+JavaScript的单体测试工具有JSUnit、Qunit、JSSpec等。<br>
+hifive中因为以下理由采用了Qunit<br>
+&nbsp;&nbsp;&nbsp;• 包括异步处理，基本上都可运行。<br>
+&nbsp;&nbsp;&nbsp;• 使用简单方便。<br>
+&nbsp;&nbsp;&nbsp;• jQuery也采用了Qunit。<br>
+
+			</p>
+			<p class="translate-jp hidden"> ロジックで複雑な処理を実装する場合等、JavaScriptでも単体テストを行っておくことが、品質担保に効果的です。<br>
+JavaScriptの単体テストツールは、JSUnitやQUnit、JSSpecなど様々なものがあります。<br>
+hifiveでは、<br>
+&nbsp;&nbsp;&nbsp;• 非同期処理を含め、一通りのことが実行可能。<br>
+&nbsp;&nbsp;&nbsp;• 簡単で使いやすい。<br>
+&nbsp;&nbsp;&nbsp;• jQueryでも採用されている。<br>
+といった理由でQUnitを採用しています。 </p>
+			
+			<h2 class="translate-cn">  QUnit的导入和测试实施方法</h2>
+			<h2 class="translate-jp hidden">QUnitの導入・テスト実施方法  </h2>
+
+			<p class="translate-cn"> 1. 下载qunit.js、qunit.css。
+2. 在想要测试的页面中导入qunit.js和qunit.css文件。
+3. 在第2步中的HTML中编写测试用例。
+4. 打开第3步完成后的HTML，测试开始，结果将在画面上展示。
+ </p>
+			<p class="translate-jp hidden">1. qunit.jsと、qunit.cssをダウンロードします。
+2. テストしたいページに、qunit.jsとqunit.cssを含めます。
+3. 2.のHTMLにテストケースを記述します。
+4. 3.のHTMLファイルを開くと、テストが開始され結果が表示されます。  </p>
+
+		
+			<h4 class="translate-cn">基本结构  </h4>
+			<h4 class="translate-jp hidden"> 基本構文 </h4>
+
+			<p class="translate-cn"> 下面便是代码中使用Qunit的例子。<br>
+			用例代码参考<a href="http://docs.jquery.com/QUnit#source">http://docs.jquery.com/QUnit#source</a>。 </p>
+			<p class="translate-jp hidden">			以下にQUnitを利用する際のサンプルコードを示します。なお、このサンプルコードは<br>
+<a href="http://docs.jquery.com/QUnit#source">http://docs.jquery.com/QUnit#source</a> を参考としています。  </p>
+
+			<div class="code"><span style="color: #BC7A00; ">&lt;!doctype html&gt;</span> &nbsp;<br><span style="font-weight: bold; color: #008000; ">&lt;html&gt;</span> &nbsp;<br> &nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;head&gt;</span> &nbsp;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;link</span> <span style="color: #7D9029; ">rel=</span><span style="color: #BA2121; ">"stylesheet"</span> <span style="color: #7D9029; ">href=</span><span style="color: #BA2121; ">"http://code.jquery.com/qunit/git/qunit.css"</span> <span style="color: #7D9029; ">type=</span><span style="color: #BA2121; ">"text/css"</span> <span style="color: #7D9029; ">media=</span><span style="color: #BA2121; ">"screen"</span> <span style="font-weight: bold; color: #008000; ">/&gt;</span><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">&lt;!--QUnitスタンドアロンで実行可能--&gt;</span><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;script&nbsp;</span><span style="color: #7D9029; ">type=</span><span style="color: #BA2121; ">"text/javascript"</span> <span style="color: #7D9029; ">src=</span><span style="color: #BA2121; ">"http://code.jquery.com/qunit/git/qunit.js"</span><span style="font-weight: bold; color: #008000; ">&gt;&lt;/script&gt;</span><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;script&gt;</span> &nbsp;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// モジュールに所属しないテスト &nbsp;<br></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;test(<span style="color: #BA2121; ">"a basic test example"</span>, <span style="font-weight: bold; color: #008000; ">function</span>(){ &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ok(<span style="font-weight: bold; color: #008000; ">true</span>, <span style="color: #BA2121; ">"this test is fine"</span>); &nbsp;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">var</span> value <span style="color: #666666; ">=</span> <span style="color: #BA2121; ">"hello"</span>; &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;equal(<span style="color: #BA2121; ">"hello"</span>, value, <span style="color: #BA2121; ">"We expect value to be hello"</span>); &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}); &nbsp;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;module(<span style="color: #BA2121; ">"Module A"</span>); <span style="font-weight: italic; color: #408080; ">// モジュール"Module A"の定義 &nbsp;<br></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;test(<span style="color: #BA2121; ">"first test within module"</span>, <span style="font-weight: bold; color: #008000; ">function</span>(){ <span style="font-weight: italic; color: #408080; ">// モジュール"Module A" のテスト &nbsp;<br></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ok(<span style="font-weight: bold; color: #008000; ">true</span>, <span style="color: #BA2121; ">"all pass"</span>); &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}); &nbsp;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;module(<span style="color: #BA2121; ">"Module B"</span>); <span style="font-weight: italic; color: #408080; ">// モジュール"Module B"の定義 &nbsp;<br></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;test(<span style="color: #BA2121; ">"some other test"</span>, <span style="font-weight: bold; color: #008000; ">function</span>(){ <span style="font-weight: italic; color: #408080; ">// モジュール"Module B" のテスト &nbsp;<br></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expect(<span style="color: #666666; ">2</span>); <span style="font-weight: italic; color: #408080; ">// このテスト関数内部では2つの成功があればOK &nbsp;<br></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;equal(<span style="font-weight: bold; color: #008000; ">true</span>, <span style="font-weight: bold; color: #008000; ">false</span>, <span style="color: #BA2121; ">"failing test"</span>); <span style="font-weight: italic; color: #408080; ">// ここで失敗する為、成功数が足りずexpect()は失敗 &nbsp;<br></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;equal(<span style="font-weight: bold; color: #008000; ">true</span>, <span style="font-weight: bold; color: #008000; ">true</span>, <span style="color: #BA2121; ">"passing test"</span>); &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}); &nbsp;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;module(<span style="color: #BA2121; ">"Module C"</span>);<span style="font-weight: italic; color: #408080; ">// モジュール"Module C"の定義 &nbsp;<br></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;asyncTest(<span style="color: #BA2121; ">"asyncTest"</span>, <span style="font-weight: bold; color: #008000; ">function</span>(){ <span style="font-weight: italic; color: #408080; ">// モジュール"Module C" のテスト &nbsp;<br></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// 時間のかかる処理を実行する &nbsp;<br></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;setTimeout(<span style="font-weight: bold; color: #008000; ">function</span>(){ &nbsp;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// 時間のかかる処理についてのアサートを行う &nbsp;<br></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ok(<span style="font-weight: bold; color: #008000; ">true</span>, <span style="color: #BA2121; ">"always fine"</span>); &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;start(); &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}, <span style="color: #666666; ">100</span>); <span style="font-weight: italic; color: #408080; ">// 100ミリ秒後にsetTimeOut()関数の第1引数である関数を実施 &nbsp;<br></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}); &nbsp;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;test(<span style="color: #BA2121; ">"asyncTest by normal test"</span>, <span style="font-weight: bold; color: #008000; ">function</span>(){ <span style="font-weight: italic; color: #408080; ">// モジュール"Module C" のテスト<br></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stop(<span style="color: #666666; ">1</span>); <span style="font-weight: italic; color: #408080; ">// test()で非同期のテストを実行する為、stop()関数でセマフォの数を設定する(start()を実行する回数)<br></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// 時間のかかる処理を実行する &nbsp;<br></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;setTimeout(<span style="font-weight: bold; color: #008000; ">function</span>(){ &nbsp;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// 時間のかかる処理についてのアサートを行う &nbsp;<br></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ok(<span style="font-weight: bold; color: #008000; ">true</span>, <span style="color: #BA2121; ">"always fine"</span>); &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;start(); &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}, <span style="color: #666666; ">200</span>); <span style="font-weight: italic; color: #408080; ">// 200ミリ秒後にsetTimeOut()関数の第1引数である関数を実施<br></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;/script&gt;</span> &nbsp;<br> &nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;/head&gt;</span> &nbsp;<br> &nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;body&gt;</span><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">&lt;!-- テスト結果を表示する領域 --&gt;</span> &nbsp;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;div</span> <span style="color: #7D9029; ">id=</span><span style="color: #BA2121; ">"qunit"</span><span style="font-weight: bold; color: #008000; ">&gt;&lt;/div&gt;</span><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;div</span> <span style="color: #7D9029; ">id=</span><span style="color: #BA2121; ">"qunit-fixture"</span><span style="font-weight: bold; color: #008000; ">&gt;</span>test markup, will be hidden<span style="font-weight: bold; color: #008000; ">&lt;/div&gt;</span> <br> &nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;/body&gt;</span> &nbsp;<br><span style="font-weight: bold; color: #008000; ">&lt;/html&gt;</span></div>
+
+
+			<h4 class="translate-cn"> 运行异步处理时 </h4>
+			<h4 class="translate-jp hidden"> 非同期通信を行う場合 </h4>
+
+			<p class="translate-cn"> stop()函数可以使测试暂停，并在获取到异步通信结果后，再通过函数中的start()函数让测试继续。
+ </p>
+			<p class="translate-jp hidden"> stop()関数で一時的にテストを停止し、非同期通信の結果が帰った関数の中でstart()関数を実行し、テストを再開します。 </p>
+
+			<div class="box code">test(<span style="color: #BA2121; ">"asyncTest"</span>, <span style="font-weight: bold; color: #008000; ">function</span>(){ &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;stop(<span style="color: #666666; ">1</span>); <span style="font-weight: italic; color: #408080; ">// 非同期処理完了後に呼ぶstart()の回数は1回なので、セマフォに1を指定する &nbsp;<br></span> &nbsp;&nbsp;&nbsp;$.getJSON(<span style="color: #BA2121; ">"/someurl"</span>, <span style="font-weight: bold; color: #008000; ">function</span>(result) {<span style="font-weight: italic; color: #408080; ">// 1秒間待機する間にJSONの結果を取得 &nbsp;<br></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;equal(result.value, <span style="color: #BA2121; ">"someExpectedValue"</span>); <span style="font-weight: italic; color: #408080; ">//結果を比較する &nbsp;<br></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;start(); <span style="font-weight: italic; color: #408080; ">// アサーションが実行された後でテストを再開する &nbsp;<br></span> &nbsp;&nbsp;&nbsp;}); &nbsp;<br>});&nbsp;&nbsp;</div>
+
+			<p class="translate-cn"> stop()函数取得参数中信息量的值。（未指定时设为1） </p>
+			<p class="translate-jp hidden"> stop()関数は、パラメータにセマフォの値を取ります。(未指定の場合は1が設定されます) </p>
+
+			<h4 class="translate-cn"> 设置Timer（定时器） </h4>
+			<h4 class="translate-jp hidden">Timerを設定する場合  </h4>
+
+			<p class="translate-cn"> •	使用函数asyncTest()进行测试的例子如下所示。 </p>
+			<p class="translate-jp hidden"> asyncTest()関数を使ってテストを実行する例を以下に記述します。 </p>
+
+			<div class="box code">asyncTest(<span style="color: #BA2121; ">"asyncTest"</span>, <span style="font-weight: bold; color: #008000; ">function</span>(){ &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;setTimeout(<span style="font-weight: bold; color: #008000; ">function</span>(){ &nbsp;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// 時間のかかる処理についてのアサートを行う &nbsp;<br></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;equal(obj.value, expectValue); &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;start(); &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;},<span style="color: #666666; ">100</span> <span style="font-weight: italic; color: #408080; ">/* 100ms待機する */</span>); &nbsp;<br>});&nbsp;&nbsp;</div>
+
+			<p class="translate-cn"> 在调用start()时，测试会一直继续。在此时间段内未调用其它的测试。<br>
+参考：http:d.hatena.ne.jp/Jxck/20100721/1279681676
+ </p>
+			<p class="translate-jp hidden"> start();が呼ばれるまで、このテストは終了しません。この間にほかのテストが呼ばれることはありません。<br>
+参考：http:d.hatena.ne.jp/Jxck/20100721/1279681676 </p>
+
+			
+			<h4 class="translate-cn">操作DOM时插入断点时</h4>
+			<h4 class="translate-jp hidden"> DOM操作時にAssertする場合 </h4>
+
+			<p class="translate-cn">下面是改变DOM节点的简单例子 </p>
+			<p class="translate-jp hidden">DOMノードの要素を変更する簡単な例について例を示します。  </p>
+
+			<div class="box code">test(<span style="color: #BA2121; ">"domTest"</span>, <span style="font-weight: bold; color: #008000; ">function</span>(){ &nbsp;<br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">var</span> domtest <span style="color: #666666; ">=</span> <span style="color: #008000; ">document</span>.getElementById(<span style="color: #BA2121; ">"dom_test"</span>); &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;equal(domtest.id, <span style="color: #BA2121; ">"dom_test"</span>); &nbsp;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;domtest.setAttribute(<span style="color: #BA2121; ">"id"</span>, <span style="color: #BA2121; ">"dom_test2"</span>); &nbsp;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;notEqual(domtest.id, <span style="color: #BA2121; ">"dom_test"</span>); &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;equal(domtest.id, <span style="color: #BA2121; ">"dom_test2"</span>); &nbsp;<br>});&nbsp;&nbsp;</div>
+
+		</article>
+</script>

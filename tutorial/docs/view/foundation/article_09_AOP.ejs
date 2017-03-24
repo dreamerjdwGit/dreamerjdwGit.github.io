@@ -1,0 +1,69 @@
+<script type="text/ejs" id="article_09_AOP">
+
+
+<header class="main-header">
+			<span class="header-span">教程（基本篇）</span>
+			<h1 class="header-h1">09.AOP（切面）的应用</h1>
+		</header>
+		<article>
+			<h2 class="translate-cn">概要</h2>
+			<h2 class="translate-jp hidden">概要</h2>
+
+			<p class="translate-cn">hifive中可以在控制器与逻辑的方法间应用切面（AOP）。<br>
+			AOP的优点在于可以不用通过增加或改变代码来实现追加新的功能。<br>
+			例如，不去修改已有的方法去实现日志的输出，或者是实现时间的监测。
+			</p>
+			<p class="translate-jp hidden"> hifiveではコントローラとロジックのメソッドにアスペクトを適用(AOP)することができます。<br>
+			AOPのメリットは「コードに変更を加えずに新たな処理を追加すること」ができる点です。<br>
+			例えば既存のメソッドを修正せずにログ出力するようにしたり、そのメソッドの実行時間の計測ができるようになります。 </p>
+
+			<h2 class="translate-cn"> 切面（aspect）的使用方法 </h2>
+			<h2 class="translate-jp hidden"> アスペクトの適用方法 </h2>
+
+			<p class="translate-cn"> 通过三个步骤在Hello World里应用切面。 </p>
+			<p class="translate-jp hidden"> ステップ3で作成したHello Worldにアスペクトを適用します。 </p>
+
+			<p class="translate-cn"> 1.新建文件h5preinit.js，并先于h5.js读取。 </p>
+			<p class="translate-jp hidden"> 1. h5preinit.jsというファイルを新しく作成し、h5.jsよりも先に読み込ませます。 </p>
+
+			<div class="box code"><span style="font-weight: italic; color: #408080; ">&lt;!-- hifiveのpreinitイベントで処理をさせるために、h5.jsより先に読み込む --&gt;</span> &nbsp;<br><span style="font-weight: bold; color: #008000; ">&lt;script&nbsp;</span><span style="color: #7D9029; ">src=</span><span style="color: #BA2121; ">"h5preinit.js"</span><span style="font-weight: bold; color: #008000; ">&gt;&lt;/script&gt;</span> &nbsp;<br><span style="font-weight: bold; color: #008000; ">&lt;script&nbsp;</span><span style="color: #7D9029; ">src=</span><span style="color: #BA2121; ">"h5.js"</span><span style="font-weight: bold; color: #008000; ">&gt;&lt;/script&gt;</span></div>
+
+			<p class="translate-cn">  </p>
+			<p class="translate-jp hidden">  </p>
+
+			<p class="translate-cn"> 2.h5preinit的内容如下。 </p>
+			<p class="translate-jp hidden"> 2. h5preinit.jsは内容は以下の通りです。 </p>
+
+			<div class="box code">$(<span style="color: #008000; ">document</span>).bind(<span style="color: #BA2121; ">'h5preinit'</span>, <span style="font-weight: bold; color: #008000; ">function</span>() { &nbsp;<br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">var</span> aspect <span style="color: #666666; ">=</span> { &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;target<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'HelloWorldController'</span>, &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;interceptors<span style="color: #666666; ">:</span> h5.core.interceptor.lapInterceptor, &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pointCut<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'#btn click'</span> &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;}; &nbsp;<br> &nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;h5.settings.aspects <span style="color: #666666; ">=</span> [aspect]; &nbsp;<br>});&nbsp;&nbsp;</div>
+
+			<p class="translate-cn">• 切面（aspect）被指定为hifive中独有的h5preinit事件。之后再进行详细说明。 </p>
+			<p class="translate-jp hidden">• アスペクトはhifiveの独自イベントh5preinitイベントで指定します。
+			詳細は後述します。 </p>
+
+			<p class="translate-cn"> 
+• 第2行到第6行定义了切面（aspect）。切面由目标、拦截器和pointcut组成。之后再分别进行详细说明。<br>
+&nbsp;&nbsp;&nbsp;目标指定了该拦截器适用于哪个控制器和逻辑中。在这里，适用于名字为“HelloWorldController”的控制器中。<br>
+&nbsp;&nbsp;&nbsp;在这里指定为检测hifive中的事件结束时间并在控制台中输出的拦截器。<br>
+&nbsp;&nbsp;&nbsp;pointcut则指定了该拦截器在什么事件中适用。在这里，适用于"#btn click"方法。
+ </p>
+			<p class="translate-jp hidden">
+• 2行目から6行目までがアスペクトの定義です。アスペクトはターゲットとインターセプタ、ポイントカットで構成されます。<br>
+&nbsp;&nbsp;&nbsp;それぞれの詳細については後述します。<br>
+&nbsp;&nbsp;&nbsp;ターゲットはどのコントローラ、ロジックにインターセプタを適用するかを指定します。<br>&nbsp;&nbsp;&nbsp;ここでは名前が"HelloWorldController"であるコントローラに適用しています。<br>
+&nbsp;&nbsp;&nbsp;インターセプタとは適用したい処理のことです。<br>&nbsp;&nbsp;&nbsp;ここではhifiveが用意しているイベントハンドラが終了するまでの時間を計測しコンソールに出力する実行時間計測用インターセプタを<br>&nbsp;&nbsp;&nbsp;指定しています。<br>
+&nbsp;&nbsp;&nbsp;ポイントカットはインターセプタをどこに適用するかを指定します。ここでは"#btn click"メソッドに適用しています。 </p>
+
+			<h4 class="translate-cn">运行确认  </h4>
+			<h4 class="translate-jp hidden"> 動作確認</h4>
+
+			<p class="translate-cn"> F12打开开发者工具，点击"hello world!"按钮，控制台将显示实际运行时间。<br>
+如果将包含了"h5preinit.js"的代码注释掉，控制台将不会再显示运行时间。
+ </p>
+			<p class="translate-jp hidden">F12で開発者ツールを開き、"hello world!"ボタンをクリックすると、コンソールに実行時間が表示されます。<br>
+"h5preinit.js"のインクルードをコメントアウトすると、コンソールに出力されなくなります。 </p>
+
+
+
+
+		</article>
+</script>

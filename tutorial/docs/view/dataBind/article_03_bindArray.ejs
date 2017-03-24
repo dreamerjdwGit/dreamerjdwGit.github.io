@@ -1,0 +1,121 @@
+<script type="text/ejs" id="article_03_bindArray">
+
+
+	<header class="main-header">
+		<span class="header-span">教程（基本篇）</span>
+		<h1 class="header-h1">03.数组的绑定</h1>
+	</header>
+
+	<article>
+		<h2 class="translate-cn">循环绑定</h2>
+		<h2 class="translate-jp hidden">ループバインドによるビューの自動繰り返し出力</h2>
+
+		<p class="translate-cn">
+数据绑定，可实现特定元素自动循环生成并在视图中显示。<br>
+通常可以使用数组、或是ObervableArray对象，<br>
+将数组中包含的元素自动遍历生成并在视图中显示。<br>
+并且，使用ObervableArray时，还可以调用push()、splice()等方法，来对数组元素进行操作，从而改变视图。<br>
+使用自动遍历生成功能时，遍历部分的父元素需要指定为data-h5-loop-context的属性值。<br>
+此时，只是知道了该数组元素个数，即确定了遍历循环的次数。<br>
+还需要用data-h5-bind属性来绑定数组中每个元素的值。<br>
+		</p>
+		<p class="translate-jp hidden">
+データバインド機構では、特定の要素を自動的に繰り返し出力させることができます。<br>
+データソースとして通常の配列、またはObservableArrayを用いることができ、<br>
+配列に含まれる要素の数だけビューが繰り返し出力されます。<br>
+また、ObservableArrayをソースにした場合、push(), splice()などのメソッド呼び出しで<br><br>
+配列の要素数が変更されると、ビューも自動的に変更されます。<br>
+繰り返し出力を使用する場合は、繰り返し部分の親要素にdata-h5-loop-context属性を指定します。<br><br><br>
+data-h5-loop-contextが指定された要素の子要素が、配列の要素の数だけ複製されます。<br><br>
+子要素には、data-h5-bind属性で配列要素中のどのプロパティ値をバインドするかをさらに指定できます。<br>
+また、data-h5-loop-context属性の値には、現在のコンテキストにおける繰り返しプロパティを指定します。
+		</p>	
+
+		<h2 class="translate-cn"> 绑定普通数组时 </h2>
+		<h2 class="translate-jp hidden"> 通常の配列をバインドする場合 </h2>
+
+		<p class="translate-cn">
+用普通数组作为数据源时，数组长度变化时，视图不会发生改变。<br>
+想要视图随着数组动态改变时，请使用ObservableArray作为数据源。
+		</p>
+		<p class="translate-jp hidden">
+データソースとして通常の配列を使用した場合、配列の要素数が変わってもビューは変更されません。<br>
+配列の要素に応じてビューを動的に変更したい場合は、データソースとしてObservableArrayを使用してください。
+		</p>	
+
+		<div class="box code"><span style="font-weight: bold; color: #008000; ">&lt;div</span> <span style="color: #7D9029; ">id=</span><span style="color: #BA2121; ">"bindtest"</span><span style="font-weight: bold; color: #008000; ">&gt;</span><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;div</span> <span style="color: #7D9029; ">data-h5-loop-context=</span><span style="color: #BA2121; ">"items"</span><span style="font-weight: bold; color: #008000; ">&gt;</span><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;div&gt;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ID: <span style="font-weight: bold; color: #008000; ">&lt;span</span> <span style="color: #7D9029; ">data-h5-bind=</span><span style="color: #BA2121; ">"id"</span><span style="font-weight: bold; color: #008000; ">&gt;&lt;/span&gt;</span> &nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">&lt;!-- items[i].id を意味する --&gt;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name: <span style="font-weight: bold; color: #008000; ">&lt;span</span> <span style="color: #7D9029; ">data-h5-bind=</span><span style="color: #BA2121; ">"name"</span><span style="font-weight: bold; color: #008000; ">&gt;&lt;/span&gt;</span> <span style="font-weight: italic; color: #408080; ">&lt;!-- items[i].name を意味する --&gt;</span><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;/div&gt;</span><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;/div&gt;</span><br><span style="font-weight: bold; color: #008000; ">&lt;/div&gt;</span></div>
+
+		<div class="box code"><span style="font-weight: bold; color: #008000; ">var</span> ary <span style="color: #666666; ">=</span> [{<br>&nbsp;&nbsp;&nbsp;&nbsp;id<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'001'</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;name<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'taro'</span><br>}, {<br>&nbsp;&nbsp;&nbsp;&nbsp;id<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'002'</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;name<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'jiro'</span><br>}];<br><br>h5.core.view.bind($(<span style="color: #BA2121; ">'#bindtest'</span>), {<br>&nbsp;&nbsp;&nbsp;&nbsp;items<span style="color: #666666; ">:</span> ary<br>});</div>
+
+		<p class="translate-cn">
+
+		</p>
+		<p class="translate-jp hidden">
+
+		</p>	
+
+		<p class="translate-cn">
+显示结果如下：
+		</p>
+		<p class="translate-jp hidden">
+出力結果は以下のようになります。
+		</p>	
+
+		<div class="box code">ID<span style="color: #666666; ">:</span> <span style="color: #666666; ">001</span> Name<span style="color: #666666; ">:</span> taro<br>ID<span style="color: #666666; ">:</span> <span style="color: #666666; ">002</span> Name<span style="color: #666666; ">:</span> jiro</div>
+
+		<h2 class="translate-cn"> ObservableArray的绑定 </h2>
+		<h2 class="translate-jp hidden"> ObservableArrayのバインド </h2>
+
+		<p class="translate-cn">
+和普通数组的绑定方式完全相同。
+		</p>
+		<p class="translate-jp hidden">
+配列の場合と同様にバインドすることができます。
+		</p>	
+
+		<div class="box code"><span style="font-weight: italic; color: #408080; ">// ObservableArrayの作成<br></span><span style="font-weight: bold; color: #008000; ">var</span> obsAry <span style="color: #666666; ">=</span> h5.core.data.createObservableArray();<br><br>obsAry.set(<span style="color: #666666; ">0</span>, { id<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'001'</span>, name<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'taro'</span> });<br>obsAry.set(<span style="color: #666666; ">1</span>, { id<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'002'</span>, name<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'jiro'</span> });<br><br>h5.core.view.bind($(<span style="color: #BA2121; ">'#bindtest'</span>), {<br>&nbsp;&nbsp;&nbsp;&nbsp;items<span style="color: #666666; ">:</span> obsAry<br>});</div>
+
+		<p class="translate-cn">
+
+		</p>
+		<p class="translate-jp hidden">
+
+		</p>	
+
+		<p class="translate-cn">
+HTML中的显示结果也和普通数组一样，<br>
+但是，使用ObservableArray，数组的变化可以自动反映到视图中。
+		</p>
+		<p class="translate-jp hidden">
+HTML、出力結果は配列の場合と同様です。<br>
+また、ObservableArrayを使った場合、配列への変更は自動的にビューに反映されます。
+		</p>	
+
+		<div class="box code">obsAry.push({<br>&nbsp;&nbsp;&nbsp;&nbsp;id<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'005'</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;name<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'goro'</span><br>});</div>
+
+		<p class="translate-cn">
+
+		</p>
+		<p class="translate-jp hidden">
+
+		</p>	
+
+		<p class="translate-cn">
+显示结果
+		</p>
+		<p class="translate-jp hidden">
+出力結果
+		</p>
+
+		<div class="box code">ID: 001 Name: taro<br>ID: 002 Name: jiro<br>ID: 005 Name: goro</div>
+
+		<p class="translate-cn">
+想要对数组元素进行操作是，请使用get()和set()方法。
+		</p>
+		<p class="translate-jp hidden">
+この配列の各要素を操作したい場合は、get(), set()メソッドを使用してください。添え字によるアクセスはできません
+		</p>	
+
+	</article>
+
+</script>

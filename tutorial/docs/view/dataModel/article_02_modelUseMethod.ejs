@@ -1,0 +1,159 @@
+<script type="text/ejs" id="article_02_modelUseMethod">
+
+
+<header class="main-header">
+			<span class="header-span">教程（基本篇）</span>
+			<h1 class="header-h1">02.基本使用方法</h1>
+		</header>
+		<article>
+			<h2 class="translate-cn">dataManager、dataModel、dataItem的关系</h2>
+			<h2 class="translate-jp hidden">データモデルマネージャ、データモデル、データアイテムの関係</h2>
+
+			<p class="translate-cn">
+			hifive的数据模型结构，有如下的三层结构组成。<br>
+每个dataManager管理多个dataModel，其中的每个dataModel中包含多个dataItem。<br>
+
+用数据库来类比的话，我们想成这样：<br>
+&nbsp;&nbsp;&nbsp;•	dataManager：数据库（一个实例）<br>
+&nbsp;&nbsp;&nbsp;•	dataModel：表<br>
+&nbsp;&nbsp;&nbsp;•	dataItem：每条记录<br>
+
+			</p>
+			<p class="translate-jp hidden"> hifiveのデータモデル機構は、以下のような3つの階層からなります。<br>
+データモデルマネージャ（以下「データモデルマネージャ」と略記）は複数のデータモデルを管理し、データモデルは複数のデータアイテムを持ちます。<br>
+データベースに例えると、<br>
+&nbsp;&nbsp;&nbsp;•	データモデルマネージャ：データベース（の1インスタンス）<br>
+&nbsp;&nbsp;&nbsp;•	データモデル：表<br>
+&nbsp;&nbsp;&nbsp;•	データアイテム：レコード<br>
+のように考えるとよいでしょう。
+ </p>
+
+			<p><img src="../img/dataModelER.png" alt="dataModelER.png"></p>
+
+
+			<p class="translate-cn">  使用数据模型结构的基本流程为：<br>
+　&nbsp;&nbsp;&nbsp;生成dataManager → 生成dataModel → 生成dataItem
+</p>
+			<p class="translate-jp hidden"> データモデル機構を使うときの基本的な流れは<br>
+　&nbsp;&nbsp;&nbsp;データモデルマネージャを生成 → データモデルを生成 → データアイテムを生成<br>
+となります。 </p>
+
+			<h2 class="translate-cn"> dataManager的生成 </h2>
+			<h2 class="translate-jp hidden"> データモデルマネージャの作成 </h2>
+
+			<p class="translate-cn">使用h5.core.data.createManager方法可生成dataManager。  </p>
+			<p class="translate-jp hidden"> データモデルマネージャはh5.core.data.createManagerを使って作成します。 </p>
+
+			<div class="box code"><span style="font-weight: bold; color: #008000; ">var</span> manager <span style="color: #666666; ">=</span> h5.core.data.createManager(<span style="color: #BA2121; ">'SampleManager'</span>, <span style="color: #BA2121; ">'sample'</span>);</div>
+
+			<p class="translate-cn"> createManager返回生成的dataManager。<br>
+			第一个参数指定了dataManager的名字，必须传入的参数。<br>
+第二个参数指定了dataManager所在的命名空间。dataManager公开在这个被指定的命名空间中。第二个参数省略时，manager被公开在全局环境下。<br>
+
+以上面的代码为例，dataManager作为sample.Maneger公开。实例与manager相同。
+ </p>
+			<p class="translate-jp hidden">createManagerはマネージャを作成して返します。<br>
+第1引数にデータモデルマネージャの名前を指定します。必須です。<br>
+第2引数にはデータモデルマネージャを公開する名前空間を文字列で指定します。指定された名前空間にデータモデルマネージャの名前でデータモデルマネージャを公開します。<br>空文字を指定した場合はwindow直下に公開します。第2引数を省略した場合はマネージャをグローバルに公開しません。<br>
+上のコードの例では、sample.SampleManagerにデータモデルマネージャが公開されます。インスタンスはmanagerと同じです。  </p>
+			
+			<h2 class="translate-cn"> dataModel的生成 </h2>
+			<h2 class="translate-jp hidden">データモデルの作成  </h2>
+
+			<p class="translate-cn">dataModel是通过使用dataManager的createModel方法来生成的。<br>
+			createMode()中传入的参数是数据模型描述器对象。<br>
+			描述器定义了这个数据模型中的各个dataItem包含哪些属性，以及属性的类型和检查规则。<br>
+			关于描述器的具体写法，我们在下一章节进行说明。  </p>
+			<p class="translate-jp hidden">データモデルは、データモデルマネージャのcreateModelを使って作成します。<br>
+createModel()は、引数にディスクリプタオブジェクトを取ります。<br>
+「ディスクリプタ」とは、このデータモデルに属する各データアイテムがどのようなプロパティを持っているか、またそのプロパティにはどのような型・制約があるかを記述したものです。<br>
+ディスクリプタの記述については、次の章(ディスクリプタの書き方)で説明します。  </p>
+
+			<div class="box code"><span style="font-weight: bold; color: #008000; ">var</span> model <span style="color: #666666; ">=</span> manager.createModel({<br>&nbsp;&nbsp;&nbsp;&nbsp;name<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'SampleModel'</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;schema<span style="color: #666666; ">:</span> {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id<span style="color: #666666; ">:</span> {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id<span style="color: #666666; ">:</span> <span style="font-weight: bold; color: #008000; ">true</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name<span style="color: #666666; ">:</span> {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'string'</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;point<span style="color: #666666; ">:</span> {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'integer'</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;defaultValue<span style="color: #666666; ">:</span> <span style="color: #666666; ">0</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>});</div>
+
+			<h2 class="translate-cn"> dataItem的删除 </h2>
+			<h2 class="translate-jp hidden"> データモデルの削除 </h2>
+
+			<p class="translate-cn"> 使用dropModel方法，可以从dataManager中删除dataModel。 </p>
+			<p class="translate-jp hidden"> データモデルマネージャからデータモデルを削除するには、dropModelメソッドを使用します。</p>
+
+			<div class="code"><span style="font-weight: italic; color: #408080; ">// 引数にデータモデル名を指定する<br></span>manager.dropModel(<span style="color: #BA2121; ">'SampleModel'</span>);</div>
+
+			<h2 class="translate-cn"> dataItem的生成 </h2>
+			<h2 class="translate-jp hidden"> データアイテムの生成 </h2>
+
+			<p class="translate-cn"> 使用dataModel中的create方法，可以生成dataItem。 </p>
+			<p class="translate-jp hidden"> データアイテムは、データモデルのcreateを使って作成します。 </p>
+
+			<div class="box code"><span style="font-weight: bold; color: #008000; ">var</span> item <span style="color: #666666; ">=</span> model.create({ &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// modelは先ほど作成したデータモデル<br></span> &nbsp;&nbsp;&nbsp;id<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'001'</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;name<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'田中太郎'</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;point<span style="color: #666666; ">:</span> <span style="color: #666666; ">50</span><br>});<br><br>item.get(<span style="color: #BA2121; ">'id'</span>) <span style="color: #666666; ">===</span> <span style="color: #BA2121; ">'001'</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// true<br></span>item.get(<span style="color: #BA2121; ">'name'</span>) <span style="color: #666666; ">===</span> <span style="color: #BA2121; ">'田中太郎'</span> &nbsp;<span style="font-weight: italic; color: #408080; ">// true<br></span>item.get(<span style="color: #BA2121; ">'point'</span>) <span style="color: #666666; ">===</span> <span style="color: #666666; ">50</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// true<br></span></div>
+
+			<p class="translate-cn">返回值为dataItem的实例。参数所指定的对象的值将全部存储在实例中。<br>
+			并且，省略了值的属性将被赋予默认值。<br>
+			若设定了defaultValue的值时默认值就为该值，未设定时数组的默认值则为一个空的ObservableArray对象，普通对象的默认值为null。但是名为"ID"的属性必须进行初始化。 </p>
+			<p class="translate-jp hidden"> 戻り値はデータアイテムインスタンスです。引数に指定したオブジェクト通りに値が格納されます。
+また、値の指定を省略したプロパティには、デフォルト値が入ります。
+デフォルト値はdefaultValueが指定されていればその値、指定されていない場合で、typeに配列が指定されている場合は空のObservableArrayインスタンス、そうでない場合はnullが格納されます。IDとして指定されたプロパティの値は省略できません。 </p>
+
+			<div class="box code"><span style="font-weight: bold; color: #008000; ">var</span> item2 <span style="color: #666666; ">=</span> model.create({<br>&nbsp;&nbsp;&nbsp;&nbsp;id<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'002'</span> &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// IDとして指定されたプロパティなので、値を省略できない<br></span>});<br><br>item2.get(<span style="color: #BA2121; ">'id'</span>) <span style="color: #666666; ">===</span> <span style="color: #BA2121; ">'002'</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// true<br></span>item2.get(<span style="color: #BA2121; ">'name'</span>) <span style="color: #666666; ">===</span> <span style="font-weight: bold; color: #008000; ">null</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// true<br></span>item2.get(<span style="color: #BA2121; ">'point'</span>) <span style="color: #666666; ">===</span> <span style="font-weight: bold; color: #008000; ">null</span> &nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// true<br></span></div>
+
+			<p class="translate-cn"> 给create方法传入对象数组时，会同时生成多个dataItem。 </p>
+			<p class="translate-jp hidden"> 
+create に配列で複数のオブジェクトを指定すると、複数のアイテムを同時に作成することができます。 </p>
+
+			<div class="code"><span style="font-weight: bold; color: #008000; ">var</span> items <span style="color: #666666; ">=</span> model.create([{ id<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'0001'</span> },{ id<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'0002'</span> }, { id<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'0003'</span> }]);<br><span style="font-weight: italic; color: #408080; ">// 戻り値は生成されたデータアイテムを要素に持つ配列<br></span></div>
+
+			<h2 class="translate-cn"> dataItem的取得 </h2>
+			<h2 class="translate-jp hidden"> データアイテムの取得 </h2>
+
+			<p class="translate-cn"> 使用get方法，可以从dataModel中获取已生成的dataItem。参数指定为想要获取的dataItem的ID值。 </p>
+			<p class="translate-jp hidden">  登録されたデータアイテムをデータモデルから取得するには、getメソッドを使います。引数に、取得したいデータアイテムのID属性の値を指定します。</p>
+
+			<div class="box code"><span style="font-weight: italic; color: #408080; ">// idが'001'であるデータアイテムを取得<br></span><span style="font-weight: bold; color: #008000; ">var</span> item <span style="color: #666666; ">=</span> model.get(<span style="color: #BA2121; ">'001'</span>);<br><br><span style="font-weight: italic; color: #408080; ">// idが'001','002'であるデータアイテムを取得<br>// 戻り値はデータアイテムの配列<br></span><span style="font-weight: bold; color: #008000; ">var</span> items <span style="color: #666666; ">=</span> model.get([<span style="color: #BA2121; ">'001'</span>, <span style="color: #BA2121; ">'002'</span>]);</div>
+
+			<h2 class="translate-cn"> dataItem的删除 </h2>
+			<h2 class="translate-jp hidden"> データアイテムの削除 </h2>
+
+			<p class="translate-cn"> 使用remove方法，可以从dataModel中删除掉dataItem。参数指定为想要删除的dataItem的ID值。 </p>
+			<p class="translate-jp hidden"> データアイテムの削除は、データモデルのremoveメソッドを使います。引数に削除したいデータアイテムのID属性の値を指定します。 </p>
+
+			<div class="box code"><span style="font-weight: italic; color: #408080; ">// idが'001'のデータアイテムを削除。<br>// 戻り値は削除されたデータアイテム。<br></span><span style="font-weight: bold; color: #008000; ">var</span> removedItem <span style="color: #666666; ">=</span> model.remove(<span style="color: #BA2121; ">'001'</span>);<br><br><span style="font-weight: italic; color: #408080; ">// idが'0001','0002','0003'のデータアイテムを削除。<br>// 戻り値は削除されたデータアイテムの配列<br></span><span style="font-weight: bold; color: #008000; ">var</span> removedItems <span style="color: #666666; ">=</span> model.remove([<span style="color: #BA2121; ">'0001'</span>, <span style="color: #BA2121; ">'0002'</span>, <span style="color: #BA2121; ">'0003'</span>]);</div>
+
+			<h2 class="translate-cn"> 获取dataItem的属性值 </h2>
+			<h2 class="translate-jp hidden"> データアイテムからプロパティの取得 </h2>
+
+			<p class="translate-cn"> 使用get方法，可以从dataItem中取得属性值。参数指定为想要获取的属性名。如果不设定参数的话，将取得一个包含所有属性的对象。该对象为属性的键值对。 </p>
+			<p class="translate-jp hidden">データアイテムから値を取得するにはget()メソッドを使います。引数にプロパティ名を指定すると、そのプロパティが持つ値が返ってきます。また、引数なしで呼び出すとデータアイテムの持つすべてのプロパティについて値が取得できるオブジェクトが返ってきます。プロパティ名がキー名、値がプロパティに対応する値を格納したオブジェクトです。 </p>
+
+			<div class="box code"><span style="font-weight: bold; color: #008000; ">var</span> item <span style="color: #666666; ">=</span> model.create({<br>&nbsp;&nbsp;&nbsp;&nbsp;id<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'001'</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;value1<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'AAA'</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;value2<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'BBB'</span><br>});<br><br>item.get(<span style="color: #BA2121; ">'id'</span>) <span style="color: #666666; ">===</span> <span style="color: #BA2121; ">'001'</span>; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// true<br></span>item.get(<span style="color: #BA2121; ">'value1'</span>) <span style="color: #666666; ">===</span> <span style="color: #BA2121; ">'AAA'</span>; &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// true<br></span>item.get(<span style="color: #BA2121; ">'value2'</span>) <span style="color: #666666; ">===</span> <span style="color: #BA2121; ">'BBB'</span>; &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// true<br></span><br><span style="font-weight: italic; color: #408080; ">// 引数なしでget<br></span><span style="font-weight: bold; color: #008000; ">var</span> itemValue <span style="color: #666666; ">=</span> item.get();<br><br>itemValue.id <span style="color: #666666; ">===</span> <span style="color: #BA2121; ">'001'</span>; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// true<br></span>itemValue.value1 <span style="color: #666666; ">===</span> <span style="color: #BA2121; ">'AAA'</span>; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// true<br></span>itemValue.value2 <span style="color: #666666; ">===</span> <span style="color: #BA2121; ">'BBB'</span>; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// true<br></span><br><span style="font-weight: italic; color: #408080; ">// 取得したオブジェクトを書き換えても元のデータアイテムは書き変わらない<br></span>itemValue.value1 <span style="color: #666666; ">=</span> <span style="color: #BA2121; ">'CCC'</span>;<br><br>item.get(<span style="color: #BA2121; ">'value1'</span>); &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// 'AAA'<br></span></div>
+
+			<h2 class="translate-cn">dataItem中值的设定  </h2>
+			<h2 class="translate-jp hidden">  データアイテムに値を格納</h2>
+
+			<p class="translate-cn"> 使用set方法，可以向dataItem中设定值。 </p>
+			<p class="translate-jp hidden"> データアイテムへの値の格納はset()メソッドを使います。 </p>
+
+			<div class="box code"><span style="font-weight: italic; color: #408080; ">// モデルの作成<br></span><span style="font-weight: bold; color: #008000; ">var</span> model <span style="color: #666666; ">=</span> manager.createModel({<br>&nbsp;&nbsp;&nbsp;&nbsp;name<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'SampleModel'</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;schema<span style="color: #666666; ">:</span> {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id<span style="color: #666666; ">:</span> {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id<span style="color: #666666; ">:</span> <span style="font-weight: bold; color: #008000; ">true</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val1<span style="color: #666666; ">:</span> <span style="font-weight: bold; color: #008000; ">null</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val2<span style="color: #666666; ">:</span> <span style="font-weight: bold; color: #008000; ">null</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val3<span style="color: #666666; ">:</span> <span style="font-weight: bold; color: #008000; ">null</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ary<span style="color: #666666; ">:</span> {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'any[]'</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>});<br><span style="font-weight: bold; color: #008000; ">var</span> item <span style="color: #666666; ">=</span> model.create({<br>&nbsp;&nbsp;&nbsp;&nbsp;id<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'001'</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;val1<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'v1'</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;val2<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'v2'</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;val3<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'v3'</span><br>});<br><br>item.set(<span style="color: #BA2121; ">'val1'</span>, <span style="color: #BA2121; ">'new value'</span>); <span style="font-weight: italic; color: #408080; ">// 第一引数にプロパティ名、第二引数にセットする値<br></span><br>item.set({ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// オブジェクトでまとめてセットすることも可能<br></span> &nbsp;&nbsp;&nbsp;val2<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'vv22'</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;val3<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'vv33'</span><br>});<br><br>item.set(<span style="color: #BA2121; ">'ary'</span>, [<span style="color: #BA2121; ">'A'</span>, <span style="color: #BA2121; ">'B'</span>]); &nbsp;<span style="font-weight: italic; color: #408080; ">// 配列をセット<br></span></div>
+
+			<p class="translate-cn">  </p>
+			<p class="translate-jp hidden">  </p>
+
+			<p class="translate-cn">
+type指定为数组的属性（如上面例子中的ary），必须用ObervableArray进行初始化设定（这个实例不能被更改）。<br>
+对数组里的元素进行操作时，请使用get和set方法。<br>
+例：<br>
+item.get('ary').set(0, 'a');     // ○  <br>
+// item.get('ary')[0] = 'a';     // この書き方はできない <br>
+同时，ObservableArray中也包含了和普通数组相同方法（splice、pop、push等）。<br>
+详细请参照ObservableArray的API。
+			</p>
+			<p class="translate-jp hidden"> 
+typeで配列指定したプロパティ(上の例での'ary')には、初期状態で必ずObservableArrayインスタンスがセットされます（このインスタンスを変更することはできません）。<br>この配列の各要素を操作したい場合は、get(), set()メソッドを使用してください。添え字によるアクセスはできません。<br>
+例：<br>
+item.get('ary').set(0, 'a');     // ○<br>
+// item.get('ary')[0] = 'a';     // この書き方はできない<br>
+なお、ObservableArrayは、通常の配列と同等のメソッド（splice、pop、push等）が用意されています。<br>
+詳しくはObservableArrayのAPIドキュメントを参照してください。
+			</p>
+
+		</article>
+</script>

@@ -1,0 +1,124 @@
+<script type="text/ejs" id="article_05_logic">
+<header class="main-header">
+			<span class="header-span">教程（基本篇）</span>
+			<h1 class="header-h1">05.Logic</h1>
+		</header>
+		<article>
+			<h2 class="translate-cn">概要</h2>
+			<h2 class="translate-jp hidden">概要</h2>
+
+			<p class="translate-cn">在hifive中，「逻辑」被定义为诸如：<br>
+   &nbsp;&nbsp;&nbsp;&nbsp;1.复杂的计算<br>
+   &nbsp;&nbsp;&nbsp;&nbsp;2.与服务器的通信<br>
+   &nbsp;&nbsp;&nbsp;&nbsp;3.本地DB操作<br>
+等只是进行纯粹的（不包含画面操作）通信和计算的东西。<br>
+通过整理和归纳这些「处理」、程序的可读性、可维护性、重用性和易测试性大大增强。<br>
+并且，通过使用下一节介绍的异步处理功能，能使得逻辑内部实现的变更不会影响到整个处理。
+</p>
+			<p class="translate-jp hidden"> hifiveでは、「ロジック」は<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1.複雑な計算<br>
+&nbsp;&nbsp;&nbsp;&nbsp;2.サーバとの通信<br>
+&nbsp;&nbsp;&nbsp;&nbsp;3.ローカルDB操作<br>
+などの純粋な（画面操作を含まない）通信・計算処理のみを記述するものと定めています。<br>
+「処理」だけをまとめることによって、可読性・保守性・再利用性・テスト容易性が向上します。
+また、次のステップで紹介する非同期処理機構を用いることで、<br>
+ロジックの内部実装の変更がコントローラに影響しないようにすることができます。 </p>
+
+			<h2 class="translate-cn"> 逻辑的定义  </h2>
+			<h2 class="translate-jp hidden"> ロジックの定義 </h2>
+
+			<p class="translate-cn">
+逻辑的定义如下：<br>
+1. 定义了程序的逻辑部分<br>
+ </p>
+			<p class="translate-jp hidden"> ロジックは以下のように定義します。<br>
+1. ロジックを定義する </p>
+
+			<div class="box code"><span style="font-weight: bold; color: #008000; ">var</span> dateLogic <span style="color: #666666; ">=</span> { &nbsp;<br> &nbsp;&nbsp;<br>&nbsp;&nbsp;__name<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'DateLogic'</span>, &nbsp;<br> &nbsp;&nbsp;<br>&nbsp;&nbsp;dateFormat<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'{0}年{1}月{2}日'</span>, &nbsp;<br> &nbsp;&nbsp;<br>&nbsp;&nbsp;getCurrent<span style="color: #666666; ">:</span> <span style="font-weight: bold; color: #008000; ">function</span>(time) { &nbsp;<br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">var</span> year <span style="color: #666666; ">=</span> time.getYear(); &nbsp;<br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">var</span> month <span style="color: #666666; ">=</span> time.getMonth() <span style="color: #666666; ">+</span> <span style="color: #666666; ">1</span>; &nbsp;<br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">var</span> date <span style="color: #666666; ">=</span> time.getDate(); &nbsp;<br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">return</span> <span style="font-weight: bold; color: #008000; ">this</span>._format(year, month, date); &nbsp;<br>&nbsp;&nbsp;}, &nbsp;<br> &nbsp;&nbsp;<br>&nbsp;&nbsp;_format<span style="color: #666666; ">:</span> <span style="font-weight: bold; color: #008000; ">function</span>(year, month, date) {<br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">return</span> h5.u.str.format(<span style="font-weight: bold; color: #008000; ">this</span>.dateFormat, year, month, date);<br>&nbsp;&nbsp;}<br>};</div>
+
+			<p class="translate-cn"> <strong>__name</strong><br>定义了该逻辑程序的名称。与控制器名相同，是必须要定义的属性。未定义时，会发生错误。 </p>
+			<p class="translate-jp hidden"> <strong>__name</strong><br>ロジック名を指定します。コントローラと同様必須プロパティであり、記述がない場合エラーが発生します。  </p>
+
+			<p class="translate-cn"> <strong>publicMethod</strong> <br>公共方法的名称开头禁用”_” </p>
+			<p class="translate-jp hidden"> <strong>publicMethod</strong><br>
+パブリックメソッドは_以外の文字で始まるようにします。  </p>
+
+			<p class="translate-cn"> <strong>privateMethod</strong> <br> 私有方法的名称开头请使用”_” </p>
+			<p class="translate-jp hidden"> <strong>privateMethod</strong> <br>
+プライベートメソッドは_で始まるようにします。 </p>
+
+			<p class="translate-cn"> 2. 请在控制器中声明 </p>
+			<p class="translate-jp hidden">2. コントローラでロジックを宣言する  </p>
+
+			<div class="code"><span style="font-weight: bold; color: #008000; ">var</span> dateController <span style="color: #666666; ">=</span> { &nbsp;<br>&nbsp;&nbsp;__name<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'DateController'</span>, &nbsp;<br> &nbsp;&nbsp;<br>&nbsp;&nbsp;dateLogic<span style="color: #666666; ">:</span> dateLogic, &nbsp;<br> &nbsp;&nbsp;<br>&nbsp;&nbsp;__ready<span style="color: #666666; ">:</span> <span style="font-weight: bold; color: #008000; ">function</span>(context) { &nbsp;<br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">var</span> current <span style="color: #666666; ">=</span> <span style="font-weight: bold; color: #008000; ">this</span>.dateLogic.getCurrent(<span style="font-weight: bold; color: #008000; ">new</span> <span style="color: #008000; ">Date</span>()); &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;alert(current); &nbsp;<br>&nbsp;&nbsp;} &nbsp;<br>};</div>
+
+			<p class="translate-cn"> 请声明要在该控制器中使用的逻辑。后缀一定要为Logic。<br>
+声明的逻辑通过框架会被自动“逻辑化”，成为hifive中的逻辑对象。
+</p>
+			<p class="translate-jp hidden">このコントローラで使用するロジックを宣言します。サフィックスを必ずLogicにする必要があります。<br>
+指定されたロジックはフレームワークによって自動的に"ロジック化"され、hifiveのロジックオブジェクトになります。  </p>
+	
+			<h2 class="translate-cn"> 实例 </h2>
+			<h2 class="translate-jp hidden"> 実装例 </h2>
+
+			<p class="translate-cn"> 1. 编写HTML。 </p>
+			<p class="translate-jp hidden"> 1. HTMLを用意します。 </p>
+
+			<div class="code"><span style="color: #BC7A00; ">&lt;!doctype html&gt;</span> &nbsp;<br><span style="font-weight: bold; color: #008000; ">&lt;html&gt;</span> &nbsp;<br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;head&gt;</span> &nbsp;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;meta</span> <span style="color: #7D9029; ">charset=</span><span style="color: #BA2121; ">"UTF-8"</span><span style="font-weight: bold; color: #008000; ">&gt;</span> &nbsp;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;script&nbsp;</span><span style="color: #7D9029; ">src=</span><span style="color: #BA2121; ">"jquery.js"</span><span style="font-weight: bold; color: #008000; ">&gt;&lt;/script&gt;</span> &nbsp;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;script&nbsp;</span><span style="color: #7D9029; ">src=</span><span style="color: #BA2121; ">"jquery.blockUI.js"</span><span style="font-weight: bold; color: #008000; ">&gt;&lt;/script&gt;</span> &nbsp;<br> &nbsp;&nbsp;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;script&nbsp;</span><span style="color: #7D9029; ">src=</span><span style="color: #BA2121; ">"ejs-1.0.h5mod.js"</span><span style="font-weight: bold; color: #008000; ">&gt;&lt;/script&gt;</span> &nbsp;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;script&nbsp;</span><span style="color: #7D9029; ">src=</span><span style="color: #BA2121; ">"h5.js"</span><span style="font-weight: bold; color: #008000; ">&gt;&lt;/script&gt;</span> &nbsp;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">&lt;!-- ここで作成したjsファイルを読み込む --&gt;</span> &nbsp;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;script&nbsp;</span><span style="color: #7D9029; ">src=</span><span style="color: #BA2121; ">"step6.js"</span><span style="font-weight: bold; color: #008000; ">&gt;&lt;/script&gt;</span> &nbsp;<br> &nbsp;&nbsp;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;title&gt;</span>hifive Step6<span style="font-weight: bold; color: #008000; ">&lt;/title&gt;</span> &nbsp;<br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;/head&gt;</span> &nbsp;<br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;body&gt;</span> &nbsp;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;div</span> <span style="color: #7D9029; ">id=</span><span style="color: #BA2121; ">"container"</span><span style="font-weight: bold; color: #008000; ">&gt;</span> &nbsp;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;input</span> <span style="color: #7D9029; ">type=</span><span style="color: #BA2121; ">"text"</span> <span style="color: #7D9029; ">id=</span><span style="color: #BA2121; ">"left"</span> <span style="color: #7D9029; ">value=</span><span style="color: #BA2121; ">""</span> <span style="font-weight: bold; color: #008000; ">/&gt;</span> + &nbsp;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;input</span> <span style="color: #7D9029; ">type=</span><span style="color: #BA2121; ">"text"</span> <span style="color: #7D9029; ">id=</span><span style="color: #BA2121; ">"right"</span> <span style="color: #7D9029; ">value=</span><span style="color: #BA2121; ">""</span> <span style="font-weight: bold; color: #008000; ">/&gt;</span> &nbsp;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;input</span> <span style="color: #7D9029; ">type=</span><span style="color: #BA2121; ">"button"</span> <span style="color: #7D9029; ">id=</span><span style="color: #BA2121; ">"calc"</span> <span style="color: #7D9029; ">value=</span><span style="color: #BA2121; ">"="</span> <span style="font-weight: bold; color: #008000; ">/&gt;</span> &nbsp;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;span</span> <span style="color: #7D9029; ">id=</span><span style="color: #BA2121; ">"result"</span><span style="font-weight: bold; color: #008000; ">&gt;</span> <span style="font-weight: bold; color: #008000; ">&lt;/span&gt;</span> &nbsp;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;/div&gt;</span> &nbsp;<br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;/body&gt;</span> &nbsp;<br><span style="font-weight: bold; color: #008000; ">&lt;/html&gt;</span>&nbsp;&nbsp;</div>
+
+			<p class="translate-cn"> 2. 编写step6.js文件。 </p>
+			<p class="translate-jp hidden"> 2. step6.jsというファイルを作成します。 </p>
+
+			<div class="code">$(<span style="font-weight: bold; color: #008000; ">function</span>() { &nbsp;<br> &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// ロジックを定義 &nbsp;<br></span> &nbsp;&nbsp;&nbsp;calcLogic <span style="color: #666666; ">=</span> { &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;__name<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'CalcLogic'</span>, &nbsp;<br> &nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;add<span style="color: #666666; ">:</span> <span style="font-weight: bold; color: #008000; ">function</span>(left, right) { &nbsp;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">return</span> left <span style="color: #666666; ">+</span> right; &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;}; &nbsp;<br> &nbsp;&nbsp;<br> &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// コントローラの元となるオブジェクトを作成 &nbsp;<br></span> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">var</span> controller <span style="color: #666666; ">=</span> { &nbsp;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// コントローラ名 &nbsp;<br></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;__name<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'CalcController'</span>, &nbsp;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// ロジックの宣言 &nbsp;<br></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;calcLogic<span style="color: #666666; ">:</span> calcLogic, &nbsp;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #BA2121; ">'#calc click'</span><span style="color: #666666; ">:</span> <span style="font-weight: bold; color: #008000; ">function</span>() { &nbsp;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// 左辺の値を取得 &nbsp;<br></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">var</span> left <span style="color: #666666; ">=</span> <span style="font-weight: bold; color: #008000; ">this</span>.$find(<span style="color: #BA2121; ">'#left'</span>).val(); &nbsp;<br><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// StringからNumberへ変換。変換に失敗したら終了<br></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;left <span style="color: #666666; ">=</span> <span style="color: #008000; ">parseInt</span>(left);<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">if</span> (<span style="color: #008000; ">isNaN</span>(left)) {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">return</span>;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// 右辺の値を取得 &nbsp;<br></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">var</span> right <span style="color: #666666; ">=</span> <span style="font-weight: bold; color: #008000; ">this</span>.$find(<span style="color: #BA2121; ">'#right'</span>).val(); &nbsp;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// StringからNumberへ変換。変換に失敗したら終了<br></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;right <span style="color: #666666; ">=</span> <span style="color: #008000; ">parseInt</span>(right);<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">if</span> (<span style="color: #008000; ">isNaN</span>(right)) {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">return</span>;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <br><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// CalcLogicのaddメソッドを呼び出す &nbsp;<br></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">var</span> ret <span style="color: #666666; ">=</span> <span style="font-weight: bold; color: #008000; ">this</span>.calcLogic.add(left, right); &nbsp;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// 結果を画面に出力 &nbsp;<br></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">this</span>.$find(<span style="color: #BA2121; ">'#result'</span>).html(ret); &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;}; &nbsp;<br> &nbsp;&nbsp;&nbsp;<br> &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// id="container"である要素にコントローラをバインド &nbsp;<br></span> &nbsp;&nbsp;&nbsp;h5.core.controller(<span style="color: #BA2121; ">'#container'</span>, controller); &nbsp;<br>});&nbsp;&nbsp;</div>
+
+			<p class="translate-cn"> 3. 在浏览器中打开HTML。 </p>
+			<p class="translate-jp hidden">3. HTMLをブラウザで表示させます。  </p>
+
+			<p class="translate-cn"> 4. 在左边和右边输入数字，然后点击按钮。 </p>
+			<p class="translate-jp hidden"> 4. 左辺、右辺に数値を入力し=ボタンをクリックします。 </p>
+
+			<h2 class="translate-cn">通过“逻辑化”而被追加的成员变量和方法 </h2>
+			<h2 class="translate-jp hidden"> ロジック化されることによって追加されるメンバ、メソッド </h2>
+
+			<h4 class="translate-cn"> deferred </h4>
+			<h4 class="translate-jp hidden"> deferred</h4>
+
+			<p class="translate-cn"> deferred() <br>
+返回一个Deferred对象（延迟对象）。<br>
+下一步来说明使用Deferred的实际例子。<br>
+ </p>
+			<p class="translate-jp hidden">  deferred()  <br>
+Deferredオブジェクトを返します。<br>
+Deferredを使った実装例は次のステップで説明します。</p>
+
+
+			<h2 class="translate-cn"> 常见问题 </h2>
+			<h2 class="translate-jp hidden"> よくある質問 </h2>
+
+			<h4 class="translate-cn">  为什么在逻辑中不能进行画面操作？ </h4>
+			<h4 class="translate-jp hidden"> どうしてロジックで画面操作をしてはいけないの？ </h4>
+
+			<p class="translate-cn"> 在逻辑中进行的处理，也就是通信和计算，如果与画面更新处理混在一起的话，当想要改变视图（标签）构造、稍微修改下样式的时候，我们就不得不去阅读和理解这一部分的JavaScript代码。<br>
+  相反，处理程序的改变也导致混入了画面操作，程序的可维护性变得非常差。<br>
+  再者，由jQuery等生成的复杂标签结构最终将变成什么样，也会变得十分的难以理解，这也是可维护性下降的原因。<br>
+  因此，<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;虽然刚开始写的时候会有些麻烦<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;虽然从设计的角度说在逻辑内可以对视图进行操作<br>
+  但是，还是强烈推荐遵循hifive框架代码的规则，将逻辑与画面操作分离开来。<br>
+  并且，为了让视图操作变得更加轻松，hifive也提供了模板引擎。<br>
+ </p>
+			<p class="translate-jp hidden"> ロジックで行うような処理、すなわち通信・計算処理と画面更新処理を混ぜてしまうと、<br>
+ビュー（タグ）の構造を変えたい、スタイルを少し変えたいといったときにJavaScriptコードまで<br>
+読み解いて手を入れなければならなくなります。<br>
+逆に、処理が変わった時に画面操作が混ざってしまっているため、保守性が低下してしまいます。<br>
+さらに、jQuery等で複雑なタグ構造を生成すると最終的にタグがどうなるかが<br>
+非常にわかりにくくなってしまい、これもメンテナンス性を落とす原因となります。<br>
+そのため、<br>
+&nbsp;&nbsp;&nbsp;&nbsp;最初に書くときにはほんの少し手間はかかるかもしれませんが<br>
+&nbsp;&nbsp;&nbsp;&nbsp;仕様上はロジック内でビューを操作することもできてしまいますが<br>
+指針に従って処理を分離しておくことを強くお勧めしています。<br>
+また、ビュー操作を楽にするために、テンプレートエンジンなども提供しています。
+ </p>
+
+		</article>
+</script>

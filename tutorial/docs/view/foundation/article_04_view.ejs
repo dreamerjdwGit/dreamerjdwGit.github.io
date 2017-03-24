@@ -1,0 +1,275 @@
+<script type="text/ejs" id="article_04_view">
+<header class="main-header">
+			<span class="header-span">教程（基本篇）</span>
+			<h1 class="header-h1">04.View（视图）</h1>
+		</header>
+		<article>
+			<h2 class="translate-cn">概要</h2>
+			<h2 class="translate-jp hidden">概要</h2>
+
+			<p class="translate-cn">JavaScript可以从程序处理的任何地方对视图进行操作（画面操作，也称为DOM操作）。
+但是，这种具有很强灵活性的反面在于，很难理解程序的什么部分对应了什么操作，在进行维护的阶段，画面的些许变动都变得十分困难。
+</p>
+			<p class="translate-jp hidden">JavaScriptでは処理のどこからでもビュー操作（画面操作、DOM操作 とも言います）を行うことができます。
+これは柔軟に機能を記述できる反面、どこでどんな処理をしているかがわかりにくくなり、保守フェーズにおける、ちょっとした画面の変更を困難にしがちです。</p>
+
+			<p class="translate-cn">而在hifive中规定了：原则上，视图的操作只能在控制器中进行。
+遵守了此规定，我们将十分清楚视图操作一定是在控制器中进行的。因此，在别人接手管理和维护程序时，很容易地就知道从何处入手。
+</p>
+			<p class="translate-jp hidden">hifiveでは「ビュー操作は原則としてコントローラ内にのみ記述すること」と定めています。
+これを守ることで「ビュー操作を行っているのは必ずコントローラである」ことが明らかになり、
+保守・引継時にどこに手を付ければよいかがわかりやすくなります。</p>
+
+			<p class="translate-cn">除此之外，为生成视图，hifive还引入了EJS这样的模板引擎。
+通过利用模板引擎，对拥有复杂构造的标签，可以从视觉上进行编写。代码的可维护性和可读性也会大大增强。
+</p>
+			<p class="translate-jp hidden">また、hifiveでは、ビュー生成のためにEJSというテンプレートエンジンを導入しています。
+テンプレートエンジンを利用することで、複雑な構造を持つタグを視覚的に編集することができるため、
+保守性や可読性の向上が期待できます。</p>
+
+			<h2 class="translate-cn">对于单个元素的操作</h2>
+			<h2 class="translate-jp hidden">単一要素に対する操作</h2>
+
+			<p class="translate-cn">读取标签input的value值、在标签div中插入文字等单个元素的读写操作使用到了jQuery。</p>
+			<p class="translate-jp hidden">inputタグにセットされた値を読み取りたい・divタグの中に文字列を流し込みたい、など、
+単一の要素の読み書きを行いたい場合はjQueryを使用します。</p>
+
+			<p class="translate-cn">  但是，在选择DOM元素时，请使用控制器中的this.$find()方法，而不要直接使用jQuery中的$()方法。</p>
+			<p class="translate-jp hidden"> ただし、DOM要素を選択するとき、jQueryの「$()」をそのまま使用するのではなく、コントローラ内で使える
+this.$find()メソッドを使用してください。 </p>
+
+			<p class="translate-cn"> 此方法只会在绑定的元素下去检索要选择的元素，因此可以防止对控制器范围外元素的误操作。 </p>
+			<p class="translate-jp hidden"> このメソッドはコントローラがバインドされた要素配下から要素を検索するので、
+コントローラ（がバインドされた要素）の範囲外の要素を誤って操作することを防ぎます。
+ </p>
+
+			<p class="translate-cn"> 想要对控制器绑定元素自身进行操作的时候怎么做？<br>
+控制器中包含了一个叫rootElement的实例，使用该实例可以对绑定的元素本身进行操作。
+使用$(this.rootElement)方法，绑定的元素本身可以使用各种jQuery的方法操作。
+ </p>
+			<p class="translate-jp hidden"> コントローラがバインドされている要素自身を対象にしたい場合は？<br>
+コントローラのインスタンスにはrootElementというプロパティがあり、
+これを使うことでバインドされている要素を参照できます。
+$(this.rootElement) とすることで、バインドされている要素自身をjQueryで操作できます。 </p>
+
+			<h4 class="translate-cn">例子</h4>
+			<h4 class="translate-jp hidden">操作例</h4>
+
+			<p class="translate-cn">※因为this.$find()方法的值为jQuery对象（选择器所指定的元素），所以可以对该值进行各种jQuery的方法操作。</p>
+			<p class="translate-jp hidden">※this.$find()の戻り値は「セレクタで指定された要素が選択された状態のjQueryオブジェクト」なので、
+選択した後は通常のjQueryと同様に要素を操作することができます。</p>
+
+
+			<table><tbody><tr><th scope="col">操作内容</th><th scope="col">実装方法</th></tr><tr><td>要素生成</td><td>$(タグ)</td></tr><tr><td>要素選択</td><td>this.$find(セレクタ);</td></tr><tr><td>要素削除</td><td>this.$find(セレクタ).remove();</td></tr><tr><td>要素の内容の更新</td><td>this.$find(セレクタ).html(element);<br>this.$find(セレクタ).text(value);<br>this.$find(セレクタ).val(value);</td></tr></tbody></table>
+
+			<p class="translate-cn" style="color:red;">※this指向controller本身。</p>
+			<p class="translate-jp hidden" style="color:red;">※thisはコントローラ自身を指します。</p>
+
+			<h2 class="translate-cn"> 生成复杂的视图（模板使用） </h2>
+			<h2 class="translate-jp hidden">複雑なビューの生成（テンプレートの使用）</h2>
+
+			<h4 class="translate-cn"> 基本结构 </h4>
+			<h4 class="translate-jp hidden">基本構文</h4>
+
+			<p class="translate-cn">作成由多个标签所构成的复杂视图时，可以使用视图模板。<br>
+一个模板被记录在一个&lt;script&gt; type="text/ejs"&gt;&lt;/script&gt;标签中。<br>
+每个模板都拥有唯一的ID（设置&lt;script&gt;标签中的id属性）。
+</p>
+			<p class="translate-jp hidden">複数のタグで構成される複雑なビューを作成する場合は、ビューテンプレートを使用します。<br>
+1つのテンプレートは&lt;script type="text/ejs"&gt;&lt;/script&gt;で囲んだ中に記述します。<br>
+各テンプレートには一意なIDをつける必要があります（&lt;script&gt;タグのid属性としてセットします）。</p>
+
+			<p class="translate-cn">EJS的语法和JSP非常地相似。<br>
+JavaScript代码的开始为&#91;%，结束为%&#93;。<br>&#91;% %&#93;可以写在任何的地方。
+</p>
+			<p class="translate-jp hidden"> EJSの構文は、JSPに非常によく似ています。<br>
+JavaScriptコードの開始は&#91;%で、終了は%]で表します。&#91;% %&#93;は任意の場所に書くことができます。<br>
+中にはJavaScriptコードを記述することができるので、forループやif分岐などを使用して表示をカスタマイズできます。 </p>
+
+			<div class="box code">&lt;script type="text/ejs" id="list"&gt;<br>&nbsp;&nbsp;&#91;% for (var i = 1, len = num + 1; i &lt; len; i++) { %]<br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;span style="&#91;%= 'color: ' + (i % 2 === 0 ? 'blue;': 'red;') %]"&gt;&#91;%= i %]&lt;/span&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/li&gt;<br>&nbsp;&nbsp;&#91;% } %]<br>&lt;/script&gt;</div>
+
+			<h4 class="translate-cn">定义模板的地方</h4>
+			<h4 class="translate-jp hidden"> テンプレートの定義場所 </h4>
+
+			<p class="translate-cn">模板可以在下面两处进行定义。<br>&nbsp;&nbsp;&nbsp;&nbsp;1.在单独的文件中进行描述<br>&nbsp;&nbsp;&nbsp;&nbsp;2.在HTML中直接描述</p>
+			<p class="translate-jp hidden">テンプレートは以下の2箇所で定義できます。<br>&nbsp;&nbsp;&nbsp;&nbsp;1.独立したファイルに記述<br>
+&nbsp;&nbsp;&nbsp;&nbsp;2.HTML内に直接記述</p>
+
+			<p class="translate-cn"> 一般来说推荐使用单独文件来进行描述，<br>但是下面两种情况更适合在HTML中直接进行定义：<br> &nbsp;&nbsp;&nbsp;该模板只在特定的画面中使用<br>&nbsp;&nbsp;&nbsp;希望将HTTP请求数最小化<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;若是单独文件会发出新的HTTP请求。<br>把模板定义在单独文件中时，推荐文件后缀名使用.ejs</p>
+			<p class="translate-jp hidden">基本的には独立したファイルに記述することをお勧めしますが、<br>&nbsp;&nbsp;そのテンプレートを特定の画面（HTML）でしか使用しない<br>&nbsp;&nbsp;HTTPリクエストの回数を最小限にしたい<br>&nbsp;&nbsp;&nbsp;&nbsp;独立したファイルにした場合ファイルごとにHTTPリクエストが発生します<br>などの場合には、HTML内に直接記述する方式を検討するのもよいでしょう。<br>なお、テンプレートを独立したファイルにする場合、拡張子は「.ejs」にすることをお勧めします。</p>
+
+			<h4 class="translate-cn">模板文件的读取</h4>
+			<h4 class="translate-jp hidden">テンプレートファイルのロード</h4>
+
+			<p class="translate-cn">如果模板定义为外部文件，可以使用控制器的_templates属性，只用预先写好模板文件的URL地址，控制器化开始时会自动读取模板。
+  因为控制器化是在指定模板文件读取后才实际运行的，所以模板中元素绑定的事件句柄等处理也能运行的。
+</p>
+			<p class="translate-jp hidden">テンプレートを外部ファイルとして定義した場合、それを使用するコントローラの__templatesプロパティで
+テンプレートファイルのURLを書いておくと、コントローラ化を行うときに自動的に読み込まれます。
+コントローラは指定されたテンプレートファイルが読み込まれた後に動作を開始するので、
+イベントハンドラなどでテンプレートを使用するときには必ず利用可能です。</p>
+
+			<p class="translate-cn"> 如果是直接写在HTML中，那么任何时候都可以使用。
+  （不用写_templates属性）
+</p>
+			<p class="translate-jp hidden">HTMLに直接記述した場合は、いつでも使用することができます（__templatesプロパティを書く必要はありません）。</p>
+
+			<h4 class="translate-cn">语法检查用的调试库的导入</h4>
+			<h4 class="translate-jp hidden">構文チェック用デバッグライブラリの導入</h4>
+
+			<p class="translate-cn">在下载读取有错误的模板代码时，通常无法知道是在模板的什么位置发生了错误。<br>
+为此，这里也提供了输出错误信息内容和发生行数的类库。
+</p>
+			<p class="translate-jp hidden">記述に誤りがあるテンプレートをロードした場合、通常テンプレートのどの箇所でエラーが起きているのかエラー内容から把握できません。<br>
+そこで、 エラー発生時に詳細なエラー内容とエラー行数を出力するライブラリがEJSには用意されています。
+</p>
+
+			<p class="translate-cn">可以从下面的地址下载：<br>&nbsp;&nbsp;&nbsp;<a href="http://embeddedjavascript.googlecode.com/files/ejs_fulljslint.js">http://embeddedjavascript.googlecode.com/files/ejs_fulljslint.js</a> </p>
+			<p class="translate-jp hidden"> 以下のサイトからダウンロードして下さい。<br>&nbsp;&nbsp;&nbsp;<a href="http://embeddedjavascript.googlecode.com/files/ejs_fulljslint.js">http://embeddedjavascript.googlecode.com/files/ejs_fulljslint.js</a> </p>
+
+			<p class="translate-cn"> 使用方法请参考下面的网址。<br>&nbsp;&nbsp;&nbsp;<a>EJS - google code </a><br>&nbsp;&nbsp;&nbsp;<a>EJS公式HP</a> </p>
+			<p class="translate-jp hidden">使用方法については、以下のサイトを参照下さい。<br>&nbsp;&nbsp;&nbsp;<a>EJS - google code </a><br>&nbsp;&nbsp;&nbsp;<a>EJS公式HP</a></p>
+
+			<h4 class="translate-cn">对模板的操作</h4>
+			<h4 class="translate-jp hidden">テンプレートに対する操作</h4>
+
+			<p class="translate-cn">使用模板并将其显示到画面时，可以使用控制器中this.view对象的以下方法。<br>
+※this指向该控制器本身。<br>
+（以下方法只能在控制器中使用。）
+</p>
+			<p class="translate-jp hidden">テンプレートを使用し画面に反映させるときは、コントローラ内でthis.view以下の次のようなメソッドを使用します。<br>
+※thisはコントローラ自身を指します。<br>
+（下記のメソッドはコントローラ内で使用可能です。）</p>
+
+			<table><tbody><tr><th scope="col">メソッド名</th><th scope="col">説明</th></tr><tr><td>update(対象要素のオブジェクトまたはセレクタ, テンプレートID, パラメータ)</td><td>対象要素の中身を、指定されたテンプレートで更新する。</td></tr><tr><td>append(対象要素のオブジェクトまたはセレクタ, テンプレートID, パラメータ)</td><td>対象要素の末尾に、指定されたテンプレートを挿入する。</td></tr><tr><td>prepend(対象要素のオブジェクトまたはセレクタ, テンプレートID, パラメータ)</td><td>対象要素の先頭に、指定されたテンプレートを挿入する。</td></tr></tbody></table>
+
+
+			<p class="translate-cn">不直接将其显示到画面，而是想要取得该模板下的标签文本（代码）时，<br>请使用this.view.get(模板ID, 置换参数)方法。</p>
+			<p class="translate-jp hidden">直接画面に反映させずテンプレートを適用したタグ文字列を（コードで）受け取りたい場合は、<br>
+this.view.get(テンプレートID, 置換パラメータ)を使用してください。</p>
+
+			<h4 class="translate-cn"> 实例 </h4>
+			<h4 class="translate-jp hidden">実装例</h4>
+
+			<p class="translate-cn"> 1.编写HTML </p>
+			<p class="translate-jp hidden">1.HTMLを用意します。</p>
+
+			<div class="box code"><span style="color: #BC7A00; ">&lt;!doctype html&gt;</span><br><span style="font-weight: bold; color: #008000; ">&lt;html&gt;</span><br>&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;head&gt;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;meta</span> <span style="color: #7D9029; ">charset=</span><span style="color: #BA2121; ">"UTF-8"</span><span style="font-weight: bold; color: #008000; ">&gt;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;script&nbsp;</span><span style="color: #7D9029; ">src=</span><span style="color: #BA2121; ">"jquery.js"</span><span style="font-weight: bold; color: #008000; ">&gt;&lt;/script&gt;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;script&nbsp;</span><span style="color: #7D9029; ">src=</span><span style="color: #BA2121; ">"ejs-1.0.h5mod.js"</span><span style="font-weight: bold; color: #008000; ">&gt;&lt;/script&gt;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;script&nbsp;</span><span style="color: #7D9029; ">src=</span><span style="color: #BA2121; ">"h5.js"</span><span style="font-weight: bold; color: #008000; ">&gt;&lt;/script&gt;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">&lt;!-- ここで作成したjsファイルを読み込む --&gt;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;script&nbsp;</span><span style="color: #7D9029; ">src=</span><span style="color: #BA2121; ">"step5.js"</span><span style="font-weight: bold; color: #008000; ">&gt;&lt;/script&gt;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;title&gt;</span>hifive ビュー操作<span style="font-weight: bold; color: #008000; ">&lt;/title&gt;</span><br>&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;/head&gt;</span><br>&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;body&gt;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;div</span> <span style="color: #7D9029; ">id=</span><span style="color: #BA2121; ">"container"</span><span style="font-weight: bold; color: #008000; ">&gt;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;div&gt;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1から入力した数値までを奇数は<span style="font-weight: bold; color: #008000; ">&lt;span</span> <span style="color: #7D9029; ">style=</span><span style="color: #BA2121; ">"color: red;"</span><span style="font-weight: bold; color: #008000; ">&gt;</span>赤色<span style="font-weight: bold; color: #008000; ">&lt;/span&gt;</span>で、<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;偶数は<span style="font-weight: bold; color: #008000; ">&lt;span</span> <span style="color: #7D9029; ">style=</span><span style="color: #BA2121; ">"color: blue;"</span><span style="font-weight: bold; color: #008000; ">&gt;</span>青色<span style="font-weight: bold; color: #008000; ">&lt;/span&gt;</span>で画面に出力します。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;/div&gt;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;input</span> <span style="color: #7D9029; ">type=</span><span style="color: #BA2121; ">"text"</span> <span style="color: #7D9029; ">id=</span><span style="color: #BA2121; ">"to"</span> <span style="color: #7D9029; ">value=</span><span style="color: #BA2121; ">""</span> <span style="font-weight: bold; color: #008000; ">/&gt;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;input</span> <span style="color: #7D9029; ">type=</span><span style="color: #BA2121; ">"button"</span> <span style="color: #7D9029; ">id=</span><span style="color: #BA2121; ">"output"</span> <span style="color: #7D9029; ">value=</span><span style="color: #BA2121; ">"出力"</span> <span style="font-weight: bold; color: #008000; ">/&gt;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;ul</span> <span style="color: #7D9029; ">id=</span><span style="color: #BA2121; ">"list"</span><span style="font-weight: bold; color: #008000; ">&gt;&lt;/ul&gt;</span> <span style="font-weight: italic; color: #408080; ">&lt;!-- ここにテンプレート出力が流し込まれる --&gt;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;/div&gt;</span><br>&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;/body&gt;</span><br><span style="font-weight: bold; color: #008000; ">&lt;/html&gt;</span></div>
+
+			<p class="translate-cn"> 2.编写list.ejs文件 </p>
+			<p class="translate-jp hidden"> 2.list.ejsファイルを作成します。 </p>
+
+			<div class="box code">&lt;script type="text/ejs" id="list"&gt;<br>&#91;% for (var i = 1, len = num + 1; i &lt; len; i++) { %]<br>&lt;li&gt;<br>&nbsp;&nbsp;&lt;span style="&#91;%= 'color: ' + (i % 2 === 0 ? 'blue;': 'red;') %]"&gt;&#91;%= i %]&lt;/span&gt;<br>&lt;/li&gt;<br>&#91;% } %]<br>&lt;/script&gt;</div>
+
+			<p class="translate-cn">※&#91;script&#93;标签所指定的List是调用this.view.get()方法时必须的模板ID。</p>
+			<p class="translate-jp hidden">※&#91;script&#93;タグのidで指定したlistが、this.view.get()で呼び出すときに必要なテンプレートIDとなります。</p>
+
+			<p class="translate-cn"> 3.编写step5.js文件。 </p>
+			<p class="translate-jp hidden">3.step5.jsファイルを作成します。</p>
+
+			<div class="box code">$(<span style="font-weight: bold; color: #008000; ">function</span>() {<br> &nbsp;<span style="font-weight: italic; color: #408080; ">// コントローラの元となるオブジェクトを作成<br></span> &nbsp;<span style="font-weight: bold; color: #008000; ">var</span> controller <span style="color: #666666; ">=</span> {<br><br> &nbsp;<span style="font-weight: italic; color: #408080; ">// コントローラ名を設定<br></span> &nbsp;__name<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'NumListController'</span>,<br><br> &nbsp;<span style="font-weight: italic; color: #408080; ">// 使用するテンプレートのパスを書く<br></span> &nbsp;__templates<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'list.ejs'</span>, &nbsp;<span style="font-weight: italic; color: #408080; ">// 複数ejsファイルを呼び出す場合は、配列で指定してください。<br></span><br> &nbsp;<span style="font-weight: italic; color: #408080; ">// id=outputが押された時のイベントハンドラ<br></span> &nbsp;<span style="color: #BA2121; ">'#output click'</span><span style="color: #666666; ">:</span> <span style="font-weight: bold; color: #008000; ">function</span>() {<br> &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// 入力値を取得<br></span> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">var</span> to <span style="color: #666666; ">=</span> <span style="font-weight: bold; color: #008000; ">this</span>.$find(<span style="color: #BA2121; ">'#to'</span>).val();<br> &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">//値がなければ処理を終了<br></span> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">if</span> (<span style="color: #666666; ">!</span>to) {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">return</span>;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br> &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// StringからNumberへ変換。変換に失敗したら終了<br></span> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">try</span> {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to <span style="color: #666666; ">=</span> <span style="color: #008000; ">parseInt</span>(to);<br>&nbsp;&nbsp;&nbsp;&nbsp;} <span style="font-weight: bold; color: #008000; ">catch</span>(e) {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">return</span>;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// 値をバインドしたテンプレートを画面に出力する<br></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">this</span>.view.append(<span style="color: #BA2121; ">'#list'</span>, <span style="color: #BA2121; ">'list'</span>, {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;num<span style="color: #666666; ">:</span> to<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;};<br><br> &nbsp;<span style="font-weight: italic; color: #408080; ">// id="container"である要素にコントローラをバインド<br></span> &nbsp;h5.core.controller(<span style="color: #BA2121; ">'#container'</span>, controller);<br>});</div>
+
+			<p class="translate-cn">4.在浏览器中打开HTML。</p>
+			<p class="translate-jp hidden">4.HTMLをブラウザで表示させます。</p>
+
+			<p class="translate-cn">5.在文本框里输入数字，然后点击输出按钮。</p>
+			<p class="translate-jp hidden">5.テキストボックスに数値を入力し出力ボタンをクリックします。</p>
+
+			<h4 class="translate-cn">向模板传递值的方法</h4>
+			<h4 class="translate-jp hidden">テンプレートへ値を渡す方法</h4>
+
+			<p class="translate-cn">hifive所提供的模板与JSP一样，可以在模板中的任意地方使用&#91;% %]或者&#91;%= %]设置任何值。&#91;% %]中的文本会被自动转义为HTML，&#91;%:= %]不会被转义。<br>
+向模板传值时，如以下方法指定：<br>
+{模板要使用的变量名：变量的值}。
+</p>
+			<p class="translate-jp hidden">hifiveが提供するテンプレートはJSPと同じように、テンプレートの&#91;% %]または&#93;%= %]の位置に任意の値を設定することができます。&#91;%= %]内の文字列は自動でHTMLエスケープされます。[%:= %]と書くとエスケープされません。<br>
+テンプレートへ渡す値は、以下のように指定します。<br>
+{テンプレートで使用する変数名: 変数が保持する値}</p>
+
+			<p class="translate-cn">使用例(1)  </p>
+			<p class="translate-jp hidden">使用例(1)</p>
+
+			<div class="box code"><span style="font-weight: bold; color: #008000; ">this</span>.view.append(<span style="color: #BA2121; ">'#container'</span>, <span style="color: #BA2121; ">'templateId1'</span>, {ar<span style="color: #666666; ">:</span> [<span style="color: #666666; ">10</span>, <span style="color: #666666; ">20</span>, <span style="color: #666666; ">30</span>]});</div>
+
+			<p class="translate-cn"> 使用例（2） </p>
+			<p class="translate-jp hidden"> 使用例（2） </p>
+
+			<p class="translate-cn"> 多个值进行传递的方法，于传递对象语法相同，<br>
+{模板使用的变量名: 变量值, 模板使用的变量名: 变量值, ...}<br>
+像上面一样用逗号进行分隔指定。<br>
+ </p>
+			<p class="translate-jp hidden"> 複数の値を渡したい場合の記述方法は、オブジェクトリテラルと同じく、<br>
+{テンプレートで使用する変数名: 変数が保持する値, テンプレートで使用する変数名: 変数が保持する値, ...}<br>
+上記のようにカンマ区切りで指定します。 </p>
+
+			<div class="box code"><span style="font-weight: bold; color: #008000; ">this</span>.view.append(<span style="color: #BA2121; ">'#container'</span>, <span style="color: #BA2121; ">'templateId1'</span>, {ar<span style="color: #666666; ">:</span> [<span style="color: #666666; ">10</span>, <span style="color: #666666; ">20</span>, <span style="color: #666666; ">30</span>], str<span style="color: #666666; ">:</span><span style="color: #BA2121; ">'Hello World!'</span>});</div>
+
+			<p class="translate-cn"> 在例子中，step5.js的第27行 </p>
+			<p class="translate-jp hidden">実装例では、step5.js の27行目、</p>
+
+			<div class="box code"><span style="font-weight: bold; color: #008000; ">this</span>.view.append(<span style="color: #BA2121; ">'#list'</span>, <span style="color: #BA2121; ">'list'</span>, {num<span style="color: #666666; ">:</span> to});</div>
+
+			<p class="translate-cn">其中的第3个参数{num: to}作为值传递给模板，该值在list.ejs的第2行 </p>
+			<p class="translate-jp hidden">の第3引数{num: to}でテンプレートへ値を渡しており、渡した値は list.ejs の2行目</p>
+
+			<div class="box code"> &#91;% for (var i = 1, len = num + 1; i &lt; len; i++) { %]</div>
+
+			<p class="translate-cn"> 中被num使用。<br>像这样，通过将对象名和模板使用的变量名指定为相同的名字，然后再使用view.get()、view.append()、view.update()、 view.prepend()等方法，可以进行值的传递。 </p>
+			<p class="translate-jp hidden">のnumで使用しています。<br> このように、オブジェクトのキー名をテンプレートで使用する変数名と同じ名前に指定することで、view.get()、view.append()、view.update()、 view.prepend()から、値を渡すことができます。 </p>
+
+			<h4 class="translate-cn"> 模板的复数写法 </h4>
+			<h4 class="translate-jp hidden">テンプレートの複数記述</h4>
+
+			<p class="translate-cn"> 定义外部文件和在HTML中直接定义两者，都可以定义多个模板。但是，请把模板id设为不同。 </p>
+			<p class="translate-jp hidden"> 外部ファイル・HTML直接定義どちらの場合も、複数のテンプレートを定義することができます。ただし、idは異なるものにしてください。 </p>
+
+			<p class="translate-cn"> 当多个模板的ID相同，在读取模板的情况下，程序将如何运作</p>
+			<p class="translate-jp hidden">同じテンプレートIDを持つテンプレートが読み込まれたときの挙動</p>
+
+			<p class="translate-cn"> 模板id重复的时候，后读取的模板将会被读取（覆盖了前者）。<br>
+不想被覆盖时，请给模板文件设置唯一的id。<br>
+ejs文件读取的优先顺序如下：<br>
+&nbsp;&nbsp;&nbsp;1.因为ejs文件是由上到下顺序读取的，所以文件中后定义的优先。<br>
+&nbsp;&nbsp;&nbsp;2.控制器中_templates属性定义了多个ejs文件时，数组最后中指定的ejs文件优先<br>
+如以下代码中的例子，运行时将输出hello 2。
+ </p>
+
+			<p class="translate-jp hidden">idが重複した場合、後に読み込まれたものが優先します(上書きされる)。<br>
+上書きされたくない場合は、同一ファイルまたは別ファイル関係になく、idは一意のものを指定して下さい。<br>
+ejsファイルの読み込み優先順は以下の通りです。<br>
+    &nbsp;&nbsp;&nbsp;1.ejsファイル内では上から下に順番に読み込まれるので、ファイルの後ろに書かれた定義が優先<br>
+    &nbsp;&nbsp;&nbsp;1.コントローラの__templatesプロパティに複数のejsファイルを指定した場合、配列の後ろに指定したejsファイルが優先<br>
+    たとえば以下のようなコードの場合、実行すると「hello 2」が表示されます。</p>
+
+    		<p class="translate-cn"><strong>view.ejs</strong>  </p>
+			<p class="translate-jp hidden"> <strong>view.ejs</strong> </p>
+
+			<div class="box code"><span style="font-weight: bold; color: #008000; ">&lt;script&nbsp;</span><span style="color: #7D9029; ">type=</span><span style="color: #BA2121; ">"text/ejs"</span> <span style="color: #7D9029; ">id=</span><span style="color: #BA2121; ">"list"</span><span style="font-weight: bold; color: #008000; ">&gt;</span><br>&nbsp;&nbsp;hello <span style="color: #666666; ">1</span><br><span style="font-weight: bold; color: #008000; ">&lt;/script&gt;</span><br><span style="font-weight: bold; color: #008000; ">&lt;script&nbsp;</span><span style="color: #7D9029; ">type=</span><span style="color: #BA2121; ">"text/ejs"</span> <span style="color: #7D9029; ">id=</span><span style="color: #BA2121; ">"list"</span><span style="font-weight: bold; color: #008000; ">&gt;</span><br>&nbsp;&nbsp;hello <span style="color: #666666; ">2</span><br><span style="font-weight: bold; color: #008000; ">&lt;/script&gt;</span></div>
+
+			<p class="translate-cn"> <strong>test.js</strong> </p>
+			<p class="translate-jp hidden">  <strong>test.js</strong></p>
+
+			<div class="box code"><span style="font-weight: bold; color: #008000; ">var</span> testController <span style="color: #666666; ">=</span> {<br>&nbsp;&nbsp;__name<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'TestController'</span>,<br>&nbsp;&nbsp;__templates<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'view.ejs'</span>,<br>&nbsp;&nbsp;__ready<span style="color: #666666; ">:</span> <span style="font-weight: bold; color: #008000; ">function</span>() {<br>&nbsp;&nbsp;&nbsp;&nbsp;alert(<span style="font-weight: bold; color: #008000; ">this</span>.view.get(<span style="color: #BA2121; ">'list'</span>));<br>&nbsp;&nbsp;}<br>}<br><br>h5.core.controller(<span style="color: #BA2121; ">'body'</span>, testController);</div>
+
+			<p class="translate-cn"> <strong>test.html</strong> </p>
+			<p class="translate-jp hidden"> <strong>test.html</strong> </p>
+
+			<div class="box code"><span style="color: #BC7A00; ">&lt;!doctype html&gt;</span><br><span style="font-weight: bold; color: #008000; ">&lt;html&gt;</span><br> &nbsp;<span style="font-weight: bold; color: #008000; ">&lt;head&gt;</span><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;meta</span> <span style="color: #7D9029; ">charset=</span><span style="color: #BA2121; ">"UTF-8"</span><span style="font-weight: bold; color: #008000; ">&gt;</span><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;script&nbsp;</span><span style="color: #7D9029; ">src=</span><span style="color: #BA2121; ">"jquery.js"</span><span style="font-weight: bold; color: #008000; ">&gt;&lt;/script&gt;</span><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;script&nbsp;</span><span style="color: #7D9029; ">src=</span><span style="color: #BA2121; ">"jquery.blockUI.js"</span><span style="font-weight: bold; color: #008000; ">&gt;&lt;/script&gt;</span><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;script&nbsp;</span><span style="color: #7D9029; ">src=</span><span style="color: #BA2121; ">"ejs-1.0.h5mod.js"</span><span style="font-weight: bold; color: #008000; ">&gt;&lt;/script&gt;</span><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;script&nbsp;</span><span style="color: #7D9029; ">src=</span><span style="color: #BA2121; ">"h5.js"</span><span style="font-weight: bold; color: #008000; ">&gt;&lt;/script&gt;</span><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">&lt;script&nbsp;</span><span style="color: #7D9029; ">src=</span><span style="color: #BA2121; ">"test.js"</span><span style="font-weight: bold; color: #008000; ">&gt;&lt;/script&gt;</span><br> &nbsp;<span style="font-weight: bold; color: #008000; ">&lt;/head&gt;</span><br> &nbsp;<span style="font-weight: bold; color: #008000; ">&lt;body&gt;</span><br> &nbsp;<span style="font-weight: bold; color: #008000; ">&lt;/body&gt;</span><br><span style="font-weight: bold; color: #008000; ">&lt;/html&gt;</span></div>
+
+			<h2 class="translate-cn"> 视图操作的注意事项（id的唯一性） </h2>
+			<h2 class="translate-jp hidden"> ビュー操作に関する注意（idの一意性） </h2>
+
+			<p class="translate-cn"><strong>在画面中，请为每个元素设置唯一的id。</strong><br>
+这个是HTML的标准。<br>
+ &nbsp;&nbsp;&nbsp;1.如有像列表行等多次出现画面的情形，应该使用CSS类名而不是id来区分命名，或者添加唯一的data-*属性来区分等方法。<br>
+ &nbsp;&nbsp;&nbsp;2.需要特别地注意通过Ajax动态刷新画面的地方。<br>
+&nbsp;&nbsp;&nbsp;3.如果现在有多个元素有着相同的id，并且使用this.$find('#id')或document.getElementById('id')等方法来获取元素时，在大多数的浏览器下页面会取得最初所定义的那个元素。但是，由于动作是依赖于处理引擎的，因此相同的代码运行结果不一定相同。
+  </p>
+			<p class="translate-jp hidden"> <strong>要素に設定するidは画面内で一意になるようにしてください。</strong><br>
+これはHTMLの仕様です。<br>
+&nbsp;&nbsp;&nbsp;1.リスト行のように複数回画面に登場する場合、idでなくCSSクラスを割り当てる、data-*属性で一意なIDを割り当てる、等の方法を検討してください。<br>
+&nbsp;&nbsp;&nbsp;2.Ajax等で動的に画面書き換えを行う場合には特に注意が必要です。<br>
+&nbsp;&nbsp;&nbsp;3.同じidを持つ要素が複数ある場合、this.$find('#id') や document.getElementById('id') などで要素を取得すると、多くのブラウザはページ内で最初に定義されている要素を取得します。ただし、動作は処理系に依存するので必ずしも同じ動作になるとは限りません。 </p>
+
+		</article>
+</script>

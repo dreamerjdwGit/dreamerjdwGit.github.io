@@ -1,0 +1,85 @@
+<script type="text/ejs" id="article_05_todoDataModel">
+
+
+		<header class="main-header">
+			<span class="header-span">教程（基本篇）</span>
+			<h1 class="header-h1">05.todo小应用 DataModel的创建</h1>
+		</header>
+		<article>
+			<h2 class="translate-cn">概要</h2>
+			<h2 class="translate-jp hidden">概要</h2>
+
+			<p class="translate-cn">
+TODO的信息使用DataModel来定义。<br>
+这一页中将对例子的todoModel.js代码进行说明。
+
+			</p>
+			<p class="translate-jp hidden"> 
+TODOの情報をデータモデルを使って定義します。<br>
+このページで説明するコードは、サンプルコードのtodoModel.jsに記述されています。
+ </p>
+
+ 			<h2 class="translate-cn"> 定义schema  </h2>
+			<h2 class="translate-jp hidden"> スキーマを定義 </h2>
+
+			<p class="translate-cn">
+用来管理TODO数据的ToDoModel的schema如下进行定义。
+			</p>
+			<p class="translate-jp hidden">
+TODOのデータを管理するToDoModelのスキーマを次のように定義します。
+			</p>	
+
+			<table><tbody><tr><th scope="col">属性名</th><th scope="col">说明</th><th scope="col">类型</th><th scope="col">备注</th></tr><tr><td>id</td><td>该schema的主键</td><td>Number</td><td>必须定义</td></tr><tr><td>status</td><td>保存是否完成的状态</td><td>Boolean</td><td>已完成为true，未完成为false</td></tr><tr><td>checked</td><td>状态(画面显示用)</td><td>字符串</td><td>由status来决定。status为true时"checked"，其他情况都为null</td></tr><tr><td>content</td><td>TODO内容</td><td>String</td><td><br></td></tr><tr><td>contentStyle</td><td>TODO内容的CSS样式(画面显示用)</td><td>String</td><td>由status来决定。status为true时"line-through"，其他情况都为空</td></tr><tr><td>insertDate</td><td>插入日期</td><td>number</td><td>毫秒</td></tr><tr><td>ymdhms</td><td>插入详细日期(画面显示用)</td><td>String</td><td>由insertDate来决定。格式为『YY/MM/DD HH:MM:SS』的日期字符串</td></tr></tbody></table>
+
+			<h2 class="translate-cn"> DataManager的创建 </h2>
+			<h2 class="translate-jp hidden">  データマネージャの作成</h2>
+
+			<p class="translate-cn">
+首先，为了对DataModel进行管理，我们需要先创建一个ToDoManager。
+			</p>
+			<p class="translate-jp hidden">
+まずは、データモデルを管理するために必要な、データモデルマネージャToDoManagerを作成します。
+			</p>	
+
+			<div class="box code"><span style="font-weight: italic; color: #408080; ">// データモデルマネージャ"ToDoManager"を作成する<br></span><span style="font-weight: bold; color: #008000; ">var</span> todoManager <span style="color: #666666; ">=</span> h5.core.data.createManager(<span style="color: #BA2121; ">'ToDoManager'</span>);</div>
+
+			<h2 class="translate-cn"> DataModel的创建 </h2>
+			<h2 class="translate-jp hidden">データモデルの作成  </h2>
+
+			<p class="translate-cn">
+在schema定义的基础上，使用ToDoManager来创建了数据模型ToDoModel，并且将它设置为全局变量：sample.todo.model.ToDoModel。
+			</p>
+			<p class="translate-jp hidden">
+スキーマを定義を元に、ToDoManagerからデータモデルToDoModelを作成し、sample.todo.model.ToDoModelでグローバルに公開します。
+			</p>	
+
+			<div class="code"><span style="font-weight: italic; color: #408080; ">// データモデルを生成<br></span><span style="font-weight: bold; color: #008000; ">var</span> todoModel <span style="color: #666666; ">=</span> todoManager.createModel({<br>&nbsp;&nbsp;&nbsp;&nbsp;name<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'TodoModel'</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;schema<span style="color: #666666; ">:</span> {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// ID<br></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id<span style="color: #666666; ">:</span> {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;id<span style="color: #666666; ">:</span> <span style="font-weight: bold; color: #008000; ">true</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'integer'</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// ステータス<br></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;status<span style="color: #666666; ">:</span> {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'boolean'</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;checked<span style="color: #666666; ">:</span> {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'string'</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;depend<span style="color: #666666; ">:</span> {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;on<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'status'</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;calc<span style="color: #666666; ">:</span> <span style="font-weight: bold; color: #008000; ">function</span>() {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">return</span> <span style="font-weight: bold; color: #008000; ">this</span>.get(<span style="color: #BA2121; ">'status'</span>) <span style="color: #666666; ">?</span> <span style="color: #BA2121; ">'checked'</span> <span style="color: #666666; ">:</span> <span style="font-weight: bold; color: #008000; ">null</span>;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// 内容<br></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content<span style="color: #666666; ">:</span> {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'string'</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// 内容 - スタイル<br></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contentStyle<span style="color: #666666; ">:</span> {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'string'</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;depend<span style="color: #666666; ">:</span> {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;on<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'status'</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;calc<span style="color: #666666; ">:</span> <span style="font-weight: bold; color: #008000; ">function</span>() {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">return</span> <span style="font-weight: bold; color: #008000; ">this</span>.get(<span style="color: #BA2121; ">'status'</span>) <span style="color: #666666; ">?</span> <span style="color: #BA2121; ">'line-through'</span> <span style="color: #666666; ">:</span> <span style="color: #BA2121; ">''</span>;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// 登録日<br></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;insertDate<span style="color: #666666; ">:</span> {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'number'</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: italic; color: #408080; ">// 登録日 - 詳細表示用<br></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ymdhms<span style="color: #666666; ">:</span> {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'string'</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;depend<span style="color: #666666; ">:</span> {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;on<span style="color: #666666; ">:</span> <span style="color: #BA2121; ">'insertDate'</span>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;calc<span style="color: #666666; ">:</span> <span style="font-weight: bold; color: #008000; ">function</span>() {<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">return</span> toYMDHMS(<span style="font-weight: bold; color: #008000; ">this</span>.get(<span style="color: #BA2121; ">'insertDate'</span>));<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>});<br><br><span style="font-weight: italic; color: #408080; ">// sample.todo.model.ToDoModelでグローバルに公開する<br></span>h5.u.obj.expose(<span style="color: #BA2121; ">'sample.todo.model'</span>, {<br>&nbsp;&nbsp;&nbsp;&nbsp;ToDoModel<span style="color: #666666; ">:</span> todoModel<br>});</div>
+			
+			
+			<p class="translate-cn">
+
+			</p>
+			<p class="translate-jp hidden">
+
+			</p>	
+
+			<p class="translate-cn">
+然后，创建了将在数据模型中使用的函数toYMDHMS。
+			</p>
+			<p class="translate-jp hidden">
+また、モデル内で使用するユーティリティ関数toYMDHMSも作成します。
+			</p>	
+
+			<div class="box code"><span style="font-weight: bold; color: #008000; ">function</span> toYMDHMS(value) {<br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">var</span> date <span style="color: #666666; ">=</span> <span style="font-weight: bold; color: #008000; ">new</span> <span style="color: #008000; ">Date</span>(value);<br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">var</span> mm <span style="color: #666666; ">=</span> date.getMonth() <span style="color: #666666; ">+</span> <span style="color: #666666; ">1</span>;<br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">var</span> dd <span style="color: #666666; ">=</span> date.getDate();<br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">var</span> hh <span style="color: #666666; ">=</span> date.getHours();<br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">var</span> mi <span style="color: #666666; ">=</span> date.getMinutes();<br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">var</span> ss <span style="color: #666666; ">=</span> date.getSeconds();<br><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">if</span> (mm <span style="color: #666666; ">&lt;</span> <span style="color: #666666; ">10</span>) {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mm <span style="color: #666666; ">=</span> <span style="color: #BA2121; ">'0'</span> <span style="color: #666666; ">+</span> mm;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">if</span> (dd <span style="color: #666666; ">&lt;</span> <span style="color: #666666; ">10</span>) {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dd <span style="color: #666666; ">=</span> <span style="color: #BA2121; ">'0'</span> <span style="color: #666666; ">+</span> dd;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">if</span> (hh <span style="color: #666666; ">&lt;</span> <span style="color: #666666; ">10</span>) {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hh <span style="color: #666666; ">=</span> <span style="color: #BA2121; ">'0'</span> <span style="color: #666666; ">+</span> hh;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">if</span> (mi <span style="color: #666666; ">&lt;</span> <span style="color: #666666; ">10</span>) {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mi <span style="color: #666666; ">=</span> <span style="color: #BA2121; ">'0'</span> <span style="color: #666666; ">+</span> mi;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">if</span> (ss <span style="color: #666666; ">&lt;</span> <span style="color: #666666; ">10</span>) {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ss <span style="color: #666666; ">=</span> <span style="color: #BA2121; ">'0'</span> <span style="color: #666666; ">+</span> ss;<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br><br> &nbsp;&nbsp;&nbsp;<span style="font-weight: bold; color: #008000; ">return</span> date.getFullYear() <span style="color: #666666; ">+</span> <span style="color: #BA2121; ">'/'</span> <span style="color: #666666; ">+</span> mm <span style="color: #666666; ">+</span> <span style="color: #BA2121; ">'/'</span> <span style="color: #666666; ">+</span> dd <span style="color: #666666; ">+</span> <span style="color: #BA2121; ">' '</span> <span style="color: #666666; ">+</span> hh <span style="color: #666666; ">+</span> <span style="color: #BA2121; ">':'</span> <span style="color: #666666; ">+</span> mi <span style="color: #666666; ">+</span> <span style="color: #BA2121; ">':'</span> <span style="color: #666666; ">+</span> ss;<br>}</div>
+
+			<p class="translate-cn">
+DataModel的创建如上所示。<br>
+在下一节中，我们将创建用来显示数据模型结果的视图。
+			</p>
+			<p class="translate-jp hidden">
+データモデルの作成は以上です。<br>
+次の章では、データモデルを結果として表示させるために必要なビューを作成します。
+			</p>	
+
+		</article>
+</script>
