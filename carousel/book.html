@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>店内系统 书籍一览</title>
+	
+	<link href="fw/h5.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="src/book.css">
+	<link href="component/carousel/sample.css" rel="stylesheet">
+
+	<script src="fw/jquery-1.11.0.min.js" type="text/javascript"></script>
+	<script src="fw/ejs-h5mod.js" type="text/javascript"></script>
+	<script src="fw/h5.dev.js" type="text/javascript"></script>
+
+	<script src="component/carousel/CarouselController.js" type="text/javascript"></script>
+	<script src="src/bookLogic.js" type="text/javascript"></script>
+	<script src="src/bookController.js" type="text/javascript"></script>
+
+</head>
+<body>
+<div id="container">
+	<div class="carousel-wrapper">
+
+	</div>
+	<div id="result">
+		<div class="resultHeader">
+			<div id="list-header">
+				<span>ISBN</span>
+				<span>书籍名</span>
+				<span>作者</span>
+				<span>翻译者</span>
+				<span>价格</span>
+			</div>
+		</div>
+		<div class="booklist">
+		<table id="list">
+		</table>
+
+		</div>
+	</div>
+</div>
+</body>
+</html>

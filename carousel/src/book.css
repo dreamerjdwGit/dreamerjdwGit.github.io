@@ -1,0 +1,132 @@
+body {
+	/*background: url(../img/bg.png);
+	background-size: 100%;*/
+	color: #000;
+	margin: 0;
+	padding: 0;
+}
+
+#pageHeader {
+	width: 800px;
+	margin: 0 auto;
+	text-align: center;
+	font-family: STKaiti;
+	color: #ABABAB;
+}
+
+#pageHeader h1 {
+	padding: 0;
+	margin: 10px 0 0 0;
+	width: 800px;
+	height: 60px;
+	font-size: 60px;
+}
+
+#content {
+	margin: 0 20px 0 20px;
+	font-family: STKaiti;
+}
+
+#list {
+	font-size: 20px;
+}
+
+#result {
+	margin: 40px 0 20px 120px;
+	
+}
+
+#result h2 {
+	margin: 0 0 10px 0;
+}
+
+#result #list-header {
+	margin-left: 57px;
+	width: 795px;
+	height: 30px;
+	line-height: 30px;
+	background: #CDB38B;
+}
+
+#result #list-header span {
+	border: 1px solid #C1CDC1;
+	display: block;
+	width: 82px;
+	height: 28px;
+	float: left;
+	text-align: center;
+	font-size: 18px;
+}
+
+#result #list-header span:nth-child(1){
+	width: 182px;
+}
+
+#result #list-header span:nth-child(2){
+	width: 302px;
+}
+
+#result #list-header span:nth-child(3){
+	width: 150px;
+}
+
+#result #list-header span:nth-child(5){
+	width: 67px;
+}
+
+#result .booklist {
+	margin: 0 0 0 56px;
+	width: 813px;
+	height: 465px;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+#result .booklist table {
+	width: 813px;
+	background: #D3D3D3;
+}
+
+#result .booklist tr:hover {
+	cursor: pointer;
+	background: #ADD8E6;
+}
+
+tr.selectedTr {
+	background: #ADD8E6 !important;
+}
+
+#result .booklist td {
+	float:left;
+	border: 1px solid #fff;
+	padding: 0;
+	margin: 0;
+	text-align: center;
+	display: inline-block;
+	width: 82px;
+	height: 40px;
+	line-height: 50px;
+	overflow: hidden;
+}
+
+#result .booklist td:nth-child(1){
+	width: 182px;
+}
+
+#result .booklist td:nth-child(2){
+	width: 302px;
+}
+
+#result .booklist td:nth-child(3){
+	width: 150px;
+}
+
+#result .booklist td:nth-child(5){
+	width: 67px;
+}
+
+
+
+
+
+
