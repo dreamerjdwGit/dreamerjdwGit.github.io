@@ -1,0 +1,314 @@
+body {
+	background: url(../img/bg.png);
+	background-size: 100%;
+	color: #000;
+	margin: 0;
+	padding: 0;
+}
+
+input[type="button"]:hover, input[type="submit"]:hover {
+	cursor: pointer;
+	background-color: #CDB38B;
+}
+
+#pageHeader {
+	width: 800px;
+	margin: 0 auto;
+	text-align: center;
+	font-family: STKaiti;
+	color: #ABABAB;
+}
+
+#pageHeader h1 {
+	padding: 0;
+	margin: 10px 0 0 0;
+	width: 800px;
+	height: 60px;
+	font-size: 60px;
+}
+
+#content {
+	margin: 0 20px 0 20px;
+	font-family: STKaiti;
+}
+
+#content h1 {
+	color: #CDAA7D;
+	text-align: center;
+}
+
+#content h2 {
+	background: url(../img/icon_pg.gif) no-repeat 30px 9px;
+	padding-left: 50px;
+	color: #A79355;
+}
+
+#condition {
+	position: absolute;
+	top: 120px;
+	height: 160px;
+	width: 880px;
+}
+
+#condition .control-group {
+	margin: 0 0 0 60px;
+	padding: 0;
+}
+
+#condition .control-group label {
+	color: #616623;
+	font-size: 20px bold;
+}
+
+#condition .control-group input {
+	margin: 0 50px 15px 0;
+}
+
+#condition .control-group label:nth-child(1) {
+	margin-right: 12px;
+}
+
+#condition .control-group label:nth-child(9) {
+	margin-right: 33px;
+}
+
+#condition #searchButton {
+	position: relative;
+	height: 30px;
+	width: 60px;
+	top: 0px;
+	font-size: 18px;
+}
+
+#result {
+	margin: 120px 0 20px 0;
+	
+}
+
+#result h2 {
+	margin: 0 0 10px 0;
+}
+
+#result #list-header {
+	margin-left: 57px;
+	width: 930px;
+	height: 30px;
+	line-height: 30px;
+	background: #CDB38B;
+}
+
+#result #list-header span {
+	border: 1px solid #C1CDC1;
+	display: block;
+	width: 82px;
+	height: 28px;
+	float: left;
+	text-align: center;
+	font-size: 18px;
+}
+
+#result #list-header span:nth-child(2){
+	width: 302px;
+}
+
+#result #list-header span:nth-child(3){
+	width: 302px;
+}
+
+#result #list-header span:nth-child(4){
+	width: 117px;
+}
+
+#result #list-header span:nth-child(5){
+	width: 117px;
+}
+
+#result .publisherlist {
+	margin: 0 0 0 56px;
+	width: 953px;
+	height: 460px;
+	overflow-y: auto;
+}
+
+#result .publisherlist table {
+	width: 935px;
+	background: #D3D3D3;
+}
+
+#result .publisherlist tr:hover {
+	cursor: pointer;
+}
+
+#result .publisherlist td {
+	border: 1px solid #fff;
+	text-align: center;
+	display: inline-block;
+	width: 79px;
+	height: 40px;
+	line-height: 50px;
+	overflow: hidden;
+}
+
+#result .publisherlist td:nth-child(2){
+	width: 300px;
+}
+
+#result .publisherlist td:nth-child(3){
+	width: 300px;
+}
+
+#result .publisherlist td:nth-child(4){
+	width: 115px;
+}
+
+#result .publisherlist td:nth-child(5){
+	width: 115px;
+}
+
+#result #result-extraDiv {
+	position: absolute;
+	top: 257px;
+	left: 330px;
+	width: 80px;
+	height: 30px;
+	font: 20px bold;
+	background: #fff url(../img/insertIcon.jpg) no-repeat right;
+}
+
+#result #result-extraDiv:hover {
+	background-color: #CDB38B;
+	cursor: pointer;
+}
+
+#result #result-extraDiv span{
+	padding-top: 6px;
+	display: block;
+}
+
+#detail {
+	margin: 160px 0 0 56px;
+	width: 780px;
+	height: 460px;
+}
+
+#detail h2 {
+	top: 258px;
+	left: 20px;
+	position: absolute;
+	margin: 0 0px 20px 0;
+}
+
+#detail table {
+	width: 780px;
+	font-size: 20px;
+	background: #D3D3D3;
+}
+
+#detail td {
+	border: 1px solid #fff;
+	width: 300px;
+	text-align: left;
+}
+
+#detail th {
+	background: #CDB38B;
+	height: 40px;
+}
+
+#detail #publishinfo .info-header th:nth-child(1) {
+	width: 100px;
+}
+
+#detail #publishinfo .info-header th:nth-child(2) {
+	width: 400px;
+}
+
+#detail #publishinfo .info-header th:nth-child(3) {
+	width: 400px;
+}
+
+#detail input {
+	width: 300px;
+	height: 30px;
+	font-size: 20px;
+}
+
+#detail .button{
+	margin: 10px 0 0 20px;
+	padding: 0;
+	width: 60px;
+	float: right;
+}
+
+#detail .blank, #insertDetail .blank {
+	margin: 0;
+	padding: 0;
+	width: 550px;
+	height: 30px;
+	display: block;
+	float: left;
+}
+
+#insertDetail {
+	margin: 120px 0 20px 0;
+}
+
+#insertDetail h2 {
+	margin: 0 0 10px 0;
+}
+
+#insertDetail h2 span {
+	color: red;
+	font-size: 18px;
+}
+
+#insertDetail table {
+	margin: 0 0 0 56px;
+	width: 953px;
+	height: 80px;
+	font-size: 20px;
+	background: #D3D3D3;
+}
+
+#insertDetail th {
+	border: 1px solid #fff;
+	margin-right: 15px;
+	background: #CDB38B;
+}
+
+#insertDetail td {
+	border: 1px solid #fff;
+	margin-right: 15px;
+}
+
+#insertDetail input {
+	width: 225px;
+	height: 30px;
+	font-size: 20px;
+}
+
+
+#insertDetail .button{
+	position: absolute;
+	margin-top: 10px;
+	width: 85px;
+	height: 35px;
+	font-size: 20px;
+}
+
+#insertDetail #backButton {
+	left: 930px;
+}
+
+#insertDetail #submitButton {
+	left: 820px;
+}
+
+
+
+
+
+
+
+
+

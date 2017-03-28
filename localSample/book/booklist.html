@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>店内系统 书籍一览</title>
+	
+	<link href="../fw/h5.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="../css/book.css">
+
+	<script src="../fw/jquery-1.11.0.min.js"></script>
+	<script src="../fw/ejs-h5mod.js"></script>
+	<script src="../fw/h5.dev.js"></script>
+
+	<script src="../component/carousel/carouselController.js"></script>
+	<script src="../component/scroll/scrollBarController.js"></script>
+	<script src="bookLogic.js"></script>
+	<script src="bookController.js"></script>
+
+</head>
+<body>
+<div id="container">
+
+	<div class="carousel-wrapper"></div>
+
+	<div class="search">
+		<div class="control-group">
+			<label for="isbn">ISBN:</label>
+			<input type="text" id="isbn">
+
+			<label for="title">书籍名:</label>
+			<input type="text" id="title">
+
+			<label for="author">作者:</label>
+			<input type="text" id="author">
+			
+			<label for="translator">翻译者:</label>
+			<input type="text" id="translator">
+			
+			<label id="priceLabel" for="price">价格:</label>
+			<input type="number" id="priceStart">
+			<label>至</label>
+			<input type="number" id="priceEnd">
+		
+			<input type="button" id="searchButton" value="检索">
+		</div>
+	</div>
+
+	<div id="result">
+		<div class="resultHeader">
+			<div id="list-header">
+				<span>ISBN</span>
+				<span>书籍名</span>
+				<span>作者</span>
+				<span>翻译者</span>
+				<span>价格</span>
+			</div>
+		</div>
+		<div class="booklist">
+			<table id="list"></table>
+		</div>
+	</div>
+</div>
+</body>
+
+</html>

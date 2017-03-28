@@ -1,0 +1,264 @@
+body {
+	color: #000;
+	margin: 0;
+	padding: 0;
+}
+
+div .carousel-wrapper {
+	width: 1200px;
+	height: 200px;
+	margin: 10px 0 5px 0;
+	padding: 5px;
+	text-align: center;
+	vertical-align: center;
+	cursor: pointer;
+	overflow: hidden;
+}
+
+ul.carousel>li {
+	display: block;
+}
+
+.carousel-wrapper .item {
+	width: 200px;
+	height: 200px;
+	line-height: 160px;
+}
+
+
+div .search {
+	position: relative;
+	margin: 0px 20px 0 160px;
+	width: 1000px;
+	height: 30px;
+	line-height: 30px;
+}
+
+.control-group input {
+	width: 100px;
+}
+
+.control-group input[type="number"] {
+	width: 60px;
+}
+
+.control-group #searchButton {
+	position: absolute;
+	margin: 4px 0 0 10px;
+	width: 70px;
+	height: 25px;
+	font-size: 18px;
+}
+
+input[type="button"]:hover {
+	cursor: pointer;
+	background-color: #CDB38B;
+}
+
+
+#result {
+	margin: 15px 0 20px 180px;
+}
+
+
+#result #list-header {
+	margin-left: 57px;
+	width: 795px;
+	height: 30px;
+	line-height: 30px;
+	background: #CDB38B;
+}
+
+#result #list-header span {
+	border: 1px solid #C1CDC1;
+	display: block;
+	width: 82px;
+	height: 28px;
+	float: left;
+	text-align: center;
+	font-size: 19px;
+}
+
+#result #list-header span:nth-child(1){
+	width: 182px;
+}
+
+#result #list-header span:nth-child(2){
+	width: 302px;
+}
+
+#result #list-header span:nth-child(3){
+	width: 150px;
+}
+
+#result #list-header span:nth-child(5){
+	width: 67px;
+}
+
+#result .booklist {
+	margin: 0 0 0 56px;
+	height: 325px;
+	position: relative;
+	overflow: hidden;
+}
+
+#list {
+	font-size: 16px;
+}
+
+#result .booklist table {
+	width: 798px;
+	position: absolute;
+	background: #D3D3D3;
+}
+
+#result .booklist tr:hover {
+	cursor: pointer;
+	background: #ADD8E6;
+}
+
+tr.selectedTr {
+	background: #A2B5CD !important;
+}
+
+#result .booklist td {
+	float:left;
+	border: 1px solid #fff;
+	padding: 0;
+	margin: 0;
+	text-align: center;
+	display: inline-block;
+	width: 82px;
+	height: 29px;
+	line-height: 29px;
+	overflow: hidden;
+}
+
+#result .booklist td:nth-child(1){
+	width: 182px;
+}
+
+#result .booklist td:nth-child(2){
+	width: 302px;
+}
+
+#result .booklist td:nth-child(3){
+	width: 150px;
+}
+
+#result .booklist td:nth-child(5){
+	width: 67px;
+}
+
+
+
+.spinner {
+  margin: 120px 0px 0px 370px;
+  width: 60px;
+  height: 60px;
+  position: relative;
+}
+ 
+.container1 > div, .container2 > div, .container3 > div {
+  width: 18px;
+  height: 18px;
+  background-color: #333;
+ 
+  border-radius: 100%;
+  position: absolute;
+  -webkit-animation: bouncedelay 1.2s infinite ease-in-out;
+  animation: bouncedelay 1.2s infinite ease-in-out;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+ 
+.spinner .spinner-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+ 
+.container2 {
+  -webkit-transform: rotateZ(45deg);
+  transform: rotateZ(45deg);
+}
+ 
+.container3 {
+  -webkit-transform: rotateZ(90deg);
+  transform: rotateZ(90deg);
+}
+ 
+.circle1 { top: 0; left: 0; }
+.circle2 { top: 0; right: 0; }
+.circle3 { right: 0; bottom: 0; }
+.circle4 { left: 0; bottom: 0; }
+ 
+.container2 .circle1 {
+  -webkit-animation-delay: -1.1s;
+  animation-delay: -1.1s;
+}
+ 
+.container3 .circle1 {
+  -webkit-animation-delay: -1.0s;
+  animation-delay: -1.0s;
+}
+ 
+.container1 .circle2 {
+  -webkit-animation-delay: -0.9s;
+  animation-delay: -0.9s;
+}
+ 
+.container2 .circle2 {
+  -webkit-animation-delay: -0.8s;
+  animation-delay: -0.8s;
+}
+ 
+.container3 .circle2 {
+  -webkit-animation-delay: -0.7s;
+  animation-delay: -0.7s;
+}
+ 
+.container1 .circle3 {
+  -webkit-animation-delay: -0.6s;
+  animation-delay: -0.6s;
+}
+ 
+.container2 .circle3 {
+  -webkit-animation-delay: -0.5s;
+  animation-delay: -0.5s;
+}
+ 
+.container3 .circle3 {
+  -webkit-animation-delay: -0.4s;
+  animation-delay: -0.4s;
+}
+ 
+.container1 .circle4 {
+  -webkit-animation-delay: -0.3s;
+  animation-delay: -0.3s;
+}
+ 
+.container2 .circle4 {
+  -webkit-animation-delay: -0.2s;
+  animation-delay: -0.2s;
+}
+ 
+.container3 .circle4 {
+  -webkit-animation-delay: -0.1s;
+  animation-delay: -0.1s;
+}
+ 
+@-webkit-keyframes bouncedelay {
+  0%, 80%, 100% { -webkit-transform: scale(0.0) }
+  40% { -webkit-transform: scale(1.0) }
+}
+ 
+@keyframes bouncedelay {
+  0%, 80%, 100% {
+    transform: scale(0.0);
+    -webkit-transform: scale(0.0);
+  } 40% {
+    transform: scale(1.0);
+    -webkit-transform: scale(1.0);
+  }
+}

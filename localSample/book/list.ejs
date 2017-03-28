@@ -1,0 +1,23 @@
+<script type="text/ejs" id="list">
+<tbody>
+	[% for (var i = 1, len = list.length; i < len; i++) { %]
+	<tr class="rows" data-item-id= "[%= list[i].itemId %]">
+  		<td class="content">
+			<span>[%= list[i].isbn %]</span>
+		</td>
+		<td class="content">
+			<span>[%= list[i].title %]</span>
+		</td>
+		<td class="content">
+			<span>[%= list[i].author %]</span>
+		</td>
+		<td class="content">
+			<span>[%= list[i].translator %]</span>
+		</td>
+		<td class="content">
+			<span>[%= list[i].price %]</span>
+		</td>
+	</tr>
+	[% } %]
+</tbody>
+</script>

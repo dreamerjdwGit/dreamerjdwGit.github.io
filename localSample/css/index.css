@@ -1,0 +1,72 @@
+body {
+	background: url(../img/bg.png);
+	background-size: 100%;
+	color: #000;
+	margin: 0;
+	padding: 0;
+}
+
+#container {
+	width: 800px;
+	margin: 0 auto;
+	padding: 0;
+}
+
+#pageHeader {
+	width: 800px;
+	margin: 0 auto;
+	text-align: center;
+	font-family: STKaiti;
+	color: #ABABAB;
+}
+
+#pageHeader h1 {
+	margin: 10px 0 0 0;
+	padding: 0;
+	width: 800px;
+	height: 60px;
+	font-size: 60px;
+}
+
+#content {
+	position: relative;
+	left: 200px;
+	width: 400px;
+	height: 500px;
+	font-family: STKaiti;
+}
+
+#content h1 {
+	text-align: center;
+	color: #CDAA7D;
+}
+
+#book h2, #publisher h2 {
+	background: url(../img/icon_pg.gif) no-repeat 30px 9px;
+	padding-left: 50px;
+	color: #A79355;
+}
+
+a:link, a:visited {
+	text-decoration: none;
+	color: #793F0E;
+	font-size: bold;
+}
+
+a:hover {
+	text-decoration: underline;
+	color: #616623;
+}
+
+ul {
+	list-style: none;
+	text-align: left;
+}
+
+li {
+	background: url(../img/bullet.gif) no-repeat 0 5px;
+	padding-left: 20px;
+	font-size: 20px;
+}
+
+	

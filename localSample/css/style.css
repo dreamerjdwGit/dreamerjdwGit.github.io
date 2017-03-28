@@ -1,0 +1,68 @@
+body {
+	background: url(../img/bg.png);
+	background-size: 100%;
+	color: #000;
+	margin: 0;
+	padding: 0;
+}
+
+#pageHeader {
+	width: 800px;
+	margin: 0 auto;
+	text-align: center;
+	font-family: STKaiti;
+	color: #ABABAB;
+}
+
+#pageHeader h1 {
+	padding: 0;
+	margin: 10px 0 0 0;
+	width: 800px;
+	height: 60px;
+	font-size: 60px;
+}
+
+#content {
+	margin: 0 20px 0 20px;
+	font-family: STKaiti;
+}
+
+#content h1 {
+	color: #CDAA7D;
+	text-align: center;
+}
+
+#exception {
+	margin: 40px 0 0 56px;
+	width: 880px;
+	height: 460px;
+}
+
+#exception table {
+	width: 880px;
+	font-size: 20px;
+	background: #D3D3D3;
+}
+
+#exception th {
+	background: #CDB38B;
+	height: 40px;
+}
+
+#exception td {
+	border: 1px solid #fff;
+	width: 300px;
+	text-align: left;
+}
+
+#return {
+	float: right;
+	width: 60px;
+	height: 40px;
+	font-size: 20px;
+}
+
+#return:hover {
+	cursor: pointer;
+	background-color: #CDB38B;
+}
