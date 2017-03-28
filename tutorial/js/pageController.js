@@ -121,7 +121,14 @@
 		 * @param
 		 */
 		__ready: function() {
-			this.view.update('.content', templatesObject['01']);
+			if (sessionStorage.page) {
+				this.view.update('.content', templatesObject[sessionStorage.page]);
+				this.$find('.sidenav-section').removeClass('is-selected');
+				this.$find('.sidenav-section').eq(sessionStorage .page - 1).addClass('is-selected');
+			} else {
+				this.view.update('.content', templatesObject['01']);
+			}
+			
 		},
 
 		// 段落をクリックすると、翻訳前の日本語を出る
@@ -144,11 +151,14 @@
 
 			var id = $el.data('page');
 
+			sessionStorage.page = id;
+
 			// ビューの更新
 			this.view.update('.content', templatesObject[$el.data('page')]);
 
 			// ページの先頭に戻す
 			document.documentElement.scrollTop = document.body.scrollTop =0;
+
 		},
 
 		// 上のリストをクリックすると、対応のページが出る
@@ -158,10 +168,57 @@
 			this.$find('.l-list').removeClass('list-selected');
 			$el.addClass('list-selected');
 
+			sessionStorage.removeItem('page');
+
 			var url = docs[$el.data('list')].url;
 
 			window.location.href = url;
 		},
+
+
+		// 段落をクリックすると、翻訳前の日本語を出る
+		'.translate-cn touch': function(context, $el) {
+			var $target = $el.next() 
+			if($target.hasClass('hidden')) {
+				$target.removeClass('hidden');
+			} else {
+				$target.addClass('hidden');
+			}
+		},
+
+
+		// 左側のリストをクリックすると、対応のページが出る
+		'.sidenav-section touch': function(context, $el) {
+
+			// スタイルの変更
+			this.$find('.sidenav-section').removeClass('is-selected');
+			$el.addClass('is-selected');
+
+			var id = $el.data('page');
+
+			sessionStorage.page = id;
+
+			// ビューの更新
+			this.view.update('.content', templatesObject[$el.data('page')]);
+
+			// ページの先頭に戻す
+			document.documentElement.scrollTop = document.body.scrollTop =0;
+
+		},
+
+		// 上のリストをクリックすると、対応のページが出る
+		'.l-list touch': function(context, $el) {
+
+			// スタイルの変更
+			this.$find('.l-list').removeClass('list-selected');
+			$el.addClass('list-selected');
+
+			sessionStorage.removeItem('page');
+
+			var url = docs[$el.data('list')].url;
+
+			window.location.href = url;
+		}
 
 	}
 
