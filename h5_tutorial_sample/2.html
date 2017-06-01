@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name=viewport content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<title>在线秒表</title>
+	<script src="jquery.min.js"></script>
+	<style type="text/css">
+		html,body,ul,h1 {
+			margin: 0;
+			padding: 0;
+			background-color: #EBEBEB;
+		}
+		.container {
+			height: 667px;
+			margin: 0 auto;
+			text-align: center;
+		}
+		.container h1 {
+			height: 8%;
+			background-color: #F0F0F0;
+			padding: 20px;
+		}
+		#clock {
+			height: 52%;
+		}
+		.btn {
+			background-color: #fff;
+			width: 60px;
+			height: 60px;
+			font-size: 20px;
+			border-radius: 50%;
+			border: none;
+		}
+		#display {
+			background-color: #fff;
+			height: 90px;
+			line-height: 90px;
+			font-size: 40px;
+		}
+		#controlDiv {
+			padding: 30px;
+			height: 40px;
+		}
+		#controlDiv>#startBtn {
+			position: absolute;
+			right: 25%;
+		}
+		#controlDiv>#resultBtn {
+			position: absolute;
+			left: 25%;
+
+		}
+		#result {
+			overflow: auto;
+			height: 30%;
+		}
+
+		#resultList {
+			list-style: none;
+		}
+
+		#resultList>li {
+			padding: 9px;
+			height: 19px;
+			border-bottom: 1px solid grey;
+		}
+
+		.clockCon {
+			width: 150px;
+			height: 150px;
+			margin: 0 auto;
+			position: relative;
+			border-radius: 50%;
+			background-image: linear-gradient(#f9fdff, #d9eaf8);
+			box-shadow: 0px 0px 28px -8px #eaf7fb;
+			z-index: 11;
+			font-size: 20px;
+			color: #8da6b8;
+			font-family: Arial;
+		}
+
+		.clock:before {
+			content: "";
+			position: absolute;
+			width: 150px;
+			height: 150px;
+			border-radius: 50%;
+			box-shadow: 0px 15px 24px -5px #7a8fae;
+			z-index: 10;
+		}
+
+		.clockCon:after {
+		    content: "";
+		    left: 0px;
+		    top: 0px;
+		    position: absolute;
+		    width: 150px;
+		    height: 150px;
+		    border-radius: 50%;
+		    box-shadow: 0px 4px 4px -1px #7a8fae;
+		    z-index: 9;
+		}
+
+		.hour {
+			position: absolute;
+			font-style: normal;
+		}
+
+		.hour3 {
+			right: 15px;
+			top: 50%;
+			margin-top: -7px;
+		}
+
+		.hour6 {
+			bottom: 15px;
+			left: 50%;
+			margin-left: -7px;
+		}
+
+		.hour9 {
+			left: 15px;
+			top: 50%;
+			margin-top: -7px;
+		}
+
+		.hour12 {
+			top: 15px;
+			left: 50%;
+			margin-left: -12px;
+		}
+
+		#second, #minute, #hour {
+			width: 10px;
+			height: 150px;
+			left: 50%;
+			margin-left: -5px;
+			position: absolute;
+		}
+
+		#second:after {
+			content: "";
+			height: 60px;
+			width: 1px;
+			position: absolute;
+			top: 30px;
+			left: 4px;
+			background: #0dc1fd;
+			z-index: -1;
+		}
+
+		#minute:after {
+			content: "";
+			height: 45px;
+			width: 4px;
+			position: absolute;
+			top: 40px;
+			left: 3px;
+			background: #23bcef;
+			border-radius: 8px 8px 8px 8px;
+			z-index: -1;
+		}
+
+		#hour:after{
+		    content: "";
+		    height: 40px;
+		    width: 6px;
+		    position: absolute;
+		    top: 45px;
+		    left:2px;
+		    background: #1aa9d8;
+		    border-radius: 8px 8px 8px 8px;
+		    z-index: -1;
+		}
+
+
+	</style>
+</head>
+<body>
+	<div class="container">
+		<h1>在线秒表</h1>
+		<div id="clock">	
+			<div id="display">
+				00:00.00
+			</div>
+			<div id="controlDiv">
+				<button class="btn" id="startBtn">开始</button>
+				<button class="btn" id="resultBtn" disabled="disabled">计次</button>
+			</div>
+			<div class="clockCon">
+				<i class="hour hour3">3</i>
+				<i class="hour hour6">6</i>
+				<i class="hour hour9">9</i>
+				<i class="hour hour12">12</i>
+
+				<div id="second"></div>
+				<div id="minute"></div>
+				<div id="hour"></div>
+			</div>
+		</div>
+			
+		<div id="result">
+			<ul id="resultList">
+				<li class="list"></li>
+				<li class="list"></li>
+				<li class="list"></li>
+				<li class="list"></li>
+				<li class="list"></li>
+			</ul>
+		</div>
+
+	</div>
+</body>
+<script type="text/javascript">
+	(function(){
+
+		// 按钮 
+		var $startBtn = $('#startBtn');
+		var $resultBtn = $('#resultBtn');
+		var $display = $('#display');
+		var $resultList = $('.list');
+
+		var $second = $('#second');
+		var $minute = $('#minute');
+		var $hour = $('#hour');
+
+		// 初始值
+		var timer;
+		var con = 'off';
+		var reset = 'off';
+		var startTime = 0;
+		var lastTime = 0;
+		var dis = 0;
+
+		var listNum = 5;
+		var listNow = 0;
+		var now;
+
+		var secDeg = 0;
+		var minDeg = 0;
+		var hourDeg = 0;
+		var speedSec = 10;
+		var speedMin = 5;
+		var speedHour = 1;
+
+		$startBtn.click(function(){
+
+			if(con === 'off') {
+
+				con = 'on';
+				reset = 'off';
+
+				startTime = (new Date()).getTime() - lastTime;
+
+				$startBtn.text('暂停');
+				$startBtn.css({
+					color: 'red'
+				});
+				$resultBtn.attr('disabled',false);
+
+				$resultBtn.text('计次');
+
+				timer = requestAnimationFrame(function fn(){
+
+					dis = (new Date()).getTime() - startTime;
+					cancelAnimationFrame(timer);
+					timer = requestAnimationFrame(fn);
+
+					var minute = Math.floor(dis/1000/60);
+					var second = Math.floor(dis/1000)%60;
+					var ms = Math.floor(Math.floor(dis%1000) / 10);
+					minute = minute>=10?minute:('0'+minute);
+					second = second>=10?second:('0'+second);
+					ms = ms>=10?ms:('0'+ms);
+					now = minute + ' : ' + second + ' . ' + ms;
+
+					$display.text(minute + ' : ' + second + ' . ' + ms);
+
+					secDeg += speedSec%360;
+					minDeg += speedMin%360;
+					hourDeg += speedHour%360;
+
+					$second.css({
+						transform: 'rotate('+ secDeg +'deg)'
+					});
+
+					$minute.css({
+						transform: 'rotate('+ minDeg +'deg)'
+					});
+
+					$hour.css({
+						transform: 'rotate('+ hourDeg +'deg)'
+					});
+				});
+
+			} else {
+				cancelAnimationFrame(timer);
+				$startBtn.text('开始');
+				$startBtn.css({
+					color: 'lightgreen'
+				});
+				$resultBtn.text('复位');
+				con = 'off';
+				reset = 'on';
+				lastTime = dis;
+			}
+			
+		});
+
+		$resultBtn.click(function(){
+			if(reset === 'off') {
+				if(listNow < listNum) {
+					$(".list:last-child").remove();
+					var nd_li = $('<li class="list"></li>');
+					nd_li.text('第' + (listNow + 1) + '次计数： ' + now);
+					$("#resultList").prepend(nd_li);
+					listNow ++;
+				} else {
+					var nd_li = $('<li class="list"></li>');
+					nd_li.text('第' + (listNow + 1 ) + '次计数： ' + now);
+					$("#resultList").prepend(nd_li);
+					listNow ++;
+				}
+			} else {
+				history.go();
+			}
+		});
+
+
+	})();
+</script>
+</html>

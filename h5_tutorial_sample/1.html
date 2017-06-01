@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>投影相册</title>
+	<script src="jquery.min.js"></script>
+	<style type="text/css">
+		html,body,div,ul {
+			margin: 0;
+			padding: 0;
+		}
+		body {
+			background-color: grey;
+		}
+		ul {
+			list-style: none;
+			text-align: center;
+		}
+		li {
+			font-size: 20px;
+			font-weight: bold;
+			display: inline-block;
+			height: 51px;
+			line-height: 51px;
+			width: 150px;
+			cursor: pointer;
+			background-color: #fff;
+		}
+		li:hover {
+			background-color: lightblue;
+		}
+
+		.headNav {
+			position: fixed;
+			top: 0;
+			left: 0;
+			right: 0;
+			width: 100%;
+			height: 119px;
+			line-height: 119px;
+			text-align: center;
+			font-size: 70px;
+			background-color: #fff;
+		}
+		.footer {
+			position: fixed;
+			bottom: 0;
+			left: 0px;
+			width: 100%;
+			height: 100px;
+			line-height: 100px;
+			font-size: 40px;
+			background-color: #fff;
+			text-align: center;
+
+		}
+
+		.sideNav {
+			position: fixed;
+			background-color: #fff;
+			top: 119px;
+			left: 0;
+			bottom: 0;
+			height: 100%;
+			width: 150px;
+		}
+		.content {
+			position: relative;
+			margin: 120px 5px 60px 150px;
+			z-index: -1;
+		}
+		.img-wrapper {
+			position: relative;
+			margin-top: 200px ;
+		}
+		.one-picture {
+			margin: 10px auto;
+			width: 300px;
+			height: 300px;
+			transition: all 2s;
+		}
+		.picture1 {
+			background: url('img/1.jpg') no-repeat;
+		}
+		.picture2 {
+			background: url('img/2.jpg') no-repeat;
+		}
+		.picture3 {
+			background: url('img/3.jpg') no-repeat;
+		}
+		.picture4 {
+			background: url('img/4.jpg') no-repeat;
+		}
+		.picture5 {
+			background: url('img/5.jpg') no-repeat;
+		}
+		.picture6 {
+			background: url('img/6.jpg') no-repeat;
+		}
+		.picture7 {
+			background: url('img/7.jpg') no-repeat;
+		}
+		.picture8 {
+			background: url('img/8.jpg') no-repeat;
+		}
+		.selected {
+			background-color: #C1CDC1;
+		}
+	</style>
+</head>
+<body>
+<div class="container">
+
+	<header class="headNav">
+		投影相册
+	</header>
+	
+	<div class="content">
+		<div class="img-wrapper"></div>
+	</div>
+
+	<footer class="footer">旋转吧</footer>
+
+	<nav class="sideNav">
+		<ul>
+			<li data-id="0" class="selected">全部</li>
+			<li data-id="1">第一张</li>
+			<li data-id="2">第二张</li>
+			<li data-id="3">第三张</li>
+			<li data-id="4">第四张</li>
+			<li data-id="5">第五张</li>
+			<li data-id="6">第六张</li>
+		</ul>
+	</nav>
+</div>
+</body>
+<script type="text/javascript">
+
+(function(){
+
+	var sideOption = $('.sideNav ul');
+
+	var imgWrapper = $('.img-wrapper');
+
+	var footer = $('.footer');
+
+	for(var i=1; i<=6; i++) {
+		var temp = $("<div class='one-picture'></div>");
+		temp.addClass('picture' + i);
+		imgWrapper.append(temp);
+	}
+
+	var id = 0;
+
+	var deg = 360;
+
+	sideOption.click(function(e) {
+		id = Number($(e.target).data('id'));
+		$('.sideNav li').removeClass('selected');
+		$(e.target).addClass('selected');
+		if(id === 0) {
+			imgWrapper.empty();
+			for(var i=1; i<=6; i++) {
+				var temp = $("<div class='one-picture'></div>");
+				temp.addClass('picture' + i);
+				imgWrapper.append(temp);
+			}
+		} else {
+			var temp = $("<div class='one-picture'></div>");
+			temp.addClass('picture' + id);
+			imgWrapper.empty();
+			imgWrapper.append(temp);
+		}
+	});
+
+	footer.click(function(){
+		$('.one-picture').css('transform',"rotate("+ deg + "deg)");
+		deg = -deg;
+	});
+})();
+</script>
+</html>

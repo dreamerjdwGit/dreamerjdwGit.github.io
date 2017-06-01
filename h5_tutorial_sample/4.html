@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>滚动条动态加载</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script src="jquery.min.js"></script>
+</head>
+<body>
+	<nav class="nav">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="#">
+				<h1>NS-Solutions</h1>
+			</a>
+		</div>
+		<div class="navbar-options">
+			<ul>
+				<li class="selected"><a href="#">热门</a></li>
+				<li><a href="#">24小时</a></li>
+				<li><a href="#">热图</a></li>
+				<li><a href="#">文字</a></li>
+				<li><a href="#">穿越</a></li>
+				<li><a href="#">糗图</a></li>
+				<li><a href="#">新鲜</a></li>
+				<li><a href="#">投稿</a></li>
+			</ul>
+		</div>
+	</nav>
+	<div class="content"></div>
+	<div class="backTop"></div>
+</body>
+<script type="text/javascript">
+
+// 页面元素加载完毕后
+$(function(){
+
+	// 数据获取API
+	var GET_LIST = './data/page';
+
+	// 数据是否已经到最后
+	var end = false;
+
+	// 下次获取的数据
+	var page = 1 ;
+
+	// ajax请求数据，并渲染页面
+	var renderPage = function(page) {
+
+		var url = GET_LIST + "00"+ page + ".json";;
+		var promise = $.ajax({
+			method: 'GET',
+			dataType: 'json',
+			url: url
+		});
+
+		promise.then(function(data){
+			var $page = makeElement(data.list);
+			$('.spinner').remove();
+			$('.content').append($page);
+		},function(){
+			$('.spinner').remove();
+			$('.content').append($('<div class="endDiv">已经到底了</div>'));
+			end = true;
+		});
+
+	};
+
+	// 每次请求数据时，作成新的元素
+	var makeElement = function(list) {
+
+		var $rootElement = $('<div></div>');
+
+		for(var i=0, len=list.length; i<len; i++) {
+
+			var $temp = $('<div class="article"></div>');
+
+			var user = list[i].user;
+			var userLevel = list[i].userLevel;
+			var content = list[i].content;
+
+			var $userInfo = $('<p class="userInfo"><strong>' + user + '</strong>&nbsp;&nbsp;&nbsp;<span class="level">Level: '+ userLevel+'</span></p>');
+			var $content = $('<p>'+ content+'</p>');
+			$temp.append($userInfo);
+			$temp.append($content);
+
+			$rootElement.append($temp);
+		}
+		page++;
+		return $rootElement;
+	}
+
+	// 加载图标作成
+	function loadConstruct() {
+
+		var html = '<div class="spinner">';
+
+		html += '<div class="spinner-container container1">';
+		html += '<div class="circle1"></div>';
+		html += '<div class="circle2"></div>';
+		html += '<div class="circle3"></div>';
+		html += '<div class="circle4"></div>';
+		html += '</div>';
+
+		html += '<div class="spinner-container container2">';
+		html += '<div class="circle1"></div>';
+		html += '<div class="circle2"></div>';
+		html += '<div class="circle3"></div>';
+		html += '<div class="circle4"></div>';
+		html += '</div>';
+
+		html += '<div class="spinner-container container3">';
+		html += '<div class="circle1"></div>';
+		html += '<div class="circle2"></div>';
+		html += '<div class="circle3"></div>';
+		html += '<div class="circle4"></div>';
+		html += '</div>';
+
+		html += '</div>';
+
+		var $load = $('.spinner');
+		var len = $load.length;
+
+		if($load.length == 0) {
+		    $load = $(html);
+		    $('.content').append($load);
+		}
+	};
+
+	// 防抖
+	var asyFunQueue = {
+
+		state: 'normal',
+
+		timerID: null,
+
+		excuteFun: function(func, args) {
+
+			if(this.state == 'normal') {
+				this.state = 'waiting';
+				this._setTimer(func, args);
+				return;
+			}
+
+			if(this.state == 'waiting') {
+				clearTimeout(this.timerID);
+				this._setTimer(func, args);
+			}
+		},
+
+		_setTimer: function(func, args) {
+			this.timerID = setTimeout(function(){
+				func.call(null, args);
+				this.state = 'normal';
+			}, 1000);
+		}
+	};
+
+	// 节流
+	var throttle = function(fun, delay){
+		var last = 0;
+		return function() {
+			var now = + new Date();
+			if(now - last > delay) {
+				fun();
+				last = now;
+			}
+		}
+	};
+
+	// 滚动条滚动
+	function _scroll() {
+
+		var scrollTop = $(document).scrollTop();
+        var scrollHeight = $('.content')[0].scrollHeight + $('.nav').height();
+        var windowHeight = $(this).height();
+        if (scrollTop + windowHeight >= scrollHeight && !end) {
+        	loadConstruct();
+        	asyFunQueue.excuteFun(renderPage, page);
+        }
+	}
+
+
+	// 页面初始化
+ 	renderPage(page);
+
+ 	// 滚动条加载
+ 	$(window).scroll(throttle(_scroll, 30));
+
+ 	// 返回顶部
+	var $backTop = $('.backTop');
+
+	// 返回顶部动作
+	$backTop.click(throttle(backTop, 1000));
+
+	function backTop() {
+		$('body').animate({"scrollTop": 0}, 1000);
+	}
+
+});
+
+
+</script>
+</html>
