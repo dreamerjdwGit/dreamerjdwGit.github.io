@@ -1,0 +1,84 @@
+{
+    "list": [
+        {
+            "title": "浏览器针对于HTML文档起到了什么作用？",
+            "options": ["A. 浏览器用于创建HTML文档","B. 浏览器用于展示HTML文档","C. 浏览器用于发送HTML文档","D. 浏览器用于修改HTML文档"]
+        },
+        {
+            "title": "哪个标记用于表示HTML文档的开始和结束？",
+            "options": ["A. body","B. html","C. table","D. title"]
+        },
+        {
+            "title": "关于下列<a>标签说法错误的是？",
+            "options": ["A. <a>标签是超链接，可以使用href属性使其指向另一个资源", "B. 当点击<a>标签时触发的提交为GET提交", "C. <a>标签可以嵌套<img>标签，使图片变为一个可点击的超链接", "D. <a>标签可以指向一张图片从而在该位置显示一张图片"]
+        },
+        {
+            "title": "在页面中看不见的表单元素是那种？",
+            "options": ["A. <input type=\"password\"></input>", "B. <input type=\"radio\"></input>", "C. <input type=\"hidden\"></input>", "D. <input type=\"reset\"></input>"]
+        },
+        {
+            "title": "使用HTML编写网页代码的基本格式是？",
+            "options": ["A. <body> ", "B. <br>", "C. <html>", "D. <title>"]
+        },
+        {
+            "title": "关于下列<a>标签说法错误的是？",
+            "options": ["A. <html><div></div></html>", "B. <html><table><tr><td></td></tr></table></html>", "C. <html><body><frameset></frameset></body></html>", "D. <html><head></head><body></body></html>"]
+        },
+        {
+            "title": "空格对应的html实体是哪个？",
+            "options": ["A. &lt;", "B. &gt;", "C. &nbsp;", "D. &amp;"]
+        },
+        {
+            "title": "<a>标签的target属性作用是：",
+            "options": ["A. target属性用来指定超链接的目标，与href属性作用相似，但href属性的优先级高", "B. target属性指定超链接目标的URL的绝对部分，href属性指定超链接目标的URL的相对部分，两部分共同决定最终目标，如果没有给出target属性，那么整个超链接目标的URL都由href属性指定", "C. target属性内容会在鼠标悬浮在超链接上时显示出来，是对超链接目标的一说明文本，例如：<a href=”www.baidu.com” target=”百度”>百度</a>，当鼠标停留在这个超链接上时，鼠标下方会出现“百度”两个字", "D. target属性用来指定打开方式，target属性的值可以使目标文档在新窗口中显示，或者在当前窗口中显示，或者在父框架集中显示，或者是在框架集中显示，或者是在指定的框架中打开"]
+        },
+        {
+            "title": "<ul>默认的项目符号是：",
+            "options": ["A. 实心圆", "B. 空心圆", "C. 实心正方形", "D. 空心正方形"]
+        },
+        {
+            "title": "下列表示单选按钮的是：",
+            "options": ["A. <input type=”submit”/>", "B. <input type=”radio”/>", "C. <input type=”checkbox”/>", "D. <input type=”button”/>"]
+        },
+        {
+            "title": "下面哪一项是换行符标签？",
+            "options": ["A. <body>", "B. <font>", "C. <br>", "D. <p>"]
+        },
+        {
+            "title": "下列哪一项是在新窗口中打开网页文档。（  ）",
+            "options": ["A. _self", "B. _blank", "C. _top", "D. _parent"]
+        },
+        {
+            "title": "创建最小的标题的文本标签是？",
+            "options": ["A. <pre></pre> ", "B. <h1></h1", "C. <h6></h6>", "D. <b></b> "]
+        },
+        {
+            "title": "想在HTML中引入一张图片，需要使用的属性是(  )",
+            "options": ["A. src", "B. href", "C. align", "D. valign"]
+        },
+        {
+            "title": "定义上下分割的框架的大小的是？",
+            "options": ["A. rows", "B. cols", "C. widths", "D. heights"]
+        },
+        {
+            "title": "HTML 指的是",
+            "options": ["A. 超文本标记语言（Hyper Text Markup Language）", "B. 家庭工具标记语言（Home Tool Markup Language）", "C. 超链接和文本标记语言（Hyperlinks and Text Markup Language）", "D. 以上都不对"]
+        },
+        {
+            "title": "Web 标准的制定者是？",
+            "options": ["A. 微软（Microsoft）", "B. 万维网联盟（W3C）", "C. 网景公司（Netscape）", "D. 太阳公司(SUN)"]
+        },
+        {
+            "title": "在下列的 HTML 中，哪个是最大的标题？",
+            "options": ["A. <h6>", "B. <head>", "C. <heading>", "D. <h1>"]
+        },
+        {
+            "title": "在下列的 HTML 中，哪个可以产生超链接？",
+            "options": ["A. <a url=\"http://www.itcast.cn\">itcast.cn</a>", "B. <a href=\"http://www.itcast.cn\">itcast</a>", "C. <a>http://www.itcast.cn</a>", "D. <a name=\"http://www.itcast.cn\">itcast.cn</a>"]
+        },
+        {
+            "title": "在下列的 HTML 中，哪个可以产生复选框？",
+            "options": ["A. <input type=\"check\">", "B. <checkbox>", "C. <input type=\"checkbox\">", "D. <check>"]
+        }
+    ]
+}
