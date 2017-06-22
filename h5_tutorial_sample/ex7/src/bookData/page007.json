@@ -1,0 +1,905 @@
+{
+    "itemSize": 3000,
+    "list": [
+        {
+            "author": "江南",
+            "price": 29,
+            "isbn": "1000000601",
+            "translator": "",
+            "title": "龙族2悼亡者之瞳（平装）",
+            "cover_page_url": "http://img3x1.ddimg.cn/36/34/22574511-1_l_1.jpg",
+            "key": "1000000601"
+        },
+        {
+            "author": "墨宝非宝",
+            "price": 32,
+            "isbn": "1000000602",
+            "translator": "",
+            "title": "一生一世，黑白影画",
+            "cover_page_url": "http://img3x6.ddimg.cn/94/16/23918296-1_l_2.jpg",
+            "key": "1000000602"
+        },
+        {
+            "author": "北倾",
+            "price": 59,
+            "isbn": "1000000603",
+            "translator": "",
+            "title": "我和你差之微毫的世界（全二册）",
+            "cover_page_url": "http://img3x7.ddimg.cn/84/7/23911257-1_l_13816.jpg",
+            "key": "1000000603"
+        },
+        {
+            "author": "玄色",
+            "price": 25,
+            "isbn": "1000000604",
+            "translator": "",
+            "title": "哑舍4",
+            "cover_page_url": "http://img3x0.ddimg.cn/75/16/23520990-1_l_1.jpg",
+            "key": "1000000604"
+        },
+        {
+            "author": "江南",
+            "price": 29,
+            "isbn": "1000000605",
+            "translator": "",
+            "title": "龙族3黑月之潮·中（龙族系列最经典的热血幻想小说）",
+            "cover_page_url": "http://img3x8.ddimg.cn/92/30/23314988-1_l_2.jpg",
+            "key": "1000000605"
+        },
+        {
+            "author": "玄色",
+            "price": 25,
+            "isbn": "1000000606",
+            "translator": "",
+            "title": "哑舍2（玄色作品，哑舍古董店十二件古物终告齐聚，古风浪漫幻想第二弹《浮生物语》姐妹篇）",
+            "cover_page_url": "http://img3x7.ddimg.cn/40/33/22752517-1_l_1.jpg",
+            "key": "1000000606"
+        },
+        {
+            "author": "Twentine",
+            "price": 35,
+            "isbn": "1000000607",
+            "translator": "",
+            "title": "意林小小姐合订本2016年10期上-11期上（总第49卷）（升级版）贴标签塑封",
+            "cover_page_url": "http://img3x4.ddimg.cn/36/33/24039414-1_l_6.jpg",
+            "key": "1000000607"
+        },
+        {
+            "author": "丁墨",
+            "price": 32,
+            "isbn": "1000000608",
+            "translator": "",
+            "title": "错过世界遇到你",
+            "cover_page_url": "http://img3x9.ddimg.cn/50/16/23905679-1_l_2.jpg",
+            "key": "1000000608"
+        },
+        {
+            "author": "简蔓",
+            "price": 20,
+            "isbn": "1000000609",
+            "translator": "",
+            "title": "小小姐日光倾城系列1--巧克力色微凉青春1",
+            "cover_page_url": "http://img3x6.ddimg.cn/80/34/23598116-1_l_1.jpg",
+            "key": "1000000609"
+        },
+        {
+            "author": "顾漫",
+            "price": 29,
+            "isbn": "1000000610",
+            "translator": "",
+            "title": "杉杉来吃（豪华典藏版）青春偶像电视剧《杉杉来了》原著小说",
+            "cover_page_url": "http://img3x6.ddimg.cn/56/35/23506616-1_l_13.jpg",
+            "key": "1000000610"
+        },
+        {
+            "author": "韩寒",
+            "price": 32,
+            "isbn": "1000000611",
+            "translator": "",
+            "title": "一座城池",
+            "cover_page_url": "http://img3x3.ddimg.cn/4/23/23456173-1_l_1.jpg",
+            "key": "1000000611"
+        },
+        {
+            "author": "辛夷坞",
+            "price": 32,
+            "isbn": "1000000612",
+            "translator": "",
+            "title": "我在回忆里等你.白金纪念版",
+            "cover_page_url": "http://img3x2.ddimg.cn/24/12/23454312-1_l_1.jpg",
+            "key": "1000000612"
+        },
+        {
+            "author": "玄色",
+            "price": 25,
+            "isbn": "1000000613",
+            "translator": "",
+            "title": "哑舍3（玄色经典古风浪漫幻想大作！随书附赠精美复古信笺纸套装）",
+            "cover_page_url": "http://img3x4.ddimg.cn/38/33/23247614-1_l_1.jpg",
+            "key": "1000000613"
+        },
+        {
+            "author": "南派三叔",
+            "price": 32,
+            "isbn": "1000000614",
+            "translator": "",
+            "title": "藏海花（南派三叔力作，《盗墓笔记》《沙海》前传，闷油瓶的盗墓传奇！雪山阎王骑尸之谜）",
+            "cover_page_url": "http://img3x0.ddimg.cn/78/25/22845120-1_l_1.jpg",
+            "key": "1000000614"
+        },
+        {
+            "author": "满碧乔",
+            "price": 79,
+            "isbn": "1000000615",
+            "translator": "",
+            "title": "风透湘帘花满庭（第一卷、第二卷）亚洲好书榜原创女文榜12期No.1，独家番外首次披露。超值附赠作者签名&微博读书VIP畅读码！抢鲜独家电子版小剧本",
+            "cover_page_url": "http://img3x0.ddimg.cn/58/29/24039040-1_l_12.jpg",
+            "key": "1000000615"
+        },
+        {
+            "author": "唐家三少",
+            "price": 34,
+            "isbn": "1000000616",
+            "translator": "",
+            "title": "斗罗大陆（精装典藏版）14 唐家三少（中国幻想小说代表力作，千万点击人气畅销经典，斗罗大陆大结局！）",
+            "cover_page_url": "http://img3x6.ddimg.cn/96/17/24009576-1_l_6.jpg",
+            "key": "1000000616"
+        },
+        {
+            "author": "张皓宸",
+            "price": 75,
+            "isbn": "1000000617",
+            "translator": "",
+            "title": "我与世界只差一个你+谢谢自己够勇敢 套装2册（百万畅销书作家张皓宸合集）",
+            "cover_page_url": "http://img3x4.ddimg.cn/50/20/23939834-1_l_11.jpg",
+            "key": "1000000617"
+        },
+        {
+            "author": "简蔓",
+            "price": 24,
+            "isbn": "1000000618",
+            "translator": "",
+            "title": "意林--女生宿舍I 南栀向暖（升级版）随书附赠来自女生宿舍的四封信 纪念版明信片套装",
+            "cover_page_url": "http://img3x9.ddimg.cn/49/1/23912509-1_l_3.jpg",
+            "key": "1000000618"
+        },
+        {
+            "author": "简蔓",
+            "price": 24,
+            "isbn": "1000000619",
+            "translator": "",
+            "title": "小小姐日光倾城系列2--巧克力色微凉青春2（升级版）赠极致唯美简蔓文艺范写真明信片套装 微凉青春唯美信笺",
+            "cover_page_url": "http://img3x8.ddimg.cn/67/30/23761948-1_l_2.jpg",
+            "key": "1000000619"
+        },
+        {
+            "author": "吴大伟",
+            "price": 39,
+            "isbn": "1000000620",
+            "translator": "",
+            "title": "这世界，缺你不可：“中国好哥哥”吴大伟的暖心故事与励志随笔（当当定制版）",
+            "cover_page_url": "http://img3x7.ddimg.cn/60/30/23760357-1_l_2.jpg",
+            "key": "1000000620"
+        },
+        {
+            "author": "唐家三少",
+            "price": 32,
+            "isbn": "1000000621",
+            "translator": "",
+            "title": "斗罗大陆外传·神界传说",
+            "cover_page_url": "http://img3x1.ddimg.cn/76/3/23685331-1_l_3.jpg",
+            "key": "1000000621"
+        },
+        {
+            "author": "大漠荒草",
+            "price": 20,
+            "isbn": "1000000622",
+            "translator": "",
+            "title": "意林12星座女孩故事--天蝎座：假面黑桃Q",
+            "cover_page_url": "http://img3x0.ddimg.cn/23/30/23357390-1_l_2.jpg",
+            "key": "1000000622"
+        },
+        {
+            "author": "今何在",
+            "price": 29,
+            "isbn": "1000000623",
+            "translator": "",
+            "title": "西游日记",
+            "cover_page_url": "http://img3x4.ddimg.cn/97/31/22775344-1_l_1.jpg",
+            "key": "1000000623"
+        },
+        {
+            "author": "丁墨",
+            "price": 59,
+            "isbn": "1000000624",
+            "translator": "",
+            "title": "江山不悔：全2册（新版）",
+            "cover_page_url": "http://img3x3.ddimg.cn/44/19/24051203-1_l_4.jpg",
+            "key": "1000000624"
+        },
+        {
+            "author": "唐家三少",
+            "price": 36,
+            "isbn": "1000000625",
+            "translator": "",
+            "title": "为了你，我愿意热爱整个世界（唐家三少挚爱新作！当当专享纪念印签版 守护一生心形叠纸）",
+            "cover_page_url": "http://img3x5.ddimg.cn/30/11/23972385-1_l_17.jpg",
+            "key": "1000000625"
+        },
+        {
+            "author": "独木舟",
+            "price": 29,
+            "isbn": "1000000626",
+            "translator": "",
+            "title": "我曾赤诚天真爱过你 (随书附赠独木舟绝美影像明信片卡册  当当网独家赠送独木舟手绘肖像藏书票   白马时光 ）",
+            "cover_page_url": "http://img3x2.ddimg.cn/25/22/23940502-1_l_6.jpg",
+            "key": "1000000626"
+        },
+        {
+            "author": "彭柳蓉",
+            "price": 23,
+            "isbn": "1000000627",
+            "translator": "",
+            "title": "小小姐星愿大陆6--晨光微曦（升级版）",
+            "cover_page_url": "http://img3x4.ddimg.cn/81/4/23911254-1_l_5.jpg",
+            "key": "1000000627"
+        },
+        {
+            "author": "夏桐",
+            "price": 25,
+            "isbn": "1000000628",
+            "translator": "",
+            "title": "用一辈子，说我爱你",
+            "cover_page_url": "http://img3x6.ddimg.cn/53/35/23815196-1_l_1.jpg",
+            "key": "1000000628"
+        },
+        {
+            "author": "小狐濡尾",
+            "price": 28,
+            "isbn": "1000000629",
+            "translator": "",
+            "title": "南方有乔木",
+            "cover_page_url": "http://img3x3.ddimg.cn/53/14/23801633-1_l_1.jpg",
+            "key": "1000000629"
+        },
+        {
+            "author": "江南",
+            "price": 198,
+            "isbn": "1000000630",
+            "translator": "",
+            "title": "九州缥缈录（套装全6卷）",
+            "cover_page_url": "http://img3x5.ddimg.cn/41/1/23790335-1_l_3.jpg",
+            "key": "1000000630"
+        },
+        {
+            "author": "流潋紫",
+            "price": 196,
+            "isbn": "1000000631",
+            "translator": "",
+            "title": "后宫·如懿传 （6本套装）精美全集",
+            "cover_page_url": "http://img3x1.ddimg.cn/52/19/23763121-1_l_1.jpg",
+            "key": "1000000631"
+        },
+        {
+            "author": "陈谌",
+            "price": 32,
+            "isbn": "1000000632",
+            "translator": "",
+            "title": "世界上所有童话都是写给大人看的",
+            "cover_page_url": "http://img3x2.ddimg.cn/54/21/23554332-1_l_1.jpg",
+            "key": "1000000632"
+        },
+        {
+            "author": "独木舟",
+            "price": 29,
+            "isbn": "1000000633",
+            "translator": "",
+            "title": "我亦飘零久(热销典藏版 打动300000读者的行走读本)",
+            "cover_page_url": "http://img3x3.ddimg.cn/86/1/23542583-1_l_1.jpg",
+            "key": "1000000633"
+        },
+        {
+            "author": "沈君野",
+            "price": 23,
+            "isbn": "1000000634",
+            "translator": "",
+            "title": "意林小小姐欢乐联萌系列7--千金当道（一）（升级版）（随书附赠神秘圣旨）",
+            "cover_page_url": "http://img3x6.ddimg.cn/43/2/24017146-1_l_6.jpg",
+            "key": "1000000634"
+        },
+        {
+            "author": "两色风景",
+            "price": 26,
+            "isbn": "1000000635",
+            "translator": "",
+            "title": "青春奇妙物语4",
+            "cover_page_url": "http://img3x6.ddimg.cn/28/2/23984956-1_l_4.jpg",
+            "key": "1000000635"
+        },
+        {
+            "author": "姒锦",
+            "price": 48,
+            "isbn": "1000000636",
+            "translator": "",
+            "title": "唯愿此生不负你（全二册）",
+            "cover_page_url": "http://img3x8.ddimg.cn/12/3/23964348-1_l_10.jpg",
+            "key": "1000000636"
+        },
+        {
+            "author": "唐家三少",
+            "price": 34,
+            "isbn": "1000000637",
+            "translator": "",
+            "title": "斗罗大陆（精装典藏版）13 唐家三少 ",
+            "cover_page_url": "http://img3x6.ddimg.cn/42/27/23962596-1_l_6.jpg",
+            "key": "1000000637"
+        },
+        {
+            "author": "沧海·镜",
+            "price": 26,
+            "isbn": "1000000638",
+            "translator": "",
+            "title": "意林小小姐公主天下系列1--清河公主·洙宛传（随书附赠沧海镜插画首秀Q版公主书签  公主的祝福美好回忆祝福卡）",
+            "cover_page_url": "http://img3x3.ddimg.cn/19/21/23810113-1_l_1.jpg",
+            "key": "1000000638"
+        },
+        {
+            "author": "侧侧轻寒",
+            "price": 128,
+            "isbn": "1000000639",
+            "translator": "",
+            "title": "簪中录（珍藏版全4册）",
+            "cover_page_url": "http://img3x1.ddimg.cn/87/28/23678511-1_l_2.jpg",
+            "key": "1000000639"
+        },
+        {
+            "author": "倾泠月",
+            "price": 65,
+            "isbn": "1000000640",
+            "translator": "",
+            "title": "且试天下·完美典藏版（倾泠月经典成名作，同名电视剧、电影即将开拍！桐华倾情推荐！影响千万读者的古风经典！悦读纪）",
+            "cover_page_url": "http://img3x9.ddimg.cn/97/29/23664859-1_l_1.jpg",
+            "key": "1000000640"
+        },
+        {
+            "author": "池小凡",
+            "price": 20,
+            "isbn": "1000000641",
+            "translator": "",
+            "title": "小小姐淑女文学馆浪漫星语--天秤座：优雅走过下雨天",
+            "cover_page_url": "http://img3x5.ddimg.cn/34/5/23647075-1_l_1.jpg",
+            "key": "1000000641"
+        },
+        {
+            "author": "风染白",
+            "price": 48,
+            "isbn": "1000000642",
+            "translator": "",
+            "title": "好久不见，秦先生(上、下册）",
+            "cover_page_url": "http://img3x8.ddimg.cn/38/3/23634308-1_l_1.jpg",
+            "key": "1000000642"
+        },
+        {
+            "author": "裟椤双树",
+            "price": 26,
+            "isbn": "1000000643",
+            "translator": "",
+            "title": "浮生物语3下",
+            "cover_page_url": "http://img3x0.ddimg.cn/30/33/23528370-1_l_2.jpg",
+            "key": "1000000643"
+        },
+        {
+            "author": "羽千落",
+            "price": 20,
+            "isbn": "1000000644",
+            "translator": "",
+            "title": "意林12星座女孩故事--处女座：完美年华初相见",
+            "cover_page_url": "http://img3x9.ddimg.cn/22/29/23357389-1_l_2.jpg",
+            "key": "1000000644"
+        },
+        {
+            "author": "七堇年",
+            "price": 28,
+            "isbn": "1000000645",
+            "translator": "",
+            "title": "被窝是青春的坟墓（完整版）七堇年全新修订，收录绝版中篇《少年残像》，当当独家随机赠送“青春无你，何以为青春”征文纪念别册， 限量180）",
+            "cover_page_url": "http://img3x3.ddimg.cn/96/14/23224803-1_l_1.jpg",
+            "key": "1000000645"
+        },
+        {
+            "author": "星零",
+            "price": 49,
+            "isbn": "1000000646",
+            "translator": "",
+            "title": "上古（一场跨越前世今生的亘古之恋，一段铭刻三生三世的万卷长情！媲美唐七公子《三生三世十里桃花》的玄幻大作。）",
+            "cover_page_url": "http://img3x1.ddimg.cn/98/21/22775741-1_l_1.jpg",
+            "key": "1000000646"
+        },
+        {
+            "author": "两屉小笼包",
+            "price": 26,
+            "isbn": "1000000647",
+            "translator": "",
+            "title": "今天开始喜欢你",
+            "cover_page_url": "http://img3x2.ddimg.cn/64/21/24027562-1_l_5.jpg",
+            "key": "1000000647"
+        },
+        {
+            "author": "沈煜伦",
+            "price": 49,
+            "isbn": "1000000648",
+            "translator": "",
+            "title": "四世生花  男神沈煜伦2016新书，当当独家亲笔签名双封版（精美海报双封面）",
+            "cover_page_url": "http://img3x7.ddimg.cn/18/20/24011577-1_l_24.jpg",
+            "key": "1000000648"
+        },
+        {
+            "author": "凌筱秋",
+            "price": 23,
+            "isbn": "1000000649",
+            "translator": "",
+            "title": "小小姐月舞流光系列--前方学院请绕行3（升级版）随赠《江湖学院新生入学指南》 入学须知",
+            "cover_page_url": "http://img3x7.ddimg.cn/86/9/24006497-1_l_5.jpg",
+            "key": "1000000649"
+        },
+        {
+            "author": "唐家三少",
+            "price": 28,
+            "isbn": "1000000650",
+            "translator": "",
+            "title": "斗罗大陆3龙王传说6 唐家三少（媲美《龙族》，唐家三少代表性作品，经典之上，再铸传奇！）",
+            "cover_page_url": "http://img3x3.ddimg.cn/86/12/23989073-1_l_15.jpg",
+            "key": "1000000650"
+        },
+        {
+            "author": "云檀",
+            "price": 79,
+            "isbn": "1000000651",
+            "translator": "",
+            "title": "多年前，她曾闯入他的城（上、中、下册）",
+            "cover_page_url": "http://img3x6.ddimg.cn/42/12/23976456-1_l_6.jpg",
+            "key": "1000000651"
+        },
+        {
+            "author": "唐家三少",
+            "price": 28,
+            "isbn": "1000000652",
+            "translator": "",
+            "title": "斗罗大陆3龙王传说5 唐家三少著",
+            "cover_page_url": "http://img3x8.ddimg.cn/12/33/23973258-1_l_16.jpg",
+            "key": "1000000652"
+        },
+        {
+            "author": "辛夷坞",
+            "price": 49,
+            "isbn": "1000000653",
+            "translator": "",
+            "title": "原来你还在这里（吴亦凡&刘亦菲主演同名电影，7月8日上映）全两册（插图纪念版）（辛夷坞“暖伤青春”经典之作  新增全新番外 附赠唯美手绘明信片 全新升级版 新增全新番外 附赠唯美手绘明信片)",
+            "cover_page_url": "http://img3x2.ddimg.cn/56/27/23958452-1_l_6.jpg",
+            "key": "1000000653"
+        },
+        {
+            "author": "唐七",
+            "price": 35,
+            "isbn": "1000000654",
+            "translator": "",
+            "title": "四幕戏·起：唐七沉淀四年全新力作",
+            "cover_page_url": "http://img3x6.ddimg.cn/88/8/23954326-1_l_13.jpg",
+            "key": "1000000654"
+        },
+        {
+            "author": "夜蔓",
+            "price": 29,
+            "isbn": "1000000655",
+            "translator": "",
+            "title": "顾盼生辉（新增独家番外，随书附赠“无声爱”笔记本 精美书签一枚）白马时光",
+            "cover_page_url": "http://img3x5.ddimg.cn/49/6/23939635-1_l_12.jpg",
+            "key": "1000000655"
+        },
+        {
+            "author": "木子喵喵",
+            "price": 29,
+            "isbn": "1000000656",
+            "translator": "",
+            "title": "我想和你过好这人生 （随书赠送胶囊小姐浪漫贴纸）",
+            "cover_page_url": "http://img3x7.ddimg.cn/68/11/23924507-1_l_6.jpg",
+            "key": "1000000656"
+        },
+        {
+            "author": "郁秀",
+            "price": 32,
+            "isbn": "1000000657",
+            "translator": "",
+            "title": "花季?雨季（“花季雨季系列”丛书）",
+            "cover_page_url": "http://img3x9.ddimg.cn/55/35/23723029-1_l_1.jpg",
+            "key": "1000000657"
+        },
+        {
+            "author": "顾漫",
+            "price": 59,
+            "isbn": "1000000658",
+            "translator": "",
+            "title": "顾漫欢笑言情亲笔签名套装（独家签名明信片）微微一笑很倾城+杉杉来吃",
+            "cover_page_url": "http://img3x5.ddimg.cn/11/24/24036815-1_l_11.jpg",
+            "key": "1000000658"
+        },
+        {
+            "author": "杨洋",
+            "price": 68,
+            "isbn": "1000000659",
+            "translator": "",
+            "title": "自在 YOUNG（纯粹美好的写真集，把杨洋放进你的全世界！）",
+            "cover_page_url": "http://img3x3.ddimg.cn/58/7/24028843-1_l_2.jpg",
+            "key": "1000000659"
+        },
+        {
+            "author": "萧十一狼",
+            "price": 28,
+            "isbn": "1000000660",
+            "translator": "",
+            "title": "半面妆2",
+            "cover_page_url": "http://img3x2.ddimg.cn/25/32/24016732-1_l_4.jpg",
+            "key": "1000000660"
+        },
+        {
+            "author": "蒙淇淇",
+            "price": 34,
+            "isbn": "1000000661",
+            "translator": "",
+            "title": "全世界只有我可以欺负你",
+            "cover_page_url": "http://img3x8.ddimg.cn/61/30/24012808-1_l_2.jpg",
+            "key": "1000000661"
+        },
+        {
+            "author": "Priest",
+            "price": 64,
+            "isbn": "1000000662",
+            "translator": "",
+            "title": "大哥（套装共2册）",
+            "cover_page_url": "http://img3x8.ddimg.cn/72/12/23945598-1_l_12.jpg",
+            "key": "1000000662"
+        },
+        {
+            "author": "东奔西顾",
+            "price": 45,
+            "isbn": "1000000663",
+            "translator": "",
+            "title": "君子有九思（全二册）(附赠番外&《夏风手记》册集)",
+            "cover_page_url": "http://img3x5.ddimg.cn/39/33/23939625-1_l_26.jpg",
+            "key": "1000000663"
+        },
+        {
+            "author": "唐家三少",
+            "price": 34,
+            "isbn": "1000000664",
+            "translator": "",
+            "title": "斗罗大陆（精装典藏版）12 唐家三少",
+            "cover_page_url": "http://img3x9.ddimg.cn/39/16/23938239-1_l_5.jpg",
+            "key": "1000000664"
+        },
+        {
+            "author": "Twentine",
+            "price": 38,
+            "isbn": "1000000665",
+            "translator": "",
+            "title": "忍冬",
+            "cover_page_url": "http://img3x7.ddimg.cn/57/10/23916477-1_l_5.jpg",
+            "key": "1000000665"
+        },
+        {
+            "author": "水果熊",
+            "price": 24,
+            "isbn": "1000000666",
+            "translator": "",
+            "title": "小小姐淑女文学馆浪漫星语8--双鱼座：浪漫满分灰姑娘（升级版）附赠：定制笔记本 星语明信片×2",
+            "cover_page_url": "http://img3x7.ddimg.cn/19/3/23914657-1_l_5.jpg",
+            "key": "1000000666"
+        },
+        {
+            "author": "新海诚",
+            "price": 25,
+            "isbn": "1000000667",
+            "translator": "",
+            "title": "十字路口",
+            "cover_page_url": "http://img3x3.ddimg.cn/36/9/23772213-1_l_1.jpg",
+            "key": "1000000667"
+        },
+        {
+            "author": "彭柳蓉◎",
+            "price": 23,
+            "isbn": "1000000668",
+            "translator": "",
+            "title": "小小姐星愿大陆5--夜之王子（升级版）随书附赠：超精美人设书签",
+            "cover_page_url": "http://img3x7.ddimg.cn/29/8/23711717-1_l_1.jpg",
+            "key": "1000000668"
+        },
+        {
+            "author": "两色风景",
+            "price": 26,
+            "isbn": "1000000669",
+            "translator": "",
+            "title": "青春奇妙物语3",
+            "cover_page_url": "http://img3x8.ddimg.cn/65/23/23683538-1_l_1.jpg",
+            "key": "1000000669"
+        },
+        {
+            "author": "顾西爵",
+            "price": 141,
+            "isbn": "1000000670",
+            "translator": "",
+            "title": "顾西爵暖萌青春作品集",
+            "cover_page_url": "http://img3x9.ddimg.cn/50/0/23622539-1_l_7.jpg",
+            "key": "1000000670"
+        },
+        {
+            "author": "两色风景",
+            "price": 26,
+            "isbn": "1000000671",
+            "translator": "",
+            "title": "青春奇妙物语2",
+            "cover_page_url": "http://img3x6.ddimg.cn/2/32/23591306-1_l_2.jpg",
+            "key": "1000000671"
+        },
+        {
+            "author": "笛安",
+            "price": 34,
+            "isbn": "1000000672",
+            "translator": "",
+            "title": "南方有令秧",
+            "cover_page_url": "http://img3x9.ddimg.cn/14/15/23575379-1_l_2.jpg",
+            "key": "1000000672"
+        },
+        {
+            "author": "云上",
+            "price": 29,
+            "isbn": "1000000673",
+            "translator": "",
+            "title": "可惜没有如果2",
+            "cover_page_url": "http://img3x7.ddimg.cn/83/9/24058667-1_l_6.jpg",
+            "key": "1000000673"
+        },
+        {
+            "author": "Priest",
+            "price": 35,
+            "isbn": "1000000674",
+            "translator": "",
+            "title": "有匪1：少年游",
+            "cover_page_url": "http://img3x7.ddimg.cn/95/2/24042047-1_l_16.jpg",
+            "key": "1000000674"
+        },
+        {
+            "author": "微酸袅袅",
+            "price": 29,
+            "isbn": "1000000675",
+            "translator": "",
+            "title": "你是我生命里最温暖的事",
+            "cover_page_url": "http://img3x3.ddimg.cn/56/23/24041513-1_l_5.jpg",
+            "key": "1000000675"
+        },
+        {
+            "author": "江南",
+            "price": 42,
+            "isbn": "1000000676",
+            "translator": "",
+            "title": "《龙族IV奥丁之渊》精装版",
+            "cover_page_url": "http://img3x6.ddimg.cn/69/7/24036576-1_l_5.jpg",
+            "key": "1000000676"
+        },
+        {
+            "author": "沧月",
+            "price": 36,
+            "isbn": "1000000677",
+            "translator": "",
+            "title": "朱颜（镜）.上",
+            "cover_page_url": "http://img3x7.ddimg.cn/42/2/24035757-1_l_5.jpg",
+            "key": "1000000677"
+        },
+        {
+            "author": "玖月晞",
+            "price": 32,
+            "isbn": "1000000678",
+            "translator": "",
+            "title": "少年的你，如此美丽",
+            "cover_page_url": "http://img3x8.ddimg.cn/37/28/24019318-1_l_10.jpg",
+            "key": "1000000678"
+        },
+        {
+            "author": "落难天使",
+            "price": 35,
+            "isbn": "1000000679",
+            "translator": "",
+            "title": "关于我和肖的一切",
+            "cover_page_url": "http://img3x0.ddimg.cn/27/5/24019110-1_l_6.jpg",
+            "key": "1000000679"
+        },
+        {
+            "author": "大风刮过",
+            "price": 36,
+            "isbn": "1000000680",
+            "translator": "",
+            "title": "意林小小姐合订本2016年08期下-09期下（总第48卷）（升级版）",
+            "cover_page_url": "http://img3x8.ddimg.cn/95/35/24015218-1_l_5.jpg",
+            "key": "1000000680"
+        },
+        {
+            "author": "天蚕土豆",
+            "price": 447,
+            "isbn": "1000000681",
+            "translator": "",
+            "title": "斗破苍穹全集第一辑（套装1-15册，升级典藏版，全集共30册）",
+            "cover_page_url": "http://img3x2.ddimg.cn/44/12/23924582-1_l_5.jpg",
+            "key": "1000000681"
+        },
+        {
+            "author": "方洋",
+            "price": 25,
+            "isbn": "1000000682",
+            "translator": "",
+            "title": "梦游症调查报告",
+            "cover_page_url": "http://img3x4.ddimg.cn/16/11/23921584-1_l_5.jpg",
+            "key": "1000000682"
+        },
+        {
+            "author": "梅吉",
+            "price": 24,
+            "isbn": "1000000683",
+            "translator": "",
+            "title": "小小姐淑女文学馆浪漫星语9--金牛座：微笑天使倔强心（升级版）附赠：定制笔记本 星语明信片×2",
+            "cover_page_url": "http://img3x8.ddimg.cn/20/4/23914658-1_l_6.jpg",
+            "key": "1000000683"
+        },
+        {
+            "author": "吕亦涵",
+            "price": 28,
+            "isbn": "1000000684",
+            "translator": "",
+            "title": "阮/陈恩静 吕亦涵 著",
+            "cover_page_url": "http://img3x4.ddimg.cn/55/21/23905684-1_l_7.jpg",
+            "key": "1000000684"
+        },
+        {
+            "author": "圣妖",
+            "price": 55,
+            "isbn": "1000000685",
+            "translator": "",
+            "title": "原来一直都深爱（全二册）",
+            "cover_page_url": "http://img3x5.ddimg.cn/42/17/23824095-1_l_4.jpg",
+            "key": "1000000685"
+        },
+        {
+            "author": "丁墨",
+            "price": 35,
+            "isbn": "1000000686",
+            "translator": "",
+            "title": "意林小小姐首创果味杂志书12--柠檬红茶号（升级版）随书附赠：四张唯美明信片",
+            "cover_page_url": "http://img3x1.ddimg.cn/12/9/23808621-1_l_1.jpg",
+            "key": "1000000686"
+        },
+        {
+            "author": "简蔓",
+            "price": 20,
+            "isbn": "1000000687",
+            "translator": "",
+            "title": "小小姐星愿大陆4--永恒星钻（升级版）随书附赠：彭柳蓉亲笔签名精美书签+小MM独家定制\"淑女范儿布艺随身袋\"",
+            "cover_page_url": "http://img3x7.ddimg.cn/60/17/23562357-1_l_1.jpg",
+            "key": "1000000687"
+        },
+        {
+            "author": "裟椤双树",
+            "price": 25,
+            "isbn": "1000000688",
+            "translator": "",
+            "title": "小小姐四周年特制主题书--现在是女生时代",
+            "cover_page_url": "http://img3x6.ddimg.cn/92/4/23417156-1_l_1.jpg",
+            "key": "1000000688"
+        },
+        {
+            "author": "两色风景",
+            "price": 25,
+            "isbn": "1000000689",
+            "translator": "",
+            "title": "青春奇妙物语",
+            "cover_page_url": "http://img3x6.ddimg.cn/31/32/23282356-1_l_1.jpg",
+            "key": "1000000689"
+        },
+        {
+            "author": "墨宝非宝",
+            "price": 22,
+            "isbn": "1000000690",
+            "translator": "",
+            "title": "至此终年（《步步惊心》编剧之一墨宝非宝钟爱之作，花火C-萤火年度重点推荐图书。当当网全国独家限量预售送“作者亲笔签名版-定制珍藏明信片”900册已经售空，目前预定版均为普通版本。）",
+            "cover_page_url": "http://img3x7.ddimg.cn/88/33/23236477-1_l_1.jpg",
+            "key": "1000000690"
+        },
+        {
+            "author": "桐华",
+            "price": 26,
+            "isbn": "1000000691",
+            "translator": "",
+            "title": "曾许诺",
+            "cover_page_url": "http://img3x9.ddimg.cn/44/4/21032099-1_l_2.jpg",
+            "key": "1000000691"
+        },
+        {
+            "author": "裟椤双树",
+            "price": 26,
+            "isbn": "1000000692",
+            "translator": "",
+            "title": "《浮生物语》",
+            "cover_page_url": "http://img3x5.ddimg.cn/30/19/20963775-1_l_2.jpg",
+            "key": "1000000692"
+        },
+        {
+            "author": "熄歌",
+            "price": 29,
+            "isbn": "1000000693",
+            "translator": "",
+            "title": "夜郎自大",
+            "cover_page_url": "http://img3x5.ddimg.cn/62/19/24045875-1_l_6.jpg",
+            "key": "1000000693"
+        },
+        {
+            "author": "殷寻",
+            "price": 32,
+            "isbn": "1000000694",
+            "translator": "",
+            "title": "他看见你的声音",
+            "cover_page_url": "http://img3x0.ddimg.cn/2/17/24037400-1_l_5.jpg",
+            "key": "1000000694"
+        },
+        {
+            "author": "夜未央",
+            "price": 36,
+            "isbn": "1000000695",
+            "translator": "",
+            "title": "梦想开始了，就别停下来 夜未央",
+            "cover_page_url": "http://img3x5.ddimg.cn/22/2/24027025-1_l_6.jpg",
+            "key": "1000000695"
+        },
+        {
+            "author": "苏盈",
+            "price": 26,
+            "isbn": "1000000696",
+            "translator": "",
+            "title": "胆小鬼侦探",
+            "cover_page_url": "http://img3x3.ddimg.cn/14/35/24013553-1_l_4.jpg",
+            "key": "1000000696"
+        },
+        {
+            "author": "方洋",
+            "price": 30,
+            "isbn": "1000000697",
+            "translator": "",
+            "title": "梦游症2（原名《精神异常梦游症患者调查报告》刷爆全网的热贴）",
+            "cover_page_url": "http://img3x7.ddimg.cn/2/24/23988197-1_l_8.jpg",
+            "key": "1000000697"
+        },
+        {
+            "author": "萧鼎",
+            "price": 32,
+            "isbn": "1000000698",
+            "translator": "",
+            "title": "诛仙.大结局（典藏版）",
+            "cover_page_url": "http://img3x3.ddimg.cn/63/14/23981823-1_l_6.jpg",
+            "key": "1000000698"
+        },
+        {
+            "author": "绿亦歌",
+            "price": 28,
+            "isbn": "1000000699",
+            "translator": "",
+            "title": "也曾与全世界为敌 绿亦歌*著",
+            "cover_page_url": "http://img3x1.ddimg.cn/5/5/23926721-1_l_9.jpg",
+            "key": "1000000699"
+        },
+        {
+            "author": "寐语者",
+            "price": 32,
+            "isbn": "1000000700",
+            "translator": "",
+            "title": "凤血（古言经典之作《帝王业》后言情天后寐语者又一华章巨献。红颜艳骨，孽缘纠葛；凤凰涅槃，浴火而生。超值附赠独家番外 华美海报。白马时光）",
+            "cover_page_url": "http://img3x6.ddimg.cn/67/10/23924506-1_l_9.jpg",
+            "key": "1000000700"
+        }
+    ]
+}

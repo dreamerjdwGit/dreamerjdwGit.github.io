@@ -1,0 +1,34 @@
+<script type="text/ejs" id="buyList">
+
+[% var total = 0 %]
+[% for (var i in buyList) { %]
+ 	<div class="buyDetail">
+		<p>
+			<span class="buyListTag">书名：</span>
+			<span>[%=buyList[i].title%]</span>
+		</p>
+		<p>
+			<span class="buyListTag">数量：</span>
+			<button class="minNumBtn" data-key="[%=buyList[i].key %]">-</button>
+			<input class="inputNum" data-key="[%=buyList[i].key %]" type="text" value="[%=buyList[i].num%]">
+			<button class="addNumBtn" data-key="[%=buyList[i].key %]">+</button>
+		</p>
+		<p>
+			<span class="buyListTag">价格：</span>
+			<span>[%=buyList[i].num*buyList[i].price%]元</span>
+		</p>
+		<button class="removeBtn" data-key="[%=buyList[i].key %]">删除</button>
+	</div>
+	[% total += buyList[i].num*buyList[i].price%]
+[% } %]
+[% if (total !== 0) { %]
+	<div class="summary">
+		<p>
+			<span class="buyListTag">总计：</span>
+			<span> [%=total %]元</span>
+			<button class="payBtn">确认支付</button>
+		</p>
+	</div>
+[% } %]
+
+</script>

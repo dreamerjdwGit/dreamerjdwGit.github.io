@@ -1,0 +1,26 @@
+<script type="text/ejs" id="bookDetail">
+
+	<div style="width:8rem; height:8rem; background-image:url([%=book.cover_page_url%]); background-size:100% 100%;"></div>
+	<p>
+		<span class="labelTag">ISBN：</span>
+		<span>[%=book.isbn%]</span>
+	</p>
+	<p>
+		<span class="labelTag">书名：</span>
+		<span>[%=book.title%]</span>
+	</p>
+	<p>
+		<span class="labelTag">价格：</span>
+		<span>[%=book.price%]元</span>
+	</p>
+	<p>
+		<span class="labelTag">作者：</span>
+		<span>[%=book.author%]</span>
+	</p>
+	<p>
+		<span class="labelTag">翻译者：</span>
+		<span>[%=book.translator%]</span>
+	</p>
+	<br>
+	<button id="cartBtn">添加到购物车</button>
+</script>

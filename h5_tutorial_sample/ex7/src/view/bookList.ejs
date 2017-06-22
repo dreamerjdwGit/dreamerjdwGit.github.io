@@ -1,0 +1,9 @@
+<script type="text/ejs" id="bookList">
+
+	[% for (var i = 0, len = list.length; i < len; i++) { %]
+	<p class="book" data-id="[%=index++%]">
+		[%= list[i].title.substr(0, 8) %]
+	</p>
+	[% } %]
+
+</script>

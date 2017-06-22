@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>NS Solutions书店</title>
+
+	<link rel="stylesheet" type="text/css" href="lib/hifive-all-1.2.3/h5.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+
+	<script src="lib/jquery/jquery.min.js"></script>
+	<script src="lib/hifive-all-1.2.3/ejs-h5mod.js"></script>
+	<script src="lib/hifive-all-1.2.3/h5.dev.js"></script>
+
+	<script src="js/shoppingCartController.js"></script>
+	<script src="js/searchLogic.js"></script>
+	<script src="js/detailController.js"></script>
+	<script src="js/searchController.js"></script>
+	<script src="js/pageController.js"></script>
+
+</head>
+<body>
+	<div class="warpper">
+		<nav class="ns-header">
+			<h1>NS Solutions 书店</h1>
+		</nav>
+		<div id="container" class="has-header">
+			<div class="detail">
+				<h3>详细信息</h3>
+				<div id="bookDetail">
+				</div>
+			</div>
+			<div class="list">
+				<h3>书籍一览</h3>
+				<form>
+					<label for="category">种类</label>
+					<br>
+					<input type="text" id="category">
+					<br>
+					<label for="title">书名</label>
+					<br>
+					<input type="text" id="title">
+				</form>
+				<p>结果一览：</p>
+			</div>
+			<div class="result">
+				<div id="bookList"></div>
+			</div>
+
+			<span class="cartIcon" data-num="0"></span>
+			<div class="cartList">
+				<h3>
+					购物车一览
+					<button class="returnBtn">返回</button>
+				</h3>
+				<div id="buyList">
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+
+</html>
