@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>电影指南</title>
+
+	<link rel="stylesheet" type="text/css" href="lib/hifive-all-1.2.3/h5.css">
+	<link rel="stylesheet" type="text/css" href="lib/bootstrap-3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+
+	<script src="lib/jquery/jquery.min.js"></script>
+	<script src="lib/hifive-all-1.2.3/ejs-h5mod.js"></script>
+	<script src="lib/hifive-all-1.2.3/h5.dev.js"></script>
+
+</head>
+<body>
+	<!-- 标题导航 -->
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<h1 class="title">电影指南</h1>
+		<ul class="nav navbar-nav nav-movie">
+			<li class="selected">热门电影</li>
+			<li>近期上映</li>
+			<li>top电影</li>
+		</ul>
+	</nav>
+	<!-- 内容 -->
+	<div class="wrapper">
+		<!-- 热门电影 -->
+		<div class="container-movie hot-movie">
+			<div data-h5-loop-context="items" class="movieList">
+				<div class="movie">
+					<div>
+						<span class="content-title">电影名：</span>
+						<span data-h5-bind="title"></span>
+					</div>
+					<div>
+						<span class="content-title">英文名：</span>
+						<span data-h5-bind="original_title"></span>
+					</div>
+					<div>
+						<span class="content-title">出品年限：</span>
+						<span data-h5-bind="year"></span>
+					</div>
+					<div data-h5-context="rating">
+						<span class="content-title">评分：</span>
+						<span data-h5-bind="average"></span>
+					</div>
+					<div data-h5-context="images">
+						<img data-h5-bind="attr(src): large">
+					</div>
+				</div>
+			</div>
+			<div class="loadMore" data-id="0">加载更多</div>
+			<div class="loader">
+		        <div class="loader-inner semi-circle-spin">
+		          <div></div>
+		        </div>
+	      	</div>
+		</div>
+		<!-- 近期上映 -->
+		<div class="container-movie new-movie">
+			<div data-h5-loop-context="items" class="movieList">
+				<div class="movie">
+					<div>
+						<span class="content-title">电影名：</span>
+						<span data-h5-bind="title"></span>
+					</div>
+					<div>
+						<span class="content-title">英文名：</span>
+						<span data-h5-bind="original_title"></span>
+					</div>
+					<div>
+						<span class="content-title">出品年限：</span>
+						<span data-h5-bind="year"></span>
+					</div>
+					<div data-h5-context="rating">
+						<span class="content-title">评分：</span>
+						<span data-h5-bind="average"></span>
+					</div>
+					<div data-h5-context="images">
+						<img data-h5-bind="attr(src): large">
+					</div>
+				</div>
+			</div>
+			<div class="loadMore" data-id="1">加载更多</div>
+			<div class="loader">
+		        <div class="loader-inner semi-circle-spin">
+		          <div></div>
+		        </div>
+	      	</div>
+		</div>
+		<!-- top电影 -->
+		<div class="container-movie top-movie">
+			<div data-h5-loop-context="items" class="movieList">
+				<div class="movie">
+					<div>
+						<span class="content-title">电影名：</span>
+						<span data-h5-bind="title"></span>
+					</div>
+					<div>
+						<span class="content-title">英文名：</span>
+						<span data-h5-bind="original_title"></span>
+					</div>
+					<div>
+						<span class="content-title">出品年限：</span>
+						<span data-h5-bind="year"></span>
+					</div>
+					<div data-h5-context="rating">
+						<span class="content-title">评分：</span>
+						<span data-h5-bind="average"></span>
+					</div>
+					<div data-h5-context="images">
+						<img data-h5-bind="attr(src): large">
+					</div>
+				</div>
+			</div>
+			<div class="loadMore" data-id="2">加载更多</div>
+			<div class="loader">
+		        <div class="loader-inner semi-circle-spin">
+		          <div></div>
+		        </div>
+	      	</div>
+		</div>
+	</div>
+
+	<!-- 返回顶部按钮 -->
+	<div class="backTop"></div>
+
+	<script src="js/MovieModel.js"></script>
+	<script src="js/PageLogic.js"></script>
+	<script src="js/PageController.js"></script>
+</body>
+
+</html>
