@@ -52,9 +52,9 @@ li.selected:after{
 div.container-movie {
 	position: absolute;
 	margin-top: 10rem;
-	width: 28rem;
+	width: 30rem;
 	color: #cfcccb;
-	margin-left: -14rem;
+	margin-left: -15rem;
 }
 div.hot-movie {
 	left: 50%;
