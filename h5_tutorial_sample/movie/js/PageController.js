@@ -128,7 +128,7 @@
 
 			// 模块移出
 			$from.animate({
-				left: '-100rem'
+				left: '-25rem'
 			}, 1500);
 
 			// 模块移入			
@@ -139,21 +139,6 @@
 
 		// 导航栏点击事件
 		'{.nav-movie} click': function(context, $el) {
-
-			// 选中标签样式调整
-			var from = Array.prototype.indexOf.call($('li'), $('.selected')[0]);
-			$('li').removeClass('selected');
-			var $selected = $(context.event.target);
-			$selected.addClass('selected');
-
-			var to = Array.prototype.indexOf.call($('li'), context.event.target);
-
-			// 绑定内容更新
-			this.switchView(from, to);
-		},
-
-		// 导航栏点击事件
-		'{.nav-movie} touch': function(context, $el) {
 
 			// 选中标签样式调整
 			var from = Array.prototype.indexOf.call($('li'), $('.selected')[0]);
@@ -192,38 +177,8 @@
 			});
 		},
 
-		// 加载更多
-		'.loadMore touch': function(context, $el) {
-
-			var id = Number($el.data('id'));
-
-			var $loader = $el.parent().find('.loader');
-
-			var _self = this;
-
-			// 加载图标显示
-			$el.hide();
-			$loader.show();
-
-			var option = this.getOption(id);
-
-			// 获取数据，更新数据
-			var promise = this.pageLogic.getMovies(option);
-
-			promise.then(function(data){
-				_self.pageLogic.setObservableArray(option, data);
-				$loader.hide();
-				$el.show();
-			});
-		},
-
 		// 返回顶部
 		'{.backTop} click': function() {
-			$('body').animate({"scrollTop": 0}, 1000);
-		},
-
-		// 返回顶部
-		'{.backTop} touch': function() {
 			$('body').animate({"scrollTop": 0}, 1000);
 		},
 
@@ -231,9 +186,9 @@
 		'{window} scroll': function(context, $el) {
 			if ($(document).scrollTop() > 600) {
 		    	$(".backTop").fadeIn(500);
-		    } else {
-		    	$(".backTop").fadeOut(500);
-		    }
+		    	return;
+		    } 
+		    $(".backTop").fadeOut(500);
 		}
 	};
 

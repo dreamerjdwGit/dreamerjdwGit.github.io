@@ -24,12 +24,12 @@ ul.nav-movie {
 }
 
 ul.nav-movie li {
+  cursor: pointer;
 	flex: 1;
 	line-height: 3.5rem;
 }
 
 ul.nav-movie li:hover {
-	cursor: pointer;
 	color: #fff;
 }
 
@@ -52,20 +52,20 @@ li.selected:after{
 div.container-movie {
 	position: absolute;
 	margin-top: 10rem;
-	width: 30rem;
+	width: 36rem;
 	color: #cfcccb;
-	margin-left: -15rem;
+	margin-left: -18rem;
 }
 div.hot-movie {
 	left: 50%;
 	
 }
 div.new-movie {
-	left: -100rem;
+	left: -25rem;
 }
 
 div.top-movie {
-	left: -100rem;
+	left: -25rem;
 }
 
 div.movie {
@@ -95,14 +95,12 @@ div.loadMore:hover {
 
 .backTop {
   position: fixed;
+  cursor: pointer;
   bottom: 1.5rem;
   right: 3rem;
   width: 2.2rem;
   height: 2rem;
   background-color: grey;
-}
-.backTop:hover {
-  cursor: pointer;
 }
 .backTop:before {
   display: block;
